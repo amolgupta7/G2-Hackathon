@@ -8,6 +8,7 @@
 > 4. **Every prompt:** record what was decided, **why**, and **why the other options were not chosen**.
 > 5. **Two tracks:** §6 decisions are for the **time-boxed working prototype**. Production-grade choices are listed separately (the "Production alternative" in each §6 entry) and are decided later. Never mix them up.
 > 6. Undecided items are locked **during development**, when they come up, by asking the user, never by assuming.
+> 7. **Don't break the working flow** (pipeline → DB → search → API → UI → eval). When fixing an issue: (a) make no unnecessary changes; (b) when reverting or changing code, check for and remove dead or unused code; (c) keep the fix simple, then **fix and test**: targeted tests plus a full-flow regression check (the eval compared against the previous run). If a requested fix causes a regression, report it and let the user choose.
 
 ---
 
@@ -443,7 +444,7 @@ Add per-conversation summaries, per-chunk "contextual retrieval" headers, extrac
 - **Production alternative:** choose by the full golden-set eval, and consider larger models (bge / e5 / Qwen3-Embedding).
 
 **L29 — Git configuration** · 2026-09-26
-- Identity: the existing global config (Amol Gupta <gupta07amol@gmail.com>). **Branch `main`** (renamed from `master` before the first commit). **`.gitattributes`: `* text=auto eol=lf`, `*.wav`/`*.npz` binary**, plus local `core.autocrlf=false`, so the repo stores LF consistently across Windows/Mac/Linux/Docker. **Remote: `origin` = https://github.com/amolgupta7/G2-Hackathon.git** (reachable, empty); pushing only on the user's go-ahead.
+- Identity: the user's existing global git config. **Branch `main`** (renamed from `master` before the first commit). **`.gitattributes`: `* text=auto eol=lf`, `*.wav`/`*.npz` binary**, plus local `core.autocrlf=false`, so the repo stores LF consistently across Windows/Mac/Linux/Docker. **Remote: `origin` = https://github.com/amolgupta7/G2-Hackathon.git** (reachable, empty); pushing only on the user's go-ahead.
 - **Why not `master` / default line endings / local-only:** `main` is the current hosting default; default Windows autocrlf causes CRLF/LF diff noise; the user wants a GitHub remote.
 
 **L30 — Commit policy (user rules)** · 2026-09-26
@@ -472,9 +473,172 @@ Add per-conversation summaries, per-chunk "contextual retrieval" headers, extrac
 
 **L34 — O27: keyword operator stays AND (user decision)** · 2026-09-26 — the better overall results (below). OR remains available as `keyword_op="or"` for experiments.
 
+**L35 — C7 API design (user decisions)** · 2026-09-26
+| Choice | Why | Why not the alternative |
+|---|---|---|
+| **Endpoints: `GET /search`, `GET /recordings`, `GET /health`** | `/recordings` feeds the UI's recording dropdown (id, duration, status, chunk count); `/health` checks the DB | search-only makes the UI query the DB itself; audio streaming isn't needed (Streamlit reads local files) |
+| **GET with query params** | cacheable, shareable URLs, easy to test in the browser and `/docs` | POST body isn't cacheable or shareable |
+| **Fixed hybrid + AND; no `mode`/`keyword_op` params** | the API serves the chosen config; experiments stay in eval/CLI; smaller surface | exposing knobs invites misuse |
+
+**L36 — O28: DB connection pool in the API (user decision)** · 2026-09-26
+- **What:** `app/db/connection.create_pool()` → `psycopg_pool.ConnectionPool(min=1, max=5, configure=register_vector, open=False)`. `app/api/main.py` creates **one module-level pool**, opens it once in lifespan (`wait(timeout=10)`; if the DB is down the app still starts and the pool retries), and closes it on shutdown. A **`get_db()` dependency** borrows a connection per request (`with pool.connection()`); all 3 endpoints use it, and `/search` passes it to `hybrid.search(conn=...)`. `PoolTimeout` → 503, like `OperationalError`. `/health` also reports pool size/available. New dependency `psycopg-pool` 3.3.3 (installed `--no-cache-dir`; added to requirements.txt). Offline scripts (pipeline/eval) keep the plain `connect()`.
+- **Why:** the user asked for engine/SessionLocal-style reuse, created once at startup, never per request (the psycopg equivalent of SQLAlchemy's engine is the pool).
+- **Why not one shared connection:** it would serialize concurrent requests.
+- **Measured:** DB time per request **50–83 ms → 3–5 ms** (keyword arm incl. connection acquire). 30 requests → **5 pooled DB connections** reused (`pg_stat_activity`). 20 concurrent requests all OK (1.18 s wall total). Sequential server time p50 ~60 ms, now dominated by query embedding (47–150 ms; O32). The first request after startup is cold (~1.5 s; O31).
+
+**L37 — O31: warm up at FastAPI startup, not on the first request (user decision)** · 2026-09-26
+- **Finding:** the model was already loaded in lifespan. The ~1.5 s cold first request (`embed=462ms keyword=845ms vector=133ms`) came from the **first `encode()`** (PyTorch kernel/thread init) and the **first SQL on a fresh pooled connection** (plans, pgvector types, cold cache), not from model loading.
+- **Fix:** after loading the model, lifespan runs one real `hybrid.search("warm up")` through the pool. If the DB is down it falls back to an embed-only warm-up and logs a warning, so startup never fails because of it.
+- **Measured:** startup (lifespan) 7.5 s; **first `/search` after startup 1467 ms → 26.7 ms**; next requests 25–35 ms server-side (the earlier 47–150 ms embed times weren't reproduced once warm → O32).
+- **Why not lazy loading / warm on the first request:** the first real user pays the cost.
+
+**L38 — C8 UI design (user decisions)** · 2026-09-26
+| Choice | Why | Why not the alternative |
+|---|---|---|
+| **UI calls the FastAPI** (`API_URL`, default `http://127.0.0.1:8000`) | Thin client, matches the architecture, reuses the pool and warm model | Importing `search()` duplicates model loading and DB access and bypasses the API |
+| **Audio: full WAV with `st.audio(start_time=turn start)`** | The listener can keep going past the turn for context | A clip (±2 s) is lighter but cuts context; tracked as U1 in ISSUES |
+| **No debug info** (score, per-arm ranks) | Clean end-user view | Debug expander was declined |
+
+**L39 — O29 fix: `-exclude` enforced on the fused results (user spec)** · 2026-09-26
+- **What:** `excluded_terms(query)` parses websearch-style exclusions (`-word`, `-"phrase"`; the `-` must follow whitespace or the start, so `on-call`/`self-serve` are not exclusions). In `search()`, after RRF the **whole fused list** is filtered (drop any chunk whose lowercased text contains an excluded term, whichever arm it came from), **then** the top-N is taken, so N results are still returned when enough remain. The log records `excluded=[…] dropped=N`. The API/UI get it automatically.
+- **Why after fusion, before top-N:** filtering the top-N afterwards would return fewer than N results; filtering only the vector arm would still let fusion change ranks.
+- **Verified:** parser 7/7 edge cases; `refund` → 3/10 contain "invoice", `refund -invoice` → **0/10** (5 dropped, still 10 results); `-"account credit"` and `billing -refund` → 0 leaks; the eval's quality metrics are **identical to run 2** (no exclusions in the eval set; `eval/results.json` restored to the committed version); API end-to-end `refund -invoice` → 0 leaks.
+- Follow-ups are tracked in ISSUES.md under O29 (O29.1, O29.2).
+
+**L40 — O30 fix: unknown recording → 404 (user spec)** · 2026-09-26
+- **What:** in `GET /search` (the only recording-filtered endpoint), after the speaker-needs-recording check (422) and **before running the query**, `SELECT 1 FROM recordings WHERE id = %s` on the request's pooled connection; missing → `HTTPException(404, detail="unknown recording")` (logged).
+- **Why:** a typo'd recording id used to look like "no matches" (an empty 200).
+- **Verified (API restarted):** `nope`, a typo with a speaker, and wrong case → 404 `unknown recording`; valid recording (± speaker) → 200 with 3 results; no recording → 200; speaker without recording → still 422. Follow-up tracked in ISSUES.md under O30 (O30.1).
+
+**L41 — O23 fix: minimum vector similarity 0.3 before RRF; explicit empty results (user spec)** · 2026-09-26
+- **What:** `VECTOR_SQL` adds `(embedding <=> qvec) <= 1 - min_vector_sim` (vectors are unit-length, so distance = 1 − cosine). `search(min_vector_sim=0.3)` (constant `MIN_VECTOR_SIM`), applied before fusion; the keyword arm is unchanged. If both arms are empty, the result is `[]` → API `count: 0` → UI "No matches" (no padding). Eval: `--min-vector-sim` (−1 = off) and `--out` flags; new `dataset/negative_queries.json` (5 gibberish + 5 off-topic); reports true-negative rate and zero-result rate.
+- **Why before fusion:** a weak vector hit shouldn't earn any RRF credit.
+- **Measured (hybrid, vs no threshold):** TNR **0.0 → 0.9** (off-topic 1.0, gibberish 0.8); Hit@1 0.600 → 0.600; **Hit@5 0.867 → 0.800; Recall@10 0.733 → 0.660**; MRR 0.724 → 0.699; nDCG 0.665 → 0.620; zero-result rate on labeled queries 0 → 0.033 (q20). The regression is **entirely in speaker queries** (Hit@5 0.833 → 0.500): role-word questions score 0.12–0.27 against their correct turns. Paraphrase is unchanged. Sweep 0.2–0.4 in EVALUATION §11.3. The baseline run (−1) reproduces run 2 exactly. API: gibberish/off-topic → `count: 0`; `refund` now 9 results (the weak 10th removed). UI (AppTest): gibberish → "0 results" + "No matches" message, no audio.
+- **Open:** the threshold choice/scope → ISSUES O23.1 (⭐ unscoped-only); O23.2 digit strings.
+
+**L42 — P1 + P4: torch threads + pool size from env (user spec)** · 2026-09-26 · 🟡 built, **tests pending** (the user deferred testing to one full run after all fixes)
+- **What:** config `TORCH_NUM_THREADS` (default 1), `DB_POOL_SIZE` (1), `DB_POOL_MAX_OVERFLOW` (4). `hybrid._model()` calls `torch.set_num_threads()` before loading the query embedder and logs it (offline `pipeline/embed.py` is untouched). `create_pool()` now takes no args and sizes `min = DB_POOL_SIZE`, `max = DB_POOL_SIZE + DB_POOL_MAX_OVERFLOW` (the old hard-coded args were removed from `create_pool` and `main.py`; the defaults reproduce the old 1/5). API startup logs the pool size.
+- **Baseline to compare against (before the change, 3 bursts × 20 concurrent):** client p50 497 / p95 897 ms; server `took_ms` p50 144 / p95 241 ms; torch default 2 threads on 4 logical cores. Load test script: scratchpad `load_test.py`.
+
+**L43 — K1 + K2: stale-processing recovery + SKIP LOCKED claiming (user spec)** · 2026-09-26 · 🟡 built, **tests pending**
+- **What:** schema `recordings.started_at TIMESTAMPTZ` (+ `ALTER TABLE … ADD COLUMN IF NOT EXISTS`; migration applied, data intact). Ingest startup `recover_stale()`: `processing` rows with `COALESCE(started_at, updated_at)` older than `INGEST_STALE_MINUTES` (default 30) → `failed` with an explanatory error → retried by the existing rule. Claim: `SELECT … FOR UPDATE SKIP LOCKED` → completed/processing = skip; failed = retry (`started_at = now()`); none = `INSERT … ON CONFLICT (content_sha256) DO NOTHING RETURNING id` (no row returned = another worker has it → skip). Every claim path commits immediately; the chunk-load phase is unchanged.
+- **Logs per flow step:** `ingest run … stale_timeout`, `stale recovery: none | marked failed for retry: [...]`, `claim <rec>: new | retry | skip, same content already … | skip, claimed by another worker`, then the existing `loaded …` / `ingest failed …`.
+- **Why these choices:** the smallest change that keeps the existing skip/retry rules (L23/L24). `COALESCE` covers rows from before `started_at` existed.
+- Follow-up in ISSUES under K1 (K1.1: no periodic heartbeat refresh).
+
+**L44 — S1 + S3: credentials in `.env`, Streamlit on localhost (user spec)** · 2026-09-26
+- **S1:** `.env` (already git-ignored) holds `POSTGRES_USER/PASSWORD/DB/HOST/PORT`, with **values unchanged** (the existing volume was initialized with them). `docker-compose.yml` uses `${POSTGRES_*:?set … in .env}` (fails loudly if missing). `app/config.py` has a minimal built-in `.env` reader (no new dependency; real env vars win) and builds `DATABASE_URL` from the vars (URL-escaped); an explicit `DATABASE_URL` still overrides; missing vars → a clear `RuntimeError`. `.env.example` (placeholders) is committed; README setup has `cp .env.example .env`. **Logs:** `DB pool target user@host:port/db` at API startup and the target in connect-failure logs; the password is never logged.
+- **S3:** `.streamlit/config.toml` → `[server] address = "127.0.0.1"`, auto-loaded when Streamlit runs from the project root (no command change).
+- **Quick check only (per the user, full tests later):** config loads from `.env` and queries the DB (344 chunks); `docker compose config` resolves the vars; `git check-ignore` confirms `.env` is ignored; no hard-coded password left in tracked code. Follow-up: ISSUES S1.1 (rotate the password before a public push).
+
+**L45 — G1: commit processed JSON, ignore `.npz` (user decision)** · 2026-09-26
+- **What:** `.gitignore` gets `*.npz`. Committed `f322434`: `.gitignore` + 19 JSON files (7 ASR incl. the rec01 `base` benchmark, 6 diarization, 6 chunks). Only these were staged; all other uncommitted work stays uncommitted (the user holds those commits).
+- **Why:** the DB can be rebuilt without ~40 min of CPU ASR; the `.npz` embeddings are binary and regenerated in seconds.
+
+**L46 — O23.1 fix: similarity floor only for unscoped searches (user spec)** · 2026-09-26
+- **What:** in `search()`, `threshold = None if recording else min_vector_sim`; `None` → `max_dist = 2.0` (the full cosine-distance range, i.e. no filter), otherwise `1 − threshold`. The log shows `vector_hits(threshold=0.30)` or `vector_hits(threshold=off:recording-scoped)`. No other code changed.
+- **Why:** role-word speaker questions have low absolute similarity (0.12–0.27) to correct turns, and speaker queries always carry a recording (L32). All gibberish/off-topic negatives are unscoped.
+- **Eval run 4 (targets met):** hybrid Hit@5 **0.867** (= run 2), zero-result rate **0.000**, TNR **0.9** (off-topic 1.0, gibberish 0.8, only `1234 5678 9012` = O23.2). Speaker type is identical to run 2 (Hit@5 0.833, R@10 0.778). Remaining cost: Recall@10 0.733 → 0.727 and nDCG 0.665 → 0.660 (one unscoped keyword query loses an on-topic chunk below 0.3). EVALUATION §11.4; `eval/results.json` = run 4. Follow-up ISSUES O23.3 (gibberish inside a recording isn't filtered, by design).
+
+**L47 — O23.2, O29.1, O29.2, O30.1 (user spec)** · 2026-09-26 · 🟡 built, **untested** (the user deferred tests)
+- **O23.2:** `MIN_VECTOR_SIM_NO_LETTERS = 0.4`; if the positive query text has no letters, the unscoped floor is `max(min_vector_sim, 0.4)` (scoped searches remain off, L46). The log shows `threshold=0.40(no-letters)`. Note: the earlier sweep showed `1234 5678 9012` still had 1 hit at 0.4.
+- **O29.1:** `positive_text(query)` removes `-word` / `-"phrase"`; only that text is embedded (the keyword arm and the post-filter still use the full query). An exclusion-only query → no embedding, vector arm skipped. Logged as `embedded=…`.
+- **O29.2:** the post-filter uses `re.compile(rf"\b{re.escape(term)}")` on the lowercased text (word-boundary prefix) instead of a substring.
+- **O30.1:** UI `fetch_search`: a 404 → `fetch_recordings.clear()`, log warning, show the API `detail` + "recording list has been refreshed" (via the existing warning path).
+
+**L48 — R1 reranker + R3 configurable RRF (user spec)** · 2026-09-26 · 🟡 built, **untested**
+- **R1:** the user chose `cross-encoder/ms-marco-MiniLM-L-6-v2` (~90 MB; `bge-reranker-v2-m3` was rejected for its ~2.2 GB size, RAM and CPU latency) and **on by default**. `search(rerank=RERANK)` (env `RERANK`, default 1): after fusion and exclusion, the top `RERANK_TOP` (50) are scored by `CrossEncoder.predict((positive query, turn text))` and reordered; the tail is kept; it only reorders and never drops; skipped for exclusion-only queries. `_reranker()` is lazy and cached; the API warm-up search loads it at startup (the model downloads to `.local/huggingface` on first start). Log: `rerank=on(N)` + `rerank=Xms`.
+- **R3:** `rrf(ranked_lists, k, weights)`; `search(rrf_k=RRF_K, keyword_weight=RRF_KEYWORD_WEIGHT)` from env (defaults 60 / 1.0 = unchanged); hybrid weights = [keyword_weight, 1.0]. The local `RRF_K = 60` constant in hybrid.py was removed (now from config). Eval flags `--rerank on|off`, `--rrf-k`, `--kw-weight` for the sweep in the full run.
+- **Interaction:** with rerank on, the final order is decided by the cross-encoder, so R3 weights only affect which candidates make the top 50 (and the order when rerank is off).
+
+**L49 — O22: ingest log-and-continue (user spec)** · 2026-09-26 · 🟡 built, **untested**
+- **What:** in `ingest.main()`, each `ingest(conn, f)` is wrapped in `try/except`: on an exception → `conn.rollback()` (clean transaction for the next file), the stem is added to `failed`, `log.warning("continuing after failure: …")`, and the loop continues. `ingest()` itself still logs the traceback and marks the row `failed` (L24). Summary: `done: loaded=… skipped=… failed=N [stems]; chunks in DB=…`; **exit code 1** if any failed, so scripts/CI still see the failure.
+- **Why:** one bad recording shouldn't block the rest (supersedes the earlier "stop at first failure" behavior, O22).
+- **Note:** a pre-claim failure (e.g. a missing chunks file) doesn't create a DB row (unchanged behavior); it's only in the log and the summary.
+
+**L50 — Full verification pass (user request)** · 2026-09-26 — every §0 item tested with its log line.
+| Item | Result | Evidence (log / measurement) |
+|---|---|---|
+| O29 | ✅ | `refund -invoice` → 0/6 contain "invoice" (plain `refund`: 3/10); `excluded=['invoice'] dropped=3`. 6 results, not 10, because the O23 floor leaves only 9 vector candidates (expected interaction) |
+| O29.1 | ✅ | `embedded='refund'`; `-invoice` alone → `embedded=''`, vector arm skipped, 10 keyword results, 0 leaks |
+| O29.2 | ✅ | `start -art` keeps all 10 "start" turns, `dropped=0`; `-invoices` correctly leaves singular "invoice" (prefix semantics) |
+| O30 | ✅ | `recording=nope` → 404 `unknown recording`; log `GET /search unknown recording='nope' -> 404` |
+| O30.1 | ✅ | UI warning "unknown recording: the recording list has been refreshed"; log `recordings cache cleared`; the deleted recording is gone from the dropdown on the next run |
+| O23 / O23.1 | ✅ | gibberish/off-topic unscoped → 0 (`threshold=0.30 … -> 0 results`); speaker query in rec04 → 10 results (`threshold=off:recording-scoped`), q20 relevant at rank 4 |
+| O23.2 | ❌ | `1234 5678 9012` → 1 hit (`threshold=0.40(no-letters)`); the `447129` turn scores 0.403 |
+| P1 | ✅ | 3×20 load, rerank off: client p50 497 → **295** / p95 897 → **685** ms; server p50 144 → **129** / p95 241 → **194** ms; log `torch threads=1` |
+| P4 | ✅ | defaults `pool min=1 max=5`; env `DB_POOL_SIZE=2 DB_POOL_MAX_OVERFLOW=3` → `pool min=2 max=5`, `/health` pool size 2 |
+| K1 | ✅ | `stale recovery: marked failed for retry: ['rec06_climate_policy']` → `claim … retry` → `loaded … 49 chunks` |
+| K2 | ✅ | two parallel workers: one `claim … retry`, the other `skip, claimed by another worker`; loaded once (64 rows) |
+| O22 | ✅ | `could not start ingest for rec02` → `continuing after failure: rec02_hr_burnout` → `done: … failed=1` exit 1; after the restore, `retry` → loaded |
+| S1 | ✅ | `DB pool target postgres@localhost:5432/transcripts (credentials from env/.env)` |
+| S3 | ✅ | Streamlit prints only `URL: http://127.0.0.1:8501`; socket bound to 127.0.0.1 |
+| R1 | ✅ built / ⚠ latency | Hit@1 0.600 → 0.733, Hit@5 0.867 → 0.933, MRR 0.724 → 0.823, nDCG 0.660 → 0.691; sequential p50 24 → 210 ms, p95 29 → 1080 ms; load p50 2253 / p95 4521 ms (client) |
+| R3 | ✅ | kw_weight 1.5 → keyword Hit@1 0.846 → 0.923 (fixes q16), no paraphrase/speaker change; k 10/30 no effect |
+- **Findings (ISSUES §0):** O23.2 fail; R1.1 warm-up doesn't load the reranker; R1.2 rerank latency under load; R3 weight choice; X2 `compare_embeddings.py` caches to C; X3 RAM/page-file pressure (C had 0.1 GB free; removed a ~174 MB duplicate model cache from C, D copies verified first).
+- **End state:** all 6 recordings `completed`, 344 chunks; the rec02 chunks file restored; temp recording row deleted; `eval/results.json` = run 5 (rerank on); API and UI restarted with defaults.
+
+**L51 — O23.2, R1.1, R1.2, R3, X2, X3 (user spec)** · 2026-09-26
+- **Changes:** `MIN_VECTOR_SIM_NO_LETTERS` 0.4 → **0.45**; API lifespan calls `hybrid._reranker().predict(...)` when `RERANK` is on (the ready log shows `reranker=on(top N)`); `RERANK_TOP` default 50 → **20**; `RRF_KEYWORD_WEIGHT` default 1.0 → **1.5**; `eval/compare_embeddings.py` imports `app` before `sentence_transformers` (HF cache stays on D); README + LIMITATIONS: run heavy jobs one at a time (no code change).
+- **Eval (defaults: rerank on/top 20, kw 1.5), vs run 5:** hybrid Hit@1 **0.733** (=), Hit@5 **0.933** (=), MRR **0.827** (0.823), nDCG 0.695 (0.691), Recall@10 0.741 (=); **TNR 1.0** (all 10 negatives → 0; digit query `threshold=0.45(no-letters) … -> 0 results`); misses@5 only q5, q13. O23.2 ✅, R3 ✅.
+- **R1.1 ✅:** `reranker: … (top 20)` logged at 16:06:13, **before** `API ready` at 16:06:21 (`reranker=on(top 20)`).
+- **R1.2 not measured yet:** the median rerank candidate count is 10 in both runs (the O23 floor keeps lists small), so the top-20 cap mainly affects recording-scoped queries (the p95 cases). The load test after the change (client p50 7183 / p95 10337 ms) is **confounded**: 0.3 GB RAM free, API startup 17.6 s. A same-conditions A/B then failed on a **test-harness bug** (unread stdout/stderr pipes blocked uvicorn; all variants, even rerank off, timed out). The harness was fixed (output to files); **the A/B was interrupted by the user and is still pending**.
+
+**L52 — D4: same file name + different audio → clean id-conflict error (user report)** · 2026-09-26 · 🟡 built, **untested**
+- **Bug:** the new-recording INSERT used `ON CONFLICT (content_sha256) DO NOTHING`, which didn't cover the `id` primary key, so a re-upload under an existing file name with new content raised a raw `UniqueViolation` (since O22 it was caught, but with a noisy traceback and an unclear message).
+- **Fix:** `ON CONFLICT DO NOTHING` (no target → both unique keys, race-safe). If nothing was inserted, look up the row by `id`: a different stored hash → `log.error("claim <rec>: id conflict … existing recording left unchanged. Rename the file or delete the old recording first")` + `raise RecordingIdConflict` (re-raised without the generic traceback handler; counted as failed by the O22 loop → exit 1). Otherwise → `skip, claimed by another worker` (as before).
+- **Why this behavior:** clean error + keep the existing data (the user asked for a clean error, not a silent overwrite). Follow-up found: ISSUES D4.1 (retry path after a rename).
+
+**L53 — D5: no-speech recordings crash end-of-run stats (user report)** · 2026-09-26 · 🟡 built, **untested**
+- **Bug:** `asr.py` (`sum(lengths)/len(lengths)`, `max(lengths)`) and `chunk.py` (`durs`, `words`) computed stats after writing the output; with 0 segments/chunks → `ZeroDivisionError` outside the try block → the run aborted and the remaining files were skipped.
+- **Fix (stats only; processing and outputs untouched):** if the list is empty → `log.warning(... "no speech segments detected" / "no chunks (recording has no speech segments)")` and `continue` to the next file.
+- Follow-ups found (not fixed, rule 7): ISSUES D5.1 (diarize k=2 with < 2 segments), D5.2 (zero-length audio → RTF division).
+
+**L54 — D6: exclusion-only query returns empty (user report)** · 2026-09-26 · 🟡 built, **untested**
+- **Bug:** `-invoice` → `websearch_to_tsquery` = `!invoice` → the keyword arm matched every chunk without "invoice" (~50 arbitrary results). L50 had recorded this behavior ("10 keyword results") as a pass; it's now treated as a bug.
+- **Fix:** in `search()`, after the existing validation (mode, speaker needs recording), `positive_text(query)` empty → log `no positive terms (only exclusions) -> 0 results` and `return []` (API `count: 0`, UI "No matches").
+- **Dead code removed (rule 7):** the O29.1 special case that skipped the vector arm for an empty `embed_q` (`… if embed_q else []`), the conditional query embedding (`… if embed_q else None`), and `bool(embed_q)` in the rerank condition. All are unreachable after the early return.
+
+**L55 — D7: `mean_cos_within` excluded self-pairs (user report)** · 2026-09-26 · 🟡 built, **not re-run**
+- **Bug:** `np.mean(E_c @ E_c.T)` included the diagonal (each segment vs itself = 1.0), inflating within-speaker cosine (most for small clusters). The values recorded earlier in this log and in EVALUATION §8 (0.845–0.928) are **overstated**.
+- **Fix:** `_mean_pairwise_cos(e)` = `(sum − trace)/(n(n−1))` over distinct pairs; `None` (JSON `null`) if the cluster has < 2 segments. `mean_cos_between` (no self-pairs), silhouette (sklearn excludes self-distances) and **KMeans labels are untouched** (the diagnostic isn't used for clustering).
+- **Docs:** EVALUATION §8 flags the old within values as inflated; the true values come from the next diarization run (ISSUES D7).
+
+**L56 — D8: empty `recording=` → 422 instead of a silent 0 (user report)** · 2026-09-26 · 🟡 built, **untested**
+- **Bug:** `recording=""` is falsy → `if recording and …` skipped the O30 existence check → `hybrid.search()` filtered `recording_id = ''` → 0 results with HTTP 200 (and the threshold scope logic treated it as unscoped).
+- **Fix:** `recording: str | None = Query(None, min_length=1)` → FastAPI rejects it with a 422 before any DB work (same approach as `q`). Whitespace-only `" "` still reaches the O30 check → 404.
+- **Logging:** new `RequestValidationError` handler logs `422 <method> <path>: [(field, msg)]` (no values) and returns FastAPI's **default** response via `request_validation_exception_handler` (response body/status unchanged for every existing 422).
+- **Why 422, not "treat empty as no filter":** a blank filter is almost always a client bug; failing loudly beats silently widening the search.
+
+**L57 — D9: embedding dimension checked against the DB column (user report, low)** · 2026-09-26 · 🟡 built, **untested**
+- **Bug:** `VECTOR(384)` is hard-coded in schema.sql; switching `EMBED_MODEL` to a different dimension would fail deep inside pgvector with an opaque error.
+- **Fix (fail fast, no schema templating):** `app/db/connection.embedding_dim(conn)` parses `format_type(...)` of `chunks.embedding` (→ 384). **Ingest:** logs `chunks.embedding is vector(N)` at the start; `load_rows(recording, db_dim)` raises a clear `ValueError` if a recording's `.npz` width ≠ N (pre-claim failure → logged, counted as failed by the O22 loop). **API lifespan:** compares `model.get_sentence_embedding_dimension()` with the column; mismatch → `log.error` + `RuntimeError` (the API doesn't start); DB unreachable → a warning and startup continues (consistent with the warm-up). schema.sql: a comment on the column.
+- **Why not generate the schema from config:** `CREATE TABLE IF NOT EXISTS` wouldn't alter an existing table, so a runtime check is needed either way; a real dimension change needs a migration + re-ingest.
+
+**L58 — D10: duplicated unsafe averaging → `statistics.fmean` (user report, low)** · 2026-09-26 · 🟡 built, **untested**
+- **What:** `asr.py` (`avg_seg`) and `chunk.py` (`avg_dur`, `avg_words`) use `fmean(...)` instead of `sum(x)/len(x)`; the D5 empty-list guards (warning + `continue`) stay. The log format is unchanged. A grep confirms no other `sum(...)/len(...)` in `app/`.
+- **Why not a shared helper:** two call sites, and the stdlib already provides it; a new module would be premature abstraction.
+
+**L59 — User decisions before the first push** · 2026-09-26
+- **Keep** the D6/D7/D9 fixes (the user's earlier P3 summary had listed them as "left as-is"; they were already built and are kept).
+- **D4.1:** leave documented in ISSUES, no code change (rare, low impact).
+- **Full verification run deferred** until the laptop is restarted (RAM exhausted); pending items are listed in ISSUES §0.
+- **The repo is public:** removed the email and local user paths from the docs being committed (the git author metadata still carries the user's name/email, as with any commit). Dev DB password history → ISSUES S1.1.
+- **Commit and push** after the D5.1 fix + docs update (user go-ahead).
+
+**L60 — D5.1: diarize handles < 2 segments (user spec)** · 2026-09-26 · 🟡 built, **untested**
+- **What:** if `len(segments) < 2` → skip embedding + KMeans, label all `A`, diagnostics `single_speaker: true`, `null` silhouette/within/between, `log.warning("<rec>: N speech segment(s) -> clustering skipped, single-speaker recording (all labeled A)")`. Also guarded (needed for the same goal): silhouette only if 2 ≤ clusters ≤ n−1, between-speaker cosine only if both clusters have members → otherwise `null` (exactly 2 segments previously made `silhouette_score` raise). Normal recordings: same labels/metrics, plus the new `single_speaker: false` key on re-run.
+
+**L61 — Docs for the first public push (user request)** · 2026-09-26
+- **ARCHITECTURE.md** rewritten to match the code (query path: parse/exclusions → keyword AND → vector with scoped floor → weighted RRF → exclusion filter → rerank top 20; ingest state machine with stale recovery, SKIP LOCKED, id conflict, dimension check; serving/validation; the config table; tech choices incl. the reranker). **README.md**: results at a glance (numbers checked against `eval/results.json`), docs index, config table, run commands. **LIMITATIONS.md**: rows updated for the fixes (exclusion, fusion weights, threshold, rerank latency, ingest). **ISSUES.md**: §0 rebuilt (fixes pending verification incl. D5.1), R1 re-listed as partly closed (q5/q13 still miss). **New `docs/AGENT_DISCLOSURE.md`**: roles, working agreement, workflow diagram, the 14 phases, human-vs-agent decision table, agent mistakes and how they were caught.
+- **Public-repo hygiene:** email and local user paths removed from AGENTS.md/ISSUES.md. The untracked presentation `.pptx` is not committed (not requested). Static checks before commit: `py_compile` on all changed modules OK; the unused-import/definition scan is clean.
+
 **O27 A/B result:** `keyword_op` = `and` (default) | `or` added to `search()` / CLI `--keyword-op`. OR helps keyword-only search (MRR 0.433 → 0.660) but hurts hybrid (Hit@5 0.867 → 0.767, nDCG 0.665 → 0.616; paraphrase Hit@5 0.727 → 0.455), because common words match unrelated turns. Details: [docs/EVALUATION.md](docs/EVALUATION.md) §5.
 
 ### 6.2 Open — to be locked during development
+
+> **2026-09-26: all open issues are consolidated in [docs/ISSUES.md](docs/ISSUES.md)** (user request: finish development first; latency/concurrency later). New issues go there. The table below is kept for history.
+> **Rule (user):** issues are tracked **only in ISSUES.md**, never in AGENTS.md. Follow-ups found while fixing an issue go **under the original issue** as sub-items (`O29.1`, `O29.2`), not as new top-level issues.
 | ID | Question | Options (⭐ suggestion) |
 |---|---|---|
 | O1 | LLM for writing the scripts (L3) | Probably moot: the user supplies the audio (see L16) |
@@ -489,6 +653,11 @@ Add per-conversation summaries, per-chunk "contextual retrieval" headers, extrac
 | ~~O25~~ | ~~Speaker filter scope~~ | **Closed → L32** |
 | ~~O26~~ | ~~Neighbor metric~~ | **Closed → L33** |
 | ~~O27~~ | ~~Keyword operator~~ | **Closed → L34 (AND)** |
+| ~~O28~~ | ~~DB connection per request~~ | **Closed → L36 (pool)** |
+| ~~O31~~ | ~~Cold first request~~ | **Closed → L37** |
+| O32 | API: query embedding 47–150 ms right after startup | **Not reproduced after L37:** warm sequential requests are 25–35 ms server-side. ⭐ close · keep watching |
+| O29 | `-exclude` not applied to the vector arm | ⭐ leave + document (semantic arm can't "exclude words" cleanly) · post-filter fused results whose text contains an excluded term |
+| O30 | Unknown `recording` returns an empty 200 | ⭐ 404 "unknown recording" (one extra lookup) · keep an empty 200 |
 | O24 | queries.json key | ⭐ keep DB `chunk_id` (user's format), but never re-ingest without regenerating · switch to stable `(recording_id, chunk_index)` pairs |
 | O22 | On a per-recording failure | ⭐ stop the run (current behavior, logged) · log and continue with the next recording, with a failure summary at the end |
 | ~~O5~~ | ~~Streamlit vs Gradio~~ | **Closed → L15** |
@@ -628,7 +797,19 @@ Add per-conversation summaries, per-chunk "contextual retrieval" headers, extrac
 - **C9 built:** `app/search/hybrid.py` got `mode ∈ {hybrid, keyword, vector}` (default hybrid, so behavior is unchanged; also `--mode` in the CLI). `eval/run_eval.py` runs 30 queries × 3 modes (top 10, speaker filter applied when set) → Hit@1, Hit@5, Recall@5/10, MRR@10, nDCG@10 (binary), per type, latency p50/p95, hybrid misses@5 → `eval/results.json`.
 - **C9 results → [docs/EVALUATION.md](docs/EVALUATION.md)** (full tables, per-type, per-query ranks, failure analysis, caveats). Headline: hybrid MRR@10 0.708 / nDCG@10 0.635 / Hit@5 0.80 vs vector 0.699 / 0.615 / 0.80 vs keyword 0.433 / 0.335 / 0.433; p50 37 ms. The hybrid gain comes only from keyword-type queries (AND keyword arm is empty for paraphrase/speaker). 6 misses@5, bucketed: question-turn label artifact, per-recording speaker labels, small-embedder vocabulary gap, no lexical rescue. Options O25–O27.
 - The user asked for eval results in a separate file → `docs/EVALUATION.md` (numbers generated from `eval/results.json`, not hand-copied).
-- **Docker CLI isn't on PATH in already-open terminals.** Open a new terminal, or prepend `C:\Users\gupta\AppData\Local\Programs\DockerDesktop\resources\bin`.
+- **The user locked O27 = AND (L34)** and asked to commit: `53d49c2` search modes/operator/speaker guard · `8c22998` dataset recording field · `a7eeda5` C9 eval harness + results.json · `552d4d9` docs (ARCHITECTURE status updated: C6/C9 built).
+- **Built C7 `app/api/main.py`** (L35): FastAPI with lifespan preload of the embedding model (~42 s cold start incl. imports); pydantic response models (`SearchResponse` → hits with speaker, times, text, score, per-arm ranks, prev/next turn; the unstable `chunk_id` isn't exposed); validation: `q` 1–500 chars, `speaker ∈ {A,B}` **and requires `recording`** (422), `n` 1–50; `psycopg.OperationalError` → 503 "database unavailable"; request logging. Run: `python -m uvicorn app.api.main:app --port 8000` (docs at `/docs`).
+- **C7 tests:** `/health` ok; `/recordings` → 6 recordings, all `completed`, chunk counts 64/57/55/55/64/49; `/search?q=refund` → rec04 refund turns with prev/next; quoted phrase `"connection pool"` → #1 contains the exact phrase; `refund -invoice` → #1 has no "invoice"; speaker+recording works. Errors: speaker without recording → 422 with a clear message; speaker=C → 422; empty q → 422; n=500 → 422; unknown recording → 200 with 0 results.
+- **Observations (not changed, the user decides):** (1) **latency 77–121 ms per request** vs ~23 ms in eval, because each request opens a new DB connection (~50–80 ms of the "keyword" time); a connection pool would fix it (O28). (2) `-exclude` applies only to the keyword arm, so vector hits may still contain the excluded word (O29). (3) Unknown recording → empty 200 rather than 404 (O30).
+- **The user asked to list all issues in a separate file and finish development first** (latency/concurrency later) → `docs/ISSUES.md`: API behavior (O29, O30, O23), retrieval quality (R1–R4, O9, O21), performance/concurrency (O32, P1–P4), ingestion/data (K1, K2, O22, D1–D3), eval gaps (E1–E5), repo/ops/security (G1, G2, S1, S2, X1), features not started (O8, F1), with priority P1–P3 and ⭐ options. Next: C8 UI.
+- **The user said: don't commit C7 yet; proceed to C8.**
+- **Built C8 `app/ui/streamlit_app.py`** (L38): sidebar filters (recording dropdown from `/recordings`, cached 60 s; **speaker dropdown disabled until a recording is picked**, enforcing L32; result count slider 1–20); a search form (submit button, no rerun per keystroke); results show `recording · Speaker X · mm:ss–mm:ss`, the previous turn (caption), the hit (quote), the next turn (caption), and an audio player starting at the turn. API down → clear error with the start command; 422 → warning with the API's message; 0 results → hint. Logs each search (`app.ui`). Run: `python -m streamlit run app/ui/streamlit_app.py` (API must be running).
+- **C8 tests (Streamlit `AppTest`, headless):** page loads without exceptions, 6 recordings listed, speaker filter disabled → enabled after picking a recording; `refund` → 3 rec04 hits with headers, context and 3 audio players; speaker A @ rec04 → all A; gibberish query in rec05 → still 3 results (O23 visible in the UI, P1 in ISSUES). The real server is up at http://localhost:8501 (`/_stcore/health` ok). **Not verified: actual in-browser audio playback** (needs a person to click play).
+- New issues in ISSUES.md: S3 (Streamlit binds all interfaces), U1 (full-file audio weight); O23 raised to P1.
+- **The user asked to commit C7 and C8** → 3 self-consistent commits: `20a5a93` config (env credentials + runtime settings: config.py, docker-compose.yml, .env.example; a prerequisite of the API pool) · `54e07ac` C7 API (app/api, db/connection.py pool, requirements psycopg-pool) · `c09141f` C8 UI (app/ui, .streamlit/config.toml, README). **Still uncommitted:** hybrid.py (O29/O23/P1), ingest.py + schema.sql (K1/K2), eval/run_eval.py + results.json + dataset/negative_queries.json (O23 eval), docs (EVALUATION, ISSUES), AGENTS.md.
+- **ISSUES.md cleaned (user request):** only open items remain; fixed rows were removed (their records stay here as L39–L45). §0 lists the built-but-unverified fixes with the log lines to check.
+- **Created `docs/LIMITATIONS.md` (user request):** the prototype's limits by area (data, ASR, diarization, chunking, retrieval, evaluation, system, security), each with its impact, current mitigation and production path, linked to decisions (L#) and ISSUES IDs. F1 removed from ISSUES.
+- **Docker CLI isn't on PATH in already-open terminals.** Open a new terminal, or prepend `%LOCALAPPDATA%\Programs\DockerDesktop\resources\bin`.
 - Noted for O4: `all-MiniLM-L6-v2` is **already in the local HF cache** (87 MB, no download). `multi-qa-MiniLM-L6-cos-v1` would need an ~90 MB download.
 - The user chose to work on the **database schema** while Docker installs. Draft `app/schema.sql` (NOT applied, NOT locked); open points are O11–O14.
 - **The user asked for:** (1) an audio processing status (processing/completed/failed), and (2) hashing for idempotency. Clarified the terminology: "consistent hashing" is a sharding/distribution technique; idempotency needs a **content hash** (SHA-256 of the audio bytes, UNIQUE), so the same audio is never ingested twice, even under a different file name. Added `recordings.content_sha256 TEXT NOT NULL UNIQUE` and `recordings.status` with a CHECK constraint. Chunk-level idempotency already exists through `UNIQUE (recording_id, chunk_index)` plus upsert. Follow-ups are O15–O19.
