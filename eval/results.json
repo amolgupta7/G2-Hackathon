@@ -1,0 +1,663 @@
+{
+  "n": 10,
+  "queries": 30,
+  "configs": {
+    "hybrid": [
+      "hybrid",
+      "and"
+    ],
+    "hybrid_or": [
+      "hybrid",
+      "or"
+    ],
+    "keyword": [
+      "keyword",
+      "and"
+    ],
+    "keyword_or": [
+      "keyword",
+      "or"
+    ],
+    "vector": [
+      "vector",
+      "and"
+    ]
+  },
+  "summary": {
+    "hybrid": {
+      "mode": "hybrid",
+      "keyword_op": "and",
+      "overall": {
+        "hit@1": 0.6,
+        "hit@5": 0.867,
+        "recall@5": 0.653,
+        "recall@10": 0.733,
+        "mrr@10": 0.724,
+        "ndcg@10": 0.665,
+        "hit@1+nb": 0.733,
+        "hit@5+nb": 0.933,
+        "mrr@10+nb": 0.815
+      },
+      "by_type": {
+        "keyword": {
+          "hit@1": 0.846,
+          "hit@5": 1.0,
+          "recall@5": 0.769,
+          "recall@10": 0.821,
+          "mrr@10": 0.923,
+          "ndcg@10": 0.821,
+          "hit@1+nb": 0.846,
+          "hit@5+nb": 1.0,
+          "mrr@10+nb": 0.923,
+          "n": 13
+        },
+        "paraphrase": {
+          "hit@1": 0.364,
+          "hit@5": 0.727,
+          "recall@5": 0.508,
+          "recall@10": 0.606,
+          "mrr@10": 0.543,
+          "ndcg@10": 0.49,
+          "hit@1+nb": 0.727,
+          "hit@5+nb": 0.909,
+          "mrr@10+nb": 0.791,
+          "n": 11
+        },
+        "speaker": {
+          "hit@1": 0.5,
+          "hit@5": 0.833,
+          "recall@5": 0.667,
+          "recall@10": 0.778,
+          "mrr@10": 0.625,
+          "ndcg@10": 0.645,
+          "hit@1+nb": 0.5,
+          "hit@5+nb": 0.833,
+          "mrr@10+nb": 0.625,
+          "n": 6
+        }
+      },
+      "latency_ms": {
+        "p50": 23.3,
+        "p95": 28.9
+      }
+    },
+    "hybrid_or": {
+      "mode": "hybrid",
+      "keyword_op": "or",
+      "overall": {
+        "hit@1": 0.633,
+        "hit@5": 0.767,
+        "recall@5": 0.575,
+        "recall@10": 0.675,
+        "mrr@10": 0.71,
+        "ndcg@10": 0.616,
+        "hit@1+nb": 0.733,
+        "hit@5+nb": 0.867,
+        "mrr@10+nb": 0.8
+      },
+      "by_type": {
+        "keyword": {
+          "hit@1": 0.846,
+          "hit@5": 1.0,
+          "recall@5": 0.795,
+          "recall@10": 0.846,
+          "mrr@10": 0.923,
+          "ndcg@10": 0.829,
+          "hit@1+nb": 0.846,
+          "hit@5+nb": 1.0,
+          "mrr@10+nb": 0.923,
+          "n": 13
+        },
+        "paraphrase": {
+          "hit@1": 0.455,
+          "hit@5": 0.455,
+          "recall@5": 0.235,
+          "recall@10": 0.417,
+          "mrr@10": 0.481,
+          "ndcg@10": 0.326,
+          "hit@1+nb": 0.727,
+          "hit@5+nb": 0.727,
+          "mrr@10+nb": 0.727,
+          "n": 11
+        },
+        "speaker": {
+          "hit@1": 0.5,
+          "hit@5": 0.833,
+          "recall@5": 0.722,
+          "recall@10": 0.778,
+          "mrr@10": 0.667,
+          "ndcg@10": 0.687,
+          "hit@1+nb": 0.5,
+          "hit@5+nb": 0.833,
+          "mrr@10+nb": 0.667,
+          "n": 6
+        }
+      },
+      "latency_ms": {
+        "p50": 25.6,
+        "p95": 53.3
+      }
+    },
+    "keyword": {
+      "mode": "keyword",
+      "keyword_op": "and",
+      "overall": {
+        "hit@1": 0.433,
+        "hit@5": 0.433,
+        "recall@5": 0.303,
+        "recall@10": 0.309,
+        "mrr@10": 0.433,
+        "ndcg@10": 0.335,
+        "hit@1+nb": 0.467,
+        "hit@5+nb": 0.467,
+        "mrr@10+nb": 0.467
+      },
+      "by_type": {
+        "keyword": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "recall@5": 0.7,
+          "recall@10": 0.713,
+          "mrr@10": 1.0,
+          "ndcg@10": 0.774,
+          "hit@1+nb": 1.0,
+          "hit@5+nb": 1.0,
+          "mrr@10+nb": 1.0,
+          "n": 13
+        },
+        "paraphrase": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "recall@5": 0.0,
+          "recall@10": 0.0,
+          "mrr@10": 0.0,
+          "ndcg@10": 0.0,
+          "hit@1+nb": 0.091,
+          "hit@5+nb": 0.091,
+          "mrr@10+nb": 0.091,
+          "n": 11
+        },
+        "speaker": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "recall@5": 0.0,
+          "recall@10": 0.0,
+          "mrr@10": 0.0,
+          "ndcg@10": 0.0,
+          "hit@1+nb": 0.0,
+          "hit@5+nb": 0.0,
+          "mrr@10+nb": 0.0,
+          "n": 6
+        }
+      },
+      "latency_ms": {
+        "p50": 23.4,
+        "p95": 31.7
+      }
+    },
+    "keyword_or": {
+      "mode": "keyword",
+      "keyword_op": "or",
+      "overall": {
+        "hit@1": 0.633,
+        "hit@5": 0.667,
+        "recall@5": 0.488,
+        "recall@10": 0.543,
+        "mrr@10": 0.66,
+        "ndcg@10": 0.545,
+        "hit@1+nb": 0.7,
+        "hit@5+nb": 0.8,
+        "mrr@10+nb": 0.735
+      },
+      "by_type": {
+        "keyword": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "recall@5": 0.767,
+          "recall@10": 0.818,
+          "mrr@10": 1.0,
+          "ndcg@10": 0.841,
+          "hit@1+nb": 1.0,
+          "hit@5+nb": 1.0,
+          "mrr@10+nb": 1.0,
+          "n": 13
+        },
+        "paraphrase": {
+          "hit@1": 0.182,
+          "hit@5": 0.273,
+          "recall@5": 0.121,
+          "recall@10": 0.212,
+          "mrr@10": 0.255,
+          "ndcg@10": 0.179,
+          "hit@1+nb": 0.364,
+          "hit@5+nb": 0.636,
+          "mrr@10+nb": 0.458,
+          "n": 11
+        },
+        "speaker": {
+          "hit@1": 0.667,
+          "hit@5": 0.667,
+          "recall@5": 0.556,
+          "recall@10": 0.556,
+          "mrr@10": 0.667,
+          "ndcg@10": 0.573,
+          "hit@1+nb": 0.667,
+          "hit@5+nb": 0.667,
+          "mrr@10+nb": 0.667,
+          "n": 6
+        }
+      },
+      "latency_ms": {
+        "p50": 24.9,
+        "p95": 32.6
+      }
+    },
+    "vector": {
+      "mode": "vector",
+      "keyword_op": "and",
+      "overall": {
+        "hit@1": 0.6,
+        "hit@5": 0.867,
+        "recall@5": 0.614,
+        "recall@10": 0.722,
+        "mrr@10": 0.716,
+        "ndcg@10": 0.644,
+        "hit@1+nb": 0.733,
+        "hit@5+nb": 0.933,
+        "mrr@10+nb": 0.807
+      },
+      "by_type": {
+        "keyword": {
+          "hit@1": 0.846,
+          "hit@5": 1.0,
+          "recall@5": 0.679,
+          "recall@10": 0.795,
+          "mrr@10": 0.904,
+          "ndcg@10": 0.774,
+          "hit@1+nb": 0.846,
+          "hit@5+nb": 1.0,
+          "mrr@10+nb": 0.904,
+          "n": 13
+        },
+        "paraphrase": {
+          "hit@1": 0.364,
+          "hit@5": 0.727,
+          "recall@5": 0.508,
+          "recall@10": 0.606,
+          "mrr@10": 0.543,
+          "ndcg@10": 0.49,
+          "hit@1+nb": 0.727,
+          "hit@5+nb": 0.909,
+          "mrr@10+nb": 0.791,
+          "n": 11
+        },
+        "speaker": {
+          "hit@1": 0.5,
+          "hit@5": 0.833,
+          "recall@5": 0.667,
+          "recall@10": 0.778,
+          "mrr@10": 0.625,
+          "ndcg@10": 0.645,
+          "hit@1+nb": 0.5,
+          "hit@5+nb": 0.833,
+          "mrr@10+nb": 0.625,
+          "n": 6
+        }
+      },
+      "latency_ms": {
+        "p50": 21.5,
+        "p95": 28.7
+      }
+    }
+  },
+  "misses_at_5": {
+    "hybrid": [
+      {
+        "query_id": "q2",
+        "type": "paraphrase",
+        "query": "how long were customers affected by the outage",
+        "first_rank": {
+          "hybrid": 9,
+          "hybrid_or": null,
+          "keyword": null,
+          "keyword_or": null,
+          "vector": 9
+        }
+      },
+      {
+        "query_id": "q4",
+        "type": "paraphrase",
+        "query": "what caused the incident in the first place",
+        "first_rank": {
+          "hybrid": 6,
+          "hybrid_or": 1,
+          "keyword": null,
+          "keyword_or": 6,
+          "vector": 6
+        }
+      },
+      {
+        "query_id": "q5",
+        "type": "speaker",
+        "query": "what did the on-call engineer do to reduce the damage",
+        "first_rank": {
+          "hybrid": null,
+          "hybrid_or": null,
+          "keyword": null,
+          "keyword_or": null,
+          "vector": null
+        }
+      },
+      {
+        "query_id": "q13",
+        "type": "paraphrase",
+        "query": "can we cancel if the product is not adopted",
+        "first_rank": {
+          "hybrid": null,
+          "hybrid_or": null,
+          "keyword": null,
+          "keyword_or": null,
+          "vector": null
+        }
+      }
+    ],
+    "hybrid_or": [
+      {
+        "query_id": "q2",
+        "type": "paraphrase",
+        "query": "how long were customers affected by the outage",
+        "first_rank": {
+          "hybrid": 9,
+          "hybrid_or": null,
+          "keyword": null,
+          "keyword_or": null,
+          "vector": 9
+        }
+      },
+      {
+        "query_id": "q5",
+        "type": "speaker",
+        "query": "what did the on-call engineer do to reduce the damage",
+        "first_rank": {
+          "hybrid": null,
+          "hybrid_or": null,
+          "keyword": null,
+          "keyword_or": null,
+          "vector": null
+        }
+      },
+      {
+        "query_id": "q9",
+        "type": "paraphrase",
+        "query": "trouble sleeping at night",
+        "first_rank": {
+          "hybrid": 2,
+          "hybrid_or": 6,
+          "keyword": null,
+          "keyword_or": null,
+          "vector": 2
+        }
+      },
+      {
+        "query_id": "q13",
+        "type": "paraphrase",
+        "query": "can we cancel if the product is not adopted",
+        "first_rank": {
+          "hybrid": null,
+          "hybrid_or": null,
+          "keyword": null,
+          "keyword_or": null,
+          "vector": null
+        }
+      },
+      {
+        "query_id": "q14",
+        "type": "paraphrase",
+        "query": "how long does setup take after signing the contract",
+        "first_rank": {
+          "hybrid": 1,
+          "hybrid_or": null,
+          "keyword": null,
+          "keyword_or": null,
+          "vector": 1
+        }
+      },
+      {
+        "query_id": "q24",
+        "type": "paraphrase",
+        "query": "best time of year to travel there",
+        "first_rank": {
+          "hybrid": 5,
+          "hybrid_or": null,
+          "keyword": null,
+          "keyword_or": null,
+          "vector": 5
+        }
+      },
+      {
+        "query_id": "q29",
+        "type": "paraphrase",
+        "query": "why is flooding getting worse",
+        "first_rank": {
+          "hybrid": 2,
+          "hybrid_or": 8,
+          "keyword": null,
+          "keyword_or": null,
+          "vector": 2
+        }
+      }
+    ]
+  },
+  "first_rank_per_query": {
+    "q1": {
+      "hybrid": 2,
+      "hybrid_or": 2,
+      "keyword": 1,
+      "keyword_or": 1,
+      "vector": 4
+    },
+    "q2": {
+      "hybrid": 9,
+      "hybrid_or": null,
+      "keyword": null,
+      "keyword_or": null,
+      "vector": 9
+    },
+    "q3": {
+      "hybrid": 1,
+      "hybrid_or": 1,
+      "keyword": 1,
+      "keyword_or": 1,
+      "vector": 1
+    },
+    "q4": {
+      "hybrid": 6,
+      "hybrid_or": 1,
+      "keyword": null,
+      "keyword_or": 6,
+      "vector": 6
+    },
+    "q5": {
+      "hybrid": null,
+      "hybrid_or": null,
+      "keyword": null,
+      "keyword_or": null,
+      "vector": null
+    },
+    "q6": {
+      "hybrid": 1,
+      "hybrid_or": 1,
+      "keyword": 1,
+      "keyword_or": 1,
+      "vector": 1
+    },
+    "q7": {
+      "hybrid": 1,
+      "hybrid_or": 1,
+      "keyword": 1,
+      "keyword_or": 1,
+      "vector": 1
+    },
+    "q8": {
+      "hybrid": 1,
+      "hybrid_or": 1,
+      "keyword": 1,
+      "keyword_or": 1,
+      "vector": 1
+    },
+    "q9": {
+      "hybrid": 2,
+      "hybrid_or": 6,
+      "keyword": null,
+      "keyword_or": null,
+      "vector": 2
+    },
+    "q10": {
+      "hybrid": 4,
+      "hybrid_or": 2,
+      "keyword": null,
+      "keyword_or": 1,
+      "vector": 4
+    },
+    "q11": {
+      "hybrid": 1,
+      "hybrid_or": 1,
+      "keyword": 1,
+      "keyword_or": 1,
+      "vector": 1
+    },
+    "q12": {
+      "hybrid": 1,
+      "hybrid_or": 1,
+      "keyword": 1,
+      "keyword_or": 1,
+      "vector": 1
+    },
+    "q13": {
+      "hybrid": null,
+      "hybrid_or": null,
+      "keyword": null,
+      "keyword_or": null,
+      "vector": null
+    },
+    "q14": {
+      "hybrid": 1,
+      "hybrid_or": null,
+      "keyword": null,
+      "keyword_or": null,
+      "vector": 1
+    },
+    "q15": {
+      "hybrid": 1,
+      "hybrid_or": 1,
+      "keyword": null,
+      "keyword_or": 1,
+      "vector": 1
+    },
+    "q16": {
+      "hybrid": 2,
+      "hybrid_or": 2,
+      "keyword": 1,
+      "keyword_or": 1,
+      "vector": 2
+    },
+    "q17": {
+      "hybrid": 1,
+      "hybrid_or": 1,
+      "keyword": 1,
+      "keyword_or": 1,
+      "vector": 1
+    },
+    "q18": {
+      "hybrid": 1,
+      "hybrid_or": 1,
+      "keyword": null,
+      "keyword_or": 2,
+      "vector": 1
+    },
+    "q19": {
+      "hybrid": 1,
+      "hybrid_or": 1,
+      "keyword": null,
+      "keyword_or": 1,
+      "vector": 1
+    },
+    "q20": {
+      "hybrid": 2,
+      "hybrid_or": 2,
+      "keyword": null,
+      "keyword_or": null,
+      "vector": 2
+    },
+    "q21": {
+      "hybrid": 1,
+      "hybrid_or": 1,
+      "keyword": 1,
+      "keyword_or": 1,
+      "vector": 1
+    },
+    "q22": {
+      "hybrid": 1,
+      "hybrid_or": 1,
+      "keyword": 1,
+      "keyword_or": 1,
+      "vector": 1
+    },
+    "q23": {
+      "hybrid": 1,
+      "hybrid_or": 1,
+      "keyword": null,
+      "keyword_or": 1,
+      "vector": 1
+    },
+    "q24": {
+      "hybrid": 5,
+      "hybrid_or": null,
+      "keyword": null,
+      "keyword_or": null,
+      "vector": 5
+    },
+    "q25": {
+      "hybrid": 1,
+      "hybrid_or": 1,
+      "keyword": null,
+      "keyword_or": 1,
+      "vector": 1
+    },
+    "q26": {
+      "hybrid": 1,
+      "hybrid_or": 1,
+      "keyword": 1,
+      "keyword_or": 1,
+      "vector": 1
+    },
+    "q27": {
+      "hybrid": 1,
+      "hybrid_or": 1,
+      "keyword": 1,
+      "keyword_or": 1,
+      "vector": 1
+    },
+    "q28": {
+      "hybrid": 2,
+      "hybrid_or": 1,
+      "keyword": null,
+      "keyword_or": 7,
+      "vector": 2
+    },
+    "q29": {
+      "hybrid": 2,
+      "hybrid_or": 8,
+      "keyword": null,
+      "keyword_or": null,
+      "vector": 2
+    },
+    "q30": {
+      "hybrid": 1,
+      "hybrid_or": 1,
+      "keyword": null,
+      "keyword_or": 1,
+      "vector": 1
+    }
+  }
+}
