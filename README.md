@@ -30,6 +30,7 @@ audio → speech-to-text → who-spoke → speaker turns       query → keyword
 ```bash
 pip install -r requirements.txt
 pip install --no-deps resemblyzer
+cp .env.example .env          # set DB credentials (git-ignored; read by docker compose and app/config.py)
 docker compose up -d          # Postgres + pgvector
 ```
 
@@ -43,6 +44,10 @@ python -m app.pipeline.embed --model all-MiniLM-L6-v2           # 4. embeddings 
 python -m app.pipeline.embed --model multi-qa-MiniLM-L6-cos-v1
 python -m app.db.connection                   # apply DB schema (needs `docker compose up -d`)
 python -m app.pipeline.ingest                 # 5. load chunks + embeddings into Postgres (idempotent)
+python -m app.search.hybrid "refund" -n 5     # 6. hybrid search from the CLI (--speaker needs --recording)
+python -m eval.run_eval                       # 9. evaluation -> eval/results.json, see docs/EVALUATION.md
+python -m uvicorn app.api.main:app --port 8000  # 7. API: /search, /recordings, /health (docs at /docs)
+python -m streamlit run app/ui/streamlit_app.py  # 8. UI at http://localhost:8501 (needs the API running)
 ```
 
 Logs: console + `logs/app.log`. Model files are cached in `.local/huggingface` (D drive).

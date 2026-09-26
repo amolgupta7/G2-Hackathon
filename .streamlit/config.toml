@@ -1,0 +1,3 @@
+[server]
+# Only reachable from this machine (no LAN/external access to the UI or the audio it serves).
+address = "127.0.0.1"
