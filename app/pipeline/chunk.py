@@ -1,6 +1,7 @@
 """C3: merge diarized segments into speaker-turn chunks -> data/processed/chunks/<recording>.json (L6, L20)."""
 import argparse
 import json
+from statistics import fmean
 
 from app.config import PROCESSED_DIR
 from app.log import get_logger
@@ -54,11 +55,14 @@ def main():
             log.exception("chunking failed for %s", rec)
             raise
         cs = result["chunks"]
+        if not cs:  # no speech segments upstream: empty chunk file is written, nothing to average
+            log.warning("%s: no chunks (recording has no speech segments)", rec)
+            continue
         durs = [c["end"] - c["start"] for c in cs]
         words = [len(c["text"].split()) for c in cs]
         log.info(
             "%s: chunks=%d avg_dur=%.1fs max_dur=%.1fs avg_words=%.0f max_words=%d",
-            rec, len(cs), sum(durs) / len(durs), max(durs), sum(words) / len(words), max(words),
+            rec, len(cs), fmean(durs), max(durs), fmean(words), max(words),
         )
 
 

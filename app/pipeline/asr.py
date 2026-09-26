@@ -3,6 +3,7 @@ import argparse
 import json
 import time
 from pathlib import Path
+from statistics import fmean
 
 from faster_whisper import WhisperModel
 
@@ -52,10 +53,14 @@ def main():
             log.exception("ASR failed for %s", f.name)
             raise
         lengths = [s["end"] - s["start"] for s in result["segments"]]
+        if not lengths:  # silent / no-speech audio: output is valid, just nothing to average
+            log.warning("%s [%s] audio=%ss asr=%ss: no speech segments detected -> %s",
+                        f.name, args.model, result["audio_duration_s"], result["asr_seconds"], out.name)
+            continue
         log.info(
             "%s [%s] audio=%ss asr=%ss RTF=%s segments=%d avg_seg=%.1fs max_seg=%.1fs -> %s",
             f.name, args.model, result["audio_duration_s"], result["asr_seconds"],
-            result["real_time_factor"], len(lengths), sum(lengths) / len(lengths), max(lengths), out.name,
+            result["real_time_factor"], len(lengths), fmean(lengths), max(lengths), out.name,
         )
 
 
