@@ -4,10 +4,11 @@ import json
 from pathlib import Path
 
 import numpy as np
-from sentence_transformers import SentenceTransformer
 
+# app must be imported before sentence_transformers: app/__init__ sets HF_HOME (model cache on D).
 from app.log import get_logger
 from app.pipeline.embed import EMB_DIR, MODELS, embed
+from sentence_transformers import SentenceTransformer  # noqa: E402  (after app, see above)
 
 log = get_logger("app.eval.compare_embeddings")
 

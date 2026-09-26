@@ -1,0 +1,12 @@
+[
+  {"query_id": "n1", "query": "zzzqqq nonexistent gibberish term", "type": "gibberish"},
+  {"query_id": "n2", "query": "asdf ghjkl qwerty", "type": "gibberish"},
+  {"query_id": "n3", "query": "xqzv blorptang frimble", "type": "gibberish"},
+  {"query_id": "n4", "query": "lorem ipsum dolor sit amet", "type": "gibberish"},
+  {"query_id": "n5", "query": "1234 5678 9012", "type": "gibberish"},
+  {"query_id": "n6", "query": "how do I train a puppy to sit", "type": "off_topic"},
+  {"query_id": "n7", "query": "symptoms of the flu in young children", "type": "off_topic"},
+  {"query_id": "n8", "query": "best hiking trails in Colorado", "type": "off_topic"},
+  {"query_id": "n9", "query": "python list comprehension syntax", "type": "off_topic"},
+  {"query_id": "n10", "query": "who won the world chess championship", "type": "off_topic"}
+]
