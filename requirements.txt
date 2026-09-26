@@ -1,0 +1,19 @@
+# ASR (L4)
+faster-whisper
+# Diarization (L5) - resemblyzer is installed separately with --no-deps (see below)
+webrtcvad-wheels
+librosa
+scikit-learn
+# Embeddings (L7)
+sentence-transformers
+# Database (L1, L2)
+psycopg[binary]
+pgvector
+# API + UI (L13)
+fastapi
+uvicorn
+streamlit
+
+# After `pip install -r requirements.txt`, run:
+#   pip install --no-deps resemblyzer
+# Its declared dependency `webrtcvad` needs C++ build tools on Windows; webrtcvad-wheels provides the same module prebuilt.
