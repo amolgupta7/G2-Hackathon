@@ -14,6 +14,9 @@ pgvector
 fastapi
 uvicorn
 streamlit
+# Tests (tests/, pytest.ini)
+pytest
+pytest-asyncio
 
 # After `pip install -r requirements.txt`, run:
 #   pip install --no-deps resemblyzer
