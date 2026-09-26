@@ -6,11 +6,14 @@ from typing import Literal
 
 import psycopg
 from fastapi import Depends, FastAPI, HTTPException, Query, Request
+from fastapi.exception_handlers import request_validation_exception_handler
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from psycopg_pool import PoolTimeout
 from pydantic import BaseModel
 
-from app.db.connection import create_pool
+from app.config import EMBED_MODEL, RERANK, RERANK_TOP
+from app.db.connection import create_pool, embedding_dim
 from app.log import get_logger
 from app.search import hybrid
 
@@ -29,6 +32,20 @@ async def lifespan(_: FastAPI):
     except PoolTimeout:
         log.warning("DB not reachable at startup; pool keeps retrying in the background")
     model = hybrid._model()  # load the embedding model once, not on the first request
+    model_dim = model.get_sentence_embedding_dimension()
+    try:
+        with pool.connection(timeout=5) as conn:
+            db_dim = embedding_dim(conn)
+    except (PoolTimeout, psycopg.OperationalError):
+        db_dim = None
+        log.warning("embedding dimension check skipped: DB not reachable")
+    if db_dim is not None and db_dim != model_dim:
+        # Fail at startup with a clear message instead of an opaque pgvector error on every search.
+        msg = (f"embedding model {EMBED_MODEL} is {model_dim}-d but chunks.embedding is vector({db_dim}); "
+               "update schema.sql, migrate the column and re-ingest")
+        log.error(msg)
+        raise RuntimeError(msg)
+    log.info("embedding dimension check: model=%d db=%s", model_dim, db_dim)
     # Loading isn't enough: the first encode() and the first queries on a fresh connection are slow (~1.5 s),
     # so run one real search now instead of on the first user request.
     try:
@@ -37,8 +54,12 @@ async def lifespan(_: FastAPI):
     except Exception:
         log.warning("warm-up search failed (DB down?); warming up the model only", exc_info=True)
         hybrid.embed(model, ["warm up"])
-    log.info("API ready in %.1fs (pool min=%d max=%d from DB_POOL_SIZE/DB_POOL_MAX_OVERFLOW, model warmed up)",
-             time.perf_counter() - t0, pool.min_size, pool.max_size)
+    if RERANK:
+        # The warm-up query yields < 2 candidates, so search() never reranks it: load + run the reranker explicitly.
+        hybrid._reranker().predict([("warm up", "warm up")])
+    log.info("API ready in %.1fs (pool min=%d max=%d from DB_POOL_SIZE/DB_POOL_MAX_OVERFLOW, model warmed up, "
+             "reranker=%s)", time.perf_counter() - t0, pool.min_size, pool.max_size,
+             f"on(top {RERANK_TOP})" if RERANK else "off")
     yield
     pool.close()
     log.info("API shutdown: pool closed")
@@ -94,6 +115,14 @@ async def db_unavailable(_: Request, exc: Exception):
     return JSONResponse(status_code=503, content={"detail": "database unavailable"})
 
 
+@app.exception_handler(RequestValidationError)
+async def validation_failed(request: Request, exc: RequestValidationError):
+    # Log 422s (e.g. empty recording=) so they're traceable in logs/app.log; the response stays FastAPI's default.
+    log.info("422 %s %s: %s", request.method, request.url.path,
+             [(".".join(map(str, e["loc"])), e["msg"]) for e in exc.errors()])
+    return await request_validation_exception_handler(request, exc)
+
+
 @app.get("/health")
 def health(conn: psycopg.Connection = Depends(get_db)) -> dict:
     conn.execute("SELECT 1")
@@ -114,7 +143,8 @@ def recordings(conn: psycopg.Connection = Depends(get_db)) -> list[Recording]:
 def search(
     q: str = Query(..., min_length=1, max_length=500, description="Keywords (AND, \"phrase\", -exclude) or a question"),
     speaker: Literal["A", "B"] | None = Query(None, description="Requires `recording` (labels are per recording)"),
-    recording: str | None = Query(None, description="Recording id, e.g. rec04_support_billing"),
+    # min_length=1: an empty recording= would otherwise skip the 404 check and silently filter on id ''.
+    recording: str | None = Query(None, min_length=1, description="Recording id, e.g. rec04_support_billing"),
     n: int = Query(10, ge=1, le=50),
     conn: psycopg.Connection = Depends(get_db),
 ) -> SearchResponse:

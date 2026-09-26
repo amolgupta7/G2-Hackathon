@@ -35,6 +35,11 @@ def fetch_search(q: str, recording: str | None, speaker: str | None, n: int) -> 
     if speaker:
         params["speaker"] = speaker
     r = requests.get(f"{API_URL}/search", params=params, timeout=30)
+    if r.status_code == 404:
+        # The recording list is cached for 60 s and may be stale (recording removed): refresh it for the next run.
+        fetch_recordings.clear()
+        log.warning("search 404 for recording=%s: %s; recordings cache cleared", recording, r.json().get("detail"))
+        raise ValueError(f"{r.json().get('detail', 'not found')}: the recording list has been refreshed")
     if r.status_code == 422:
         detail = r.json().get("detail")
         raise ValueError(detail if isinstance(detail, str) else "; ".join(d["msg"] for d in detail))
