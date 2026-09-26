@@ -15,12 +15,19 @@ log = get_logger("app.search.hybrid")
 
 FILTERS = "(%(speaker)s::text IS NULL OR speaker = %(speaker)s) AND (%(rec)s::text IS NULL OR recording_id = %(rec)s)"
 
-KEYWORD_SQL = f"""
-SELECT id FROM chunks, websearch_to_tsquery('english', %(q)s) AS query
-WHERE tsv @@ query AND {FILTERS}
-ORDER BY ts_rank_cd(tsv, query) DESC, id
+KEYWORD_SQL_TEMPLATE = """
+SELECT id FROM chunks, (SELECT {tsquery} AS query) AS tq
+WHERE tsv @@ tq.query AND {filters}
+ORDER BY ts_rank_cd(tsv, tq.query) DESC, id
 LIMIT %(k)s
 """
+# "and": every term must match (websearch syntax). "or": same parse, but any term may match (phrases stay phrases).
+KEYWORD_SQL = {
+    "and": KEYWORD_SQL_TEMPLATE.format(
+        tsquery="websearch_to_tsquery('english', %(q)s)", filters=FILTERS),
+    "or": KEYWORD_SQL_TEMPLATE.format(
+        tsquery="replace(websearch_to_tsquery('english', %(q)s)::text, ' & ', ' | ')::tsquery", filters=FILTERS),
+}
 
 VECTOR_SQL = f"""
 SELECT id FROM chunks
@@ -52,8 +59,18 @@ def rrf(ranked_lists: list[list[int]], k: int = RRF_K) -> dict[int, float]:
     return scores
 
 
+MODES = ("hybrid", "keyword", "vector")
+
+
 def search(query: str, speaker: str | None = None, recording: str | None = None,
-           top_k: int = 50, n: int = 10, conn=None) -> list[dict]:
+           top_k: int = 50, n: int = 10, conn=None, mode: str = "hybrid", keyword_op: str = "and") -> list[dict]:
+    if mode not in MODES:
+        raise ValueError(f"mode must be one of {MODES}")
+    if keyword_op not in KEYWORD_SQL:
+        raise ValueError(f"keyword_op must be one of {tuple(KEYWORD_SQL)}")
+    # Speaker labels A/B are assigned per recording, so "speaker A" only identifies a person within one recording.
+    if speaker and not recording:
+        raise ValueError("speaker filter requires a recording filter (speaker labels are per recording)")
     params = {"q": query, "speaker": speaker, "rec": recording, "k": top_k}
     t0 = time.perf_counter()
     params["qvec"] = embed(_model(), [query])[0]
@@ -62,12 +79,13 @@ def search(query: str, speaker: str | None = None, recording: str | None = None,
     own_conn = conn is None
     conn = conn or connect()
     try:
-        keyword_ids = [r[0] for r in conn.execute(KEYWORD_SQL, params).fetchall()]
+        keyword_ids = [r[0] for r in conn.execute(KEYWORD_SQL[keyword_op], params).fetchall()]
         t_kw = time.perf_counter()
         vector_ids = [r[0] for r in conn.execute(VECTOR_SQL, params).fetchall()]
         t_vec = time.perf_counter()
 
-        scores = rrf([keyword_ids, vector_ids])
+        arms = {"hybrid": [keyword_ids, vector_ids], "keyword": [keyword_ids], "vector": [vector_ids]}[mode]
+        scores = rrf(arms)
         top = sorted(scores, key=lambda i: (-scores[i], i))[:n]
         rows = {r[0]: r for r in conn.execute(RESULT_SQL, {"ids": top}).fetchall()}
     except Exception:
@@ -91,9 +109,9 @@ def search(query: str, speaker: str | None = None, recording: str | None = None,
         })
 
     log.info(
-        "q=%r speaker=%s rec=%s | keyword_hits=%d vector_hits=%d -> %d results | "
+        "mode=%s keyword_op=%s q=%r speaker=%s rec=%s | keyword_hits=%d vector_hits=%d -> %d results | "
         "embed=%.0fms keyword=%.0fms vector=%.0fms total=%.0fms",
-        query, speaker, recording, len(keyword_ids), len(vector_ids), len(results),
+        mode, keyword_op, query, speaker, recording, len(keyword_ids), len(vector_ids), len(results),
         (t_embed - t0) * 1e3, (t_kw - t_embed) * 1e3, (t_vec - t_kw) * 1e3, (time.perf_counter() - t0) * 1e3,
     )
     return results
@@ -105,9 +123,14 @@ def main():
     parser.add_argument("--speaker", choices=["A", "B"])
     parser.add_argument("--recording")
     parser.add_argument("-n", type=int, default=5)
+    parser.add_argument("--mode", choices=MODES, default="hybrid")
+    parser.add_argument("--keyword-op", choices=tuple(KEYWORD_SQL), default="and")
     args = parser.parse_args()
+    if args.speaker and not args.recording:
+        parser.error("--speaker requires --recording (speaker labels are per recording)")
 
-    for i, r in enumerate(search(args.query, args.speaker, args.recording, n=args.n), start=1):
+    results = search(args.query, args.speaker, args.recording, n=args.n, mode=args.mode, keyword_op=args.keyword_op)
+    for i, r in enumerate(results, start=1):
         print(f"{i}. [{r['recording_id']} #{r['chunk_index']} {r['speaker']} "
               f"{r['start_s']:.1f}-{r['end_s']:.1f}s] score={r['score']} "
               f"kw={r['keyword_rank']} vec={r['vector_rank']}\n   {r['text'][:160]}")
