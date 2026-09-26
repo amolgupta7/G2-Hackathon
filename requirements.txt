@@ -8,6 +8,7 @@ scikit-learn
 sentence-transformers
 # Database (L1, L2)
 psycopg[binary]
+psycopg-pool
 pgvector
 # API + UI (L13)
 fastapi

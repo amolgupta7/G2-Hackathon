@@ -3,12 +3,16 @@ from pathlib import Path
 
 import psycopg
 from pgvector.psycopg import register_vector
+from psycopg.conninfo import conninfo_to_dict
+from psycopg_pool import ConnectionPool
 
-from app.config import DATABASE_URL
+from app.config import DATABASE_URL, DB_POOL_MAX_OVERFLOW, DB_POOL_SIZE
 from app.log import get_logger
 
 SCHEMA_PATH = Path(__file__).with_name("schema.sql")
 log = get_logger("app.db.connection")
+_ci = conninfo_to_dict(DATABASE_URL)
+DB_TARGET = f"{_ci.get('user')}@{_ci.get('host')}:{_ci.get('port')}/{_ci.get('dbname')}"  # never includes the password
 
 
 def connect() -> psycopg.Connection:
@@ -16,9 +20,17 @@ def connect() -> psycopg.Connection:
         conn = psycopg.connect(DATABASE_URL)
         register_vector(conn)
     except Exception:
-        log.exception("DB connect failed (is the Docker db container running?)")
+        log.exception("DB connect failed to %s (is the Docker db container running? credentials in .env?)", DB_TARGET)
         raise
     return conn
+
+
+def create_pool() -> ConnectionPool:
+    """Pool for long-running services: created once, opened at startup, connections reused across requests.
+    Sized by DB_POOL_SIZE (kept open) + DB_POOL_MAX_OVERFLOW (extra under load)."""
+    log.info("DB pool target %s (credentials from env/.env)", DB_TARGET)
+    return ConnectionPool(DATABASE_URL, min_size=DB_POOL_SIZE, max_size=DB_POOL_SIZE + DB_POOL_MAX_OVERFLOW,
+                          configure=register_vector, open=False, name="app")
 
 
 def init_schema() -> None:
