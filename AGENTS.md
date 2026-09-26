@@ -451,6 +451,29 @@ Add per-conversation summaries, per-chunk "contextual retrieval" headers, extrac
 - **Initial sequence:** setup → config + logging → DB → C1 asr → C2 diarize → C3 chunk → C4 embed → C5 ingest → eval → docs.
 - **Why:** a failure or bad change in one layer (e.g. ingest) can be `git revert`-ed without touching the others; the history mirrors the pipeline (L18).
 
+**L31 — C6 search details** · 2026-09-26
+| Choice | Why | Why not the alternative |
+|---|---|---|
+| **Keyword = AND via `websearch_to_tsquery('english', q)`** (supports `"phrase"`, `or`, `-exclude`) | Precise keyword hits; users get search-engine syntax | OR-of-terms has higher recall but noisier. Trade-off: long natural-language questions may get 0 keyword hits, so RRF falls back to the vector arm alone |
+| **Filters: optional `speaker` + `recording_id`, applied to both arms before fusion** | Speaker-scoped queries are a core requirement (Q2); per-recording search for the UI | Speaker-only / none lose that |
+| **RRF in Python** (two SQL queries) | Per-arm ranks are kept and logged, which helps debugging and eval ablations (keyword-only vs vector-only vs hybrid) | Single SQL CTE is one round-trip, but per-arm ranks are harder to inspect |
+| **Neighbor context: previous + next turn** returned with each hit | Mitigates the L6 trade-off (a question and its answer sit in adjacent chunks) | Hit-only hides the answer |
+| Defaults (not user-locked, parameters): **K = 50 per arm, N = 10 results, RRF k = 60** | Standard values; K = 50 is ~15% of 344 chunks | — |
+
+**L32 — O25: a speaker filter requires a recording filter** · 2026-09-26
+- **What:** `search()` raises `ValueError` if `speaker` is set without `recording`; the CLI rejects `--speaker` without `--recording`. The 6 speaker queries in `dataset/queries.json` got a `recording` field (derived from their own labels; labels unchanged).
+- **Why:** diarization labels `A`/`B` are assigned independently per recording, so "speaker A" only identifies a person within one recording. Run 1 showed cross-recording pollution (q20 #1 came from rec01).
+- **Why not the alternatives:** LLM role labels (agent/customer) mean extra model cost and scope; leaving it as-is gives wrong results by design.
+- **Effect (run 2):** speaker Hit@5 0.500 → 0.833; hybrid overall Hit@5 0.800 → 0.867, nDCG 0.635 → 0.665.
+
+**L33 — O26: secondary "+nb" metrics (Hit@1+nb, Hit@5+nb, MRR@10+nb); the strict rule is unchanged** · 2026-09-26
+- **Why:** the UI shows prev/next turns, so a hit next to the answer (e.g. the question turn) puts the answer on screen. Reporting it separately keeps the strict numbers honest while showing the user-visible quality (hybrid Hit@5+nb 0.933).
+- **Why not relabel:** that would change the ground truth and make runs incomparable.
+
+**L34 — O27: keyword operator stays AND (user decision)** · 2026-09-26 — the better overall results (below). OR remains available as `keyword_op="or"` for experiments.
+
+**O27 A/B result:** `keyword_op` = `and` (default) | `or` added to `search()` / CLI `--keyword-op`. OR helps keyword-only search (MRR 0.433 → 0.660) but hurts hybrid (Hit@5 0.867 → 0.767, nDCG 0.665 → 0.616; paraphrase Hit@5 0.727 → 0.455), because common words match unrelated turns. Details: [docs/EVALUATION.md](docs/EVALUATION.md) §5.
+
 ### 6.2 Open — to be locked during development
 | ID | Question | Options (⭐ suggestion) |
 |---|---|---|
@@ -462,6 +485,11 @@ Add per-conversation summaries, per-chunk "contextual retrieval" headers, extrac
 | O21 | Text fed to the embedder | ⭐ chunk text only (current) · prefix speaker (`"A: …"`); the label carries no meaning for the model, so probably noise |
 | G1 | Commit `data/processed/`? | ⭐ JSON (asr/diarization/chunks, 0.33 MB; ASR takes ~40 min to redo) yes, `.npz` embeddings no (regenerated in seconds) · all · none |
 | G2 | Keep the rec01 `base` benchmark transcript? | ⭐ keep (evidence for L22) · delete |
+| O23 | Relevance cutoff for weak matches (C6) | ⭐ none for now; decide after C9 eval shows whether tails hurt · min cosine similarity on the vector arm (e.g. 0.3) · only return vector-only hits above a threshold |
+| ~~O25~~ | ~~Speaker filter scope~~ | **Closed → L32** |
+| ~~O26~~ | ~~Neighbor metric~~ | **Closed → L33** |
+| ~~O27~~ | ~~Keyword operator~~ | **Closed → L34 (AND)** |
+| O24 | queries.json key | ⭐ keep DB `chunk_id` (user's format), but never re-ingest without regenerating · switch to stable `(recording_id, chunk_index)` pairs |
 | O22 | On a per-recording failure | ⭐ stop the run (current behavior, logged) · log and continue with the next recording, with a failure summary at the end |
 | ~~O5~~ | ~~Streamlit vs Gradio~~ | **Closed → L15** |
 | ~~O6~~ | ~~Resemblyzer install~~ | **Resolved:** `webrtcvad-wheels` + `resemblyzer --no-deps` import fine |
@@ -589,6 +617,17 @@ Add per-conversation summaries, per-chunk "contextual retrieval" headers, extrac
 - **C5 verified:** 1st run loaded 6 recordings / **344 chunks**; 2nd run skipped 6 (idempotent); a simulated `failed` on rec06 → "retry" → `completed`, error cleared, `updated_at` advanced, still 344 chunks (no duplicates).
 - O21 (embedder input = chunk text only) and O22 (stop on first failure) were **not answered**; the code keeps the existing behavior for both.
 - **Git (L29, L30):** branch `main`, `.gitattributes` LF, remote `origin` = github.com/amolgupta7/G2-Hackathon. First commits made in dependency order (setup → config/logging → db → C1…C5 → eval → docs); stubs and `data/processed/` not committed yet. **Not pushed** (waiting for the user's go-ahead).
+- **Docs:** the user asked for README / ARCHITECTURE / EVALUATION / LIMITATIONS, then said to write only what's needed at this stage. `docs/ARCHITECTURE.md` was written (built parts ✅, query path marked planned). **EVALUATION.md and LIMITATIONS.md are deferred** until C6–C9 exist; README stays as it is. Not committed yet.
+- **Built C6 `app/search/hybrid.py`** (L31): `search(query, speaker, recording, top_k=50, n=10)` → keyword ids (websearch AND, `ts_rank_cd`) + vector ids (exact `<=>`) → RRF(k=60) in Python → rows with prev/next turn, per-arm ranks, score. Logs per-arm hit counts + latency. CLI: `python -m app.search.hybrid "q" --speaker B --recording rec03_sales_pricing -n 5`.
+- **C6 tests:** `refund` (kw 7 hits; top 3 = rec04 refund turns, the arms agree), `how long were customers affected by the outage` (kw 0 hits → vector-only, #1 = "How long was the total customer impact window?"), `connection pool` (kw 3, both arms), `burnout` (kw & vec both rank the rec02 burnout turn #1), `burnout --speaker B` (filter works; kw 0 → vector-only, with a weak irrelevant tail), `discount --recording rec03` (filter works, all on topic). SQL latency ~3–290 ms (first query ~1.4 s cold). CLI "embed" time 7–15 s = model load per process; the API will load it once.
+- **Observations for the user (not built):** (1) no relevance threshold, so the vector arm always fills K and irrelevant tails can appear when nothing matches (possible min-similarity cutoff, open item O23); (2) phrase syntax untested from the CLI (PowerShell strips quotes); test via the API.
+- **C6 committed** (`270349c`, user request).
+- **Built `dataset/queries.json` for C9 (user request):** 30 queries, 5 per recording (13 keyword / 11 paraphrase / 6 speaker-specific), including the user's 4 tested queries (refund, connection pool, burnout, how long were customers affected). Format `{query_id, query, relevant_chunk_ids}` plus optional `type` and `speaker` (added for per-type reporting and the speaker filter; removable). **Relevance rule:** a chunk is relevant if its text contains information answering or matching the query; pure question turns and passing mentions are excluded. Every label was taken from reading the transcripts (DB dump), not from search output. **Validated against the DB:** all ids exist, one recording per query, speaker queries only reference that speaker's chunks, 0 problems. Keyword queries deliberately include on-topic chunks without the literal word (burnout 1/5, carbon tax 1/6, custard tarts 2/5), plus tricky tokens (`4,420`, `r-8812`, `Marcus`).
+- ⚠️ **Chunk ids are DB-serial:** re-ingesting a recording assigns new ids (rec06 is already 346–394 after the retry test), which invalidates queries.json. A stable alternative is `(recording_id, chunk_index)`, open item O24.
+- **The user locked:** O24 → `(recording_id, chunk_index)` pairs (BIGSERIAL ids change on re-ingest); keep `type` + `speaker` (type drives failure bucketing); commit queries.json separately. Converted from the DB mapping (82 relevant pairs), committed `3a0f5d0`. Order: **C9 before C7.**
+- **C9 built:** `app/search/hybrid.py` got `mode ∈ {hybrid, keyword, vector}` (default hybrid, so behavior is unchanged; also `--mode` in the CLI). `eval/run_eval.py` runs 30 queries × 3 modes (top 10, speaker filter applied when set) → Hit@1, Hit@5, Recall@5/10, MRR@10, nDCG@10 (binary), per type, latency p50/p95, hybrid misses@5 → `eval/results.json`.
+- **C9 results → [docs/EVALUATION.md](docs/EVALUATION.md)** (full tables, per-type, per-query ranks, failure analysis, caveats). Headline: hybrid MRR@10 0.708 / nDCG@10 0.635 / Hit@5 0.80 vs vector 0.699 / 0.615 / 0.80 vs keyword 0.433 / 0.335 / 0.433; p50 37 ms. The hybrid gain comes only from keyword-type queries (AND keyword arm is empty for paraphrase/speaker). 6 misses@5, bucketed: question-turn label artifact, per-recording speaker labels, small-embedder vocabulary gap, no lexical rescue. Options O25–O27.
+- The user asked for eval results in a separate file → `docs/EVALUATION.md` (numbers generated from `eval/results.json`, not hand-copied).
 - **Docker CLI isn't on PATH in already-open terminals.** Open a new terminal, or prepend `C:\Users\gupta\AppData\Local\Programs\DockerDesktop\resources\bin`.
 - Noted for O4: `all-MiniLM-L6-v2` is **already in the local HF cache** (87 MB, no download). `multi-qa-MiniLM-L6-cos-v1` would need an ~90 MB download.
 - The user chose to work on the **database schema** while Docker installs. Draft `app/schema.sql` (NOT applied, NOT locked); open points are O11–O14.
