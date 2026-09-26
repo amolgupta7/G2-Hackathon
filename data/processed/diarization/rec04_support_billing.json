@@ -3,6 +3,7 @@
   "asr_model": "small",
   "diagnostics": {
     "segments": 93,
+    "single_speaker": false,
     "segments_per_speaker": {
       "A": 54,
       "B": 39
@@ -10,8 +11,8 @@
     "speaker_switches": 54,
     "silhouette": 0.747,
     "mean_cos_within": [
-      0.907,
-      0.876
+      0.905,
+      0.873
     ],
     "mean_cos_between": 0.553
   },
