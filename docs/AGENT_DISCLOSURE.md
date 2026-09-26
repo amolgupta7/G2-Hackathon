@@ -24,7 +24,7 @@ The agent **never locked a decision on its own**: options went to the human, and
 4. **Two tracks:** prototype decisions are separate from the "production alternative" noted on each decision.
 5. **Decide during development:** open questions are asked when they come up, never assumed.
 6. **Don't break the working flow:** minimal changes, remove dead code, fix-and-test, with a regression check against the previous eval run.
-7. **Issues live only in `docs/ISSUES.md`:** follow-ups found while fixing something go *under* the original issue (e.g. `O29.1`), not as new top-level issues.
+7. **One issue file drives the fix cycle:** every bug, gap and review finding went into a single working issue file with a priority and ⭐ options. Follow-ups found while fixing something went *under* the original issue (e.g. `O29.1`). Issues were resolved from that file one by one (fix → log line → verify), and the file was kept as an internal working document.
 8. **Commit policy:** small commits in dependency order, only fully developed code, each revertable on its own; push only on explicit approval.
 
 ## 3. Workflow architecture
@@ -40,7 +40,7 @@ flowchart TD
   L --> B[Agent builds ONE small component<br/>minimal change + log lines]
   B --> T[Measure / test<br/>benchmark, eval run, API/UI check]
   T --> R[Report results to the human<br/>incl. regressions and surprises]
-  R --> I[New problems → ISSUES.md<br/>under the parent issue]
+  R --> I[New problems → issue file<br/>under the parent issue]
   R --> C{Human approves commit?}
   C -- yes --> G[Small dependency-ordered commits<br/>push only when told]
   C -- no --> H
@@ -52,7 +52,7 @@ Supporting files the agent maintained:
 | File | Role |
 |---|---|
 | `AGENTS.md` | Problem analysis, options, locked decisions (L1–L60), discussion log |
-| `docs/ISSUES.md` | The only issue list: open items, fixes awaiting verification, follow-ups |
+| Issue file (internal working document) | The single issue list the fix cycle ran from: open items, fixes awaiting verification, follow-ups |
 | `docs/EVALUATION.md` | Every eval run and A/B test, with numbers generated from `eval/results.json` |
 | `docs/ARCHITECTURE.md`, `docs/LIMITATIONS.md`, `README.md` | The system as built, its limits, how to run it |
 | `logs/app.log` | Runtime evidence: every stage and fix has a traceable log line |
@@ -70,7 +70,7 @@ Supporting files the agent maintained:
 | 7 | **Search C6** | Hybrid search with filters and neighbor context | AND keyword semantics, filters, RRF in Python (L31) |
 | 8 | **Evaluation C9** | The human asked for a 30-query labeled set; the agent labeled it from the transcripts (never from search output) and built the eval harness with per-type breakdown and failure analysis | Stable `(recording_id, chunk_index)` keys (O24); speaker queries scoped to a recording (L32); a neighbor-aware secondary metric (L33); **AND kept after the OR A/B test** (L34) |
 | 9 | **API C7 + UI C8** | FastAPI with pooled DB connections and a startup warm-up; Streamlit thin client | The endpoints and validation (L35), the connection pool (L36), the warm-up (L37), UI choices (L38) |
-| 10 | **Issue backlog** | All open issues consolidated into `docs/ISSUES.md` with priorities | Latency/concurrency deferred until development was finished |
+| 10 | **Issue backlog** | All open issues consolidated into one issue file with priorities; every fix afterwards was driven and tracked from it | Latency/concurrency deferred until development was finished |
 | 11 | **Fix cycle** | Exclusion filtering, 404s, a similarity threshold (TNR 0 → 1.0), torch threads, pool config, stale-job recovery, SKIP LOCKED claiming, secrets in `.env`, localhost binding, a cross-encoder reranker, RRF weight tuning | Each fix specified by the human; the reranker model chosen after the agent flagged RAM/latency risks; **reranker on by default** (the human's call) |
 | 12 | **Verification pass** | Every fix tested with its log line; 3 "fails" investigated before being called bugs (2 were test mistakes, 1 was real) | Threshold values, rerank top 20, keyword weight 1.5 (L50, L51) |
 | 13 | **Code review fixes** | The human reviewed the code and reported D4–D10 (an id collision, no-speech crashes, an exclusion-only query, an inflated metric, an empty filter, a hard-coded dimension, duplicated stats); the agent fixed them minimally and logged follow-ups | Keep all fixes; leave D4.1 documented (L59) |
@@ -99,7 +99,7 @@ Transparency about agent errors is part of this disclosure:
 | Wrote model caches to the C drive against the user's "D drive only" rule | The user flagged it | Cache moved to D (`HF_HOME` set before any model import); a later occurrence in one script fixed (X2) |
 | Marked "exclusion-only query returns ~50 results" as a **pass** in verification | **The human's code review** (D6) | Fixed: an exclusion-only query returns an empty result |
 | Within-speaker diarization metric inflated by self-pairs | **The human's code review** (D7) | Fixed; the old numbers flagged as inflated in the docs |
-| Load-test harness blocked the server (unread output pipes) and produced a misleading "all timed out" | The agent noticed rerank-off failing too, which was implausible | Harness fixed; the latency measurement for rerank top 20 is still pending (ISSUES R1.2) |
+| Load-test harness blocked the server (unread output pipes) and produced a misleading "all timed out" | The agent noticed rerank-off failing too, which was implausible | Harness fixed; the same-conditions latency A/B was then measured (EVALUATION §12.4) |
 | Two verification "fails" were wrong test expectations | Investigated before reporting | Reported as test errors, not bugs |
 | Ran tests when the user had asked to stop testing | The user interrupted | The rule was saved: build + log only, test in one run when asked |
 
@@ -112,6 +112,6 @@ Transparency about agent errors is part of this disclosure:
 
 ## 8. Limits of this way of working
 
-- **Single annotator:** the evaluation labels were written by the agent (ISSUES E2); a second human annotator would strengthen the numbers.
+- **Single annotator:** the evaluation labels were written by the agent; a second human annotator would strengthen the numbers.
 - **Agent-written code:** reviewed by the human (which found D4–D10), but not by an independent second reviewer.
-- **Some fixes are built but not yet verified** (ISSUES §0), because the machine ran out of RAM; they are listed with the exact log line to check.
+- **Test suite not yet run on this machine:** all fixes were verified live (AGENTS L70), and the edge cases that are hard to trigger live (silent audio, conflicting uploads) are covered by the pytest suite in `tests/`.

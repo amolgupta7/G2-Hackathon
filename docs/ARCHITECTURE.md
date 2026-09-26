@@ -206,4 +206,4 @@ Full DDL: [`app/db/schema.sql`](../app/db/schema.sql) (includes `ALTER TABLE …
 | Chunking | Multi-turn windows / parent–child chunks with a contextual header |
 | Ops | Managed Postgres, secrets manager, auth + rate limits, JSON logs to a central store, per-stage metrics |
 
-See [LIMITATIONS.md](LIMITATIONS.md) for the prototype's known limits, [EVALUATION.md](EVALUATION.md) for measured quality, and [ISSUES.md](ISSUES.md) for what's open.
+See [LIMITATIONS.md](LIMITATIONS.md) for the prototype's known limits and [EVALUATION.md](EVALUATION.md) for measured quality.

@@ -36,7 +36,6 @@ Details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Components, data model, query path, serving, technology choices, scaling path |
 | [docs/EVALUATION.md](docs/EVALUATION.md) | Query sets, metrics, all eval runs (A/B tests: AND vs OR, threshold, rerank, RRF sweep), failure analysis |
 | [docs/LIMITATIONS.md](docs/LIMITATIONS.md) | Known limits of the prototype and the production path for each |
-| [docs/ISSUES.md](docs/ISSUES.md) | What's still open (fixes pending verification, deferred decisions) |
 | [docs/AGENT_DISCLOSURE.md](docs/AGENT_DISCLOSURE.md) | How an AI coding agent was used to build this, and how decisions stayed with the human |
 | [AGENTS.md](AGENTS.md) | Full decision log (L1–L60): every option considered, what was chosen and why |
 

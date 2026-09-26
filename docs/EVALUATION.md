@@ -301,7 +301,7 @@ Same 30 labeled + 10 negative queries; threshold as in §11.4. Reranker: `cross-
 | Run 5 (top 50, kw 1.0, digit 0.40) | 0.733 | 0.933 | 0.741 | 0.823 | 0.691 | 0.933 | 0.000 | 0.9 / 0.8 / 1.0 |
 | **Run 6** | **0.733** | **0.933** | **0.741** | **0.827** | **0.695** | 0.933 | 0.000 | **1.0 / 1.0 / 1.0** |
 
-Quality is unchanged or slightly up, and **all 10 negatives now return nothing** (the digit query is rejected at 0.45). Misses@5: q5, q13 (the vocabulary gap, ISSUES R1). The median query has only 10 rerank candidates, so capping at 20 mostly affects recording-scoped searches (latency under load: §12.4).
+Quality is unchanged or slightly up, and **all 10 negatives now return nothing** (the digit query is rejected at 0.45). Misses@5: q5, q13 (the small embedder's vocabulary gap). The median query has only 10 rerank candidates, so capping at 20 mostly affects recording-scoped searches (latency under load: §12.4).
 
 ### 12.4 Verification run (run 7) and rerank latency under load (R1.2)
 
@@ -316,4 +316,4 @@ Quality is unchanged or slightly up, and **all 10 negatives now return nothing**
 | Rerank off | **383 / 569 ms** | **118 / 136 ms** | 634, 551, 550 ms |
 
 - Capping the rerank at 20 candidates cuts the **server p95 by ~43%** (2756 → 1572 ms) with no quality loss (§12.3); steady-state bursts finish in ~3.5 s instead of ~5.2 s. The top-20 client p95 is inflated by its first burst right after API start.
-- Under 20 concurrent users on this CPU-only laptop, the **cross-encoder is the bottleneck** (~6× the rerank-off latency). For a single user, rerank adds ~200 ms (sequential eval p50 216 ms vs ~25 ms). Options are tracked in ISSUES R1.2.
+- Under 20 concurrent users on this CPU-only laptop, the **cross-encoder is the bottleneck** (~6× the rerank-off latency). For a single user, rerank adds ~200 ms (sequential eval p50 216 ms vs ~25 ms). Options: keep rerank on for interactive single-user use and set `RERANK=0` under load; in production, run the reranker on a GPU or as a dedicated service.
