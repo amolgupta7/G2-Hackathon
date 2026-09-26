@@ -1,4 +1,5 @@
 """Postgres connection + schema setup (L1, L2, L10, L11). Run `python -m app.db.connection` to apply schema.sql."""
+import re
 from pathlib import Path
 
 import psycopg
@@ -13,6 +14,15 @@ SCHEMA_PATH = Path(__file__).with_name("schema.sql")
 log = get_logger("app.db.connection")
 _ci = conninfo_to_dict(DATABASE_URL)
 DB_TARGET = f"{_ci.get('user')}@{_ci.get('host')}:{_ci.get('port')}/{_ci.get('dbname')}"  # never includes the password
+
+
+def embedding_dim(conn: psycopg.Connection) -> int:
+    """Dimension declared for chunks.embedding in the DB (e.g. 384 for vector(384))."""
+    declared = conn.execute(
+        "SELECT format_type(atttypid, atttypmod) FROM pg_attribute "
+        "WHERE attrelid = 'chunks'::regclass AND attname = 'embedding'"
+    ).fetchone()[0]
+    return int(re.search(r"\((\d+)\)", declared).group(1))
 
 
 def connect() -> psycopg.Connection:

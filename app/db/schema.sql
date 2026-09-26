@@ -8,8 +8,11 @@ CREATE TABLE IF NOT EXISTS recordings (
     status          TEXT NOT NULL CHECK (status IN ('processing', 'completed', 'failed')),
     error           TEXT,
     created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
-    updated_at      TIMESTAMPTZ NOT NULL DEFAULT now()
+    updated_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
+    started_at      TIMESTAMPTZ
 );
+-- For databases created before started_at existed (set when a worker claims the recording for processing).
+ALTER TABLE recordings ADD COLUMN IF NOT EXISTS started_at TIMESTAMPTZ;
 
 CREATE TABLE IF NOT EXISTS chunks (
     id            BIGSERIAL PRIMARY KEY,
@@ -20,7 +23,7 @@ CREATE TABLE IF NOT EXISTS chunks (
     end_s         REAL NOT NULL,
     text          TEXT NOT NULL,
     tsv           TSVECTOR GENERATED ALWAYS AS (to_tsvector('english', text)) STORED,
-    embedding     VECTOR(384) NOT NULL,
+    embedding     VECTOR(384) NOT NULL,  -- must equal EMBED_MODEL's dimension; checked at ingest and API startup
     UNIQUE (recording_id, chunk_index)
 );
 
