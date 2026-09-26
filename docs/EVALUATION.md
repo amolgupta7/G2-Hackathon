@@ -5,7 +5,7 @@ Run date: 2026-09-26 (run 2) · Code: [`eval/run_eval.py`](../eval/run_eval.py) 
 
 Reproduce: `python -m eval.run_eval [--min-vector-sim 0.3] [--out path]` (needs the DB running and ingested).
 
-> **Run 5 (current defaults: cross-encoder rerank on) → [§12](#12-run-5-cross-encoder-rerank-r1-and-rrf-sweep-r3).** Runs 3–4 (O23 / O23.1, similarity threshold) → §11. Sections 3–7 are the run-2 baseline (no threshold); `-1` reproduces them exactly.
+> **Current defaults: run 6/7 (§12.3–12.4, including the regression check and latency under load); run 5 (rerank on) → [§12](#12-run-5-cross-encoder-rerank-r1-and-rrf-sweep-r3).** Runs 3–4 (O23 / O23.1, similarity threshold) → §11. Sections 3–7 are the run-2 baseline (no threshold); `-1` reproduces them exactly.
 
 **Changes since run 1**
 - **O25:** a speaker filter now **requires** a recording filter, because speaker labels `A`/`B` are assigned per recording. The 6 speaker queries carry their `recording`.
@@ -158,7 +158,7 @@ The remaining misses are embedding-quality limits. They point to a larger embedd
 
 **ASR model choice** (rec01, 567.5 s of audio): `base` took 147 s and `small` 431 s. The transcripts agree on 98.4% of words; `small` fixed keyword-critical terms ("on-call", "lint", "write-up", "2.20").
 
-**Diarization** (unsupervised, since there is no ground truth): silhouette 0.62–0.83 across the 6 recordings, between-speaker cosine 0.55–0.58. A manual check of 30 rec01 segments was 30/30 correct. ⚠ The within-speaker cosine reported earlier (0.85–0.93) was **inflated**: it included each segment's similarity with itself (1.0). Fixed in L55; true values come from the next diarization run. Silhouette, between-speaker cosine and the speaker labels are unaffected.
+**Diarization** (unsupervised, since there is no ground truth): silhouette 0.62–0.83 across the 6 recordings, **within-speaker cosine 0.843–0.926** vs between-speaker 0.55–0.58. A manual check of 30 rec01 segments was 30/30 correct. The within-speaker values were recomputed over distinct pairs only (L55; earlier reports of 0.845–0.928 included each segment's self-similarity). The re-run produced **identical speaker labels** for all 6 recordings; silhouette and between-speaker cosine are unchanged.
 
 ## 9. Caveats
 
@@ -301,4 +301,19 @@ Same 30 labeled + 10 negative queries; threshold as in §11.4. Reranker: `cross-
 | Run 5 (top 50, kw 1.0, digit 0.40) | 0.733 | 0.933 | 0.741 | 0.823 | 0.691 | 0.933 | 0.000 | 0.9 / 0.8 / 1.0 |
 | **Run 6** | **0.733** | **0.933** | **0.741** | **0.827** | **0.695** | 0.933 | 0.000 | **1.0 / 1.0 / 1.0** |
 
-Quality is unchanged or slightly up, and **all 10 negatives now return nothing** (the digit query is rejected at 0.45). Misses@5: q5, q13 (the vocabulary gap, ISSUES R1). The median query has only 10 rerank candidates, so capping at 20 mostly affects recording-scoped searches. **Latency under concurrent load for this configuration hasn't been measured reliably yet** (ISSUES R1.2).
+Quality is unchanged or slightly up, and **all 10 negatives now return nothing** (the digit query is rejected at 0.45). Misses@5: q5, q13 (the vocabulary gap, ISSUES R1). The median query has only 10 rerank candidates, so capping at 20 mostly affects recording-scoped searches (latency under load: §12.4).
+
+### 12.4 Verification run (run 7) and rerank latency under load (R1.2)
+
+**Regression check:** after the robustness fixes (exclusion-only queries, id conflicts, no-speech handling, dimension check, empty-filter validation), the full eval was re-run with the current defaults and diffed programmatically against run 6: **0 quality-metric differences** across all 5 configurations and query types, and **no per-query rank changes**. Only latency varies between runs.
+
+**Latency under load** (API, 3 bursts × 20 concurrent `/search` requests, all three variants measured back to back in the same machine state, 1.2–1.3 GB RAM free):
+
+| Variant | Client p50 / p95 | Server p50 / p95 | Burst wall time |
+|---|---|---|---|
+| **Rerank on, top 20** (default) | 2367 / 6395 ms | **817 / 1572 ms** | 7153 (first burst after start), 3485, 3451 ms |
+| Rerank on, top 50 | 2576 / 4612 ms | 878 / 2756 ms | 4527, 5682, 5047 ms |
+| Rerank off | **383 / 569 ms** | **118 / 136 ms** | 634, 551, 550 ms |
+
+- Capping the rerank at 20 candidates cuts the **server p95 by ~43%** (2756 → 1572 ms) with no quality loss (§12.3); steady-state bursts finish in ~3.5 s instead of ~5.2 s. The top-20 client p95 is inflated by its first burst right after API start.
+- Under 20 concurrent users on this CPU-only laptop, the **cross-encoder is the bottleneck** (~6× the rerank-off latency). For a single user, rerank adds ~200 ms (sequential eval p50 216 ms vs ~25 ms). Options are tracked in ISSUES R1.2.

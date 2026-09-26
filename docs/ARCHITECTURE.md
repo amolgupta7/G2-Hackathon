@@ -4,7 +4,7 @@ Hybrid (keyword + semantic) retrieval over two-speaker conversation recordings.
 This document describes the system as built for the time-boxed prototype, and how it would scale to production.
 The reasoning behind each choice (and the options that were rejected) is recorded in [AGENTS.md](../AGENTS.md) as decisions `L1`–`L60`.
 
-> **Build status:** all components (C1–C9) are built. The pipeline, database, search, API, UI and evaluation were verified end to end (AGENTS L50–L51). The latest robustness fixes (ISSUES §0) are built and awaiting a final verification run.
+> **Build status:** all components (C1–C9) are built and verified end to end (AGENTS L50, L51, L70): the regression eval matches the previous run exactly, the diarization re-run reproduces identical speaker labels, and the robustness fixes were checked live with their log lines. Test suite: `tests/` (see README).
 
 ---
 

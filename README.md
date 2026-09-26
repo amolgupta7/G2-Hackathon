@@ -14,6 +14,8 @@ On 30 hand-labeled queries + 10 negative (gibberish/off-topic) queries ([docs/EV
 
 For comparison (MRR@10): keyword-only 0.433 · vector-only (reranked) 0.794 · hybrid without rerank 0.741.
 
+Latency (CPU-only laptop): ~200 ms per query with rerank, ~25 ms without. Under 20 concurrent requests the reranker dominates (server p50 ~0.8 s vs ~0.12 s with `RERANK=0`); see EVALUATION §12.4.
+
 ## How it works
 
 ```
@@ -76,6 +78,8 @@ python -m uvicorn app.api.main:app --port 8000        # 7. API (interactive docs
 python -m streamlit run app/ui/streamlit_app.py       # 8. UI at http://127.0.0.1:8501 (needs the API)
 python -m eval.run_eval                               # 9. evaluation -> eval/results.json
 ```
+
+Tests (`tests/`, pytest): `python -m pytest`. DB tests use a separate `<db>_test` database on the same Postgres (created automatically; override with `TEST_DATABASE_URL`), and are skipped if it's unreachable.
 
 Search syntax: plain words (all must match in the keyword arm), `"exact phrase"`, `-exclude`; natural-language questions work through the vector arm.
 
