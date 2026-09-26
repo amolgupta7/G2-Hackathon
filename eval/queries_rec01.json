@@ -1,0 +1,20 @@
+{
+  "recording": "rec01_standup_incident",
+  "note": "Paraphrased queries (avoid transcript wording) -> the single chunk_index that best answers each.",
+  "queries": [
+    {"q": "what woke up the engineer in the middle of the night", "relevant": 1},
+    {"q": "the web pods had healthy resource usage", "relevant": 3},
+    {"q": "open database connections were about three times higher than usual", "relevant": 5},
+    {"q": "which other systems were overloading the same tables", "relevant": 7},
+    {"q": "first action taken to relieve pressure on the database", "relevant": 13},
+    {"q": "service that was not giving back its connections", "relevant": 15},
+    {"q": "a code change removed the cap on how many rows get written at once", "relevant": 19},
+    {"q": "they called in another person to help during the night", "relevant": 35},
+    {"q": "how long were customers affected by the outage", "relevant": 39},
+    {"q": "estimate of how many purchases failed", "relevant": 41},
+    {"q": "the troubleshooting guide did not say to look at the database", "relevant": 43},
+    {"q": "rule to stop anyone deleting the batch size in future", "relevant": 31},
+    {"q": "what will be communicated publicly to users about the incident", "relevant": 55},
+    {"q": "check other background jobs for the same problem", "relevant": 59}
+  ]
+}
