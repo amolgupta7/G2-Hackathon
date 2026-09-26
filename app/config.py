@@ -37,5 +37,12 @@ DB_POOL_SIZE = int(os.getenv("DB_POOL_SIZE", "1"))
 DB_POOL_MAX_OVERFLOW = int(os.getenv("DB_POOL_MAX_OVERFLOW", "4"))
 # Ingest: a recording in 'processing' longer than this is treated as crashed (marked failed, then retried).
 INGEST_STALE_MINUTES = int(os.getenv("INGEST_STALE_MINUTES", "30"))
+# Search ranking: RRF constant and keyword-arm weight (R3: 1.5 keeps exact keyword hits on top), cross-encoder
+# rerank of the top RERANK_TOP fused candidates (R1; 20 keeps most of the gain at lower latency).
+RRF_K = int(os.getenv("RRF_K", "60"))
+RRF_KEYWORD_WEIGHT = float(os.getenv("RRF_KEYWORD_WEIGHT", "1.5"))
+RERANK = os.getenv("RERANK", "1") == "1"
+RERANK_MODEL = os.getenv("RERANK_MODEL", "cross-encoder/ms-marco-MiniLM-L-6-v2")
+RERANK_TOP = int(os.getenv("RERANK_TOP", "20"))
 # Threads per query-embedding call; 1 avoids CPU oversubscription when many /search requests run at once.
 TORCH_NUM_THREADS = int(os.getenv("TORCH_NUM_THREADS", "1"))
