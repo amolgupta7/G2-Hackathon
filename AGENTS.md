@@ -903,3 +903,8 @@ G2-Hackathon/
 └── .local/              # model cache + Docker data (gitignored)
 ```
 Every sub-folder has an `__init__.py`. Run all commands from the project root.
+
+### 2026-09-26 — Session: Publish presentation
+- The user asked to put the PowerPoint on GitHub after previously excluding both the `.zip` and `.pptx` from the prior push. This updates the request for the presentation only.
+- Decision: commit and push the `.pptx`; keep `G2-Hackathon.zip` untracked and out of the commit. The user requested the presentation explicitly; the ZIP remains excluded under the prior instruction.
+- No prototype architecture decision changed; §6 remains unchanged.
