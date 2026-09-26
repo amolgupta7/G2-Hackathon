@@ -1,0 +1,659 @@
+{
+  "recording": "rec02_hr_burnout",
+  "chunks": [
+    {
+      "chunk_index": 0,
+      "speaker": "A",
+      "start": 0.0,
+      "end": 10.2,
+      "text": "Thanks for making time today. I wanted this to just be an informal check-in, nothing formal, nothing going in a file unless you wanted to.",
+      "segment_ids": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "chunk_index": 1,
+      "speaker": "B",
+      "start": 10.2,
+      "end": 18.12,
+      "text": "Yeah, I appreciate that. Honestly I've been putting off asking for a meeting like this for a couple weeks now.",
+      "segment_ids": [
+        4,
+        5
+      ]
+    },
+    {
+      "chunk_index": 2,
+      "speaker": "A",
+      "start": 18.12,
+      "end": 26.16,
+      "text": "Well, I'm glad you didn't wait any longer. How have things been for you lately, generally speaking?",
+      "segment_ids": [
+        6,
+        7
+      ]
+    },
+    {
+      "chunk_index": 3,
+      "speaker": "B",
+      "start": 26.16,
+      "end": 36.4,
+      "text": "Honestly, not great. I've been feeling completely drained by the time I get home, like there's nothing left in the tank for anything else.",
+      "segment_ids": [
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "chunk_index": 4,
+      "speaker": "A",
+      "start": 36.4,
+      "end": 42.12,
+      "text": "That's tough to hear. Can you tell me more about what that looks like day to day?",
+      "segment_ids": [
+        11,
+        12
+      ]
+    },
+    {
+      "chunk_index": 5,
+      "speaker": "B",
+      "start": 42.12,
+      "end": 50.96,
+      "text": "I dread coming into work now, which is strange for me to say, because a year ago I actually looked forward to it most mornings.",
+      "segment_ids": [
+        13,
+        14
+      ]
+    },
+    {
+      "chunk_index": 6,
+      "speaker": "A",
+      "start": 50.96,
+      "end": 56.68,
+      "text": "That is a pretty big shift. Do you have a sense of when that started changing?",
+      "segment_ids": [
+        15,
+        16
+      ]
+    },
+    {
+      "chunk_index": 7,
+      "speaker": "B",
+      "start": 56.68,
+      "end": 68.08,
+      "text": "I think it crept up slowly, honestly, over the last two quarters. It wasn't one bad week, it was more like each month got a little heavier than the last.",
+      "segment_ids": [
+        17,
+        18
+      ]
+    },
+    {
+      "chunk_index": 8,
+      "speaker": "A",
+      "start": 68.08,
+      "end": 71.96,
+      "text": "Has it affected how you're able to focus during the day?",
+      "segment_ids": [
+        19
+      ]
+    },
+    {
+      "chunk_index": 9,
+      "speaker": "B",
+      "start": 71.96,
+      "end": 82.92,
+      "text": "Definitely. I can't focus on anything anymore, not even simple stuff. I'll sit down to write an email and just stare at it for ten minutes.",
+      "segment_ids": [
+        20,
+        21,
+        22
+      ]
+    },
+    {
+      "chunk_index": 10,
+      "speaker": "A",
+      "start": 82.92,
+      "end": 87.36,
+      "text": "It sounds exhausting in a different way than just being tired.",
+      "segment_ids": [
+        23
+      ]
+    },
+    {
+      "chunk_index": 11,
+      "speaker": "B",
+      "start": 87.36,
+      "end": 98.68,
+      "text": "It is. I'm running on empty most afternoons, and I end up redoing work the next morning that I know I did wrong the day before, just because my head wasn't in it.",
+      "segment_ids": [
+        24,
+        25,
+        26
+      ]
+    },
+    {
+      "chunk_index": 12,
+      "speaker": "A",
+      "start": 98.68,
+      "end": 110.12,
+      "text": "I want to name this directly, because I think it matters that we call it what it is. What you're describing sounds a lot like employee burnout, and I don't say that lightly.",
+      "segment_ids": [
+        27,
+        28
+      ]
+    },
+    {
+      "chunk_index": 13,
+      "speaker": "B",
+      "start": 110.12,
+      "end": 122.44,
+      "text": "Yet. Honestly hearing you say the word out loud is a little bit of a relief. I've been avoiding saying it myself, like it would sound like I'm not capable of doing my job.",
+      "segment_ids": [
+        29,
+        30,
+        31,
+        32
+      ]
+    },
+    {
+      "chunk_index": 14,
+      "speaker": "A",
+      "start": 122.44,
+      "end": 131.84,
+      "text": "It doesn't mean that at all. It usually means the opposite, that someone cared enough to keep pushing past the point they should have stopped.",
+      "segment_ids": [
+        33,
+        34,
+        35
+      ]
+    },
+    {
+      "chunk_index": 15,
+      "speaker": "B",
+      "start": 131.84,
+      "end": 143.76,
+      "text": "That makes sense, I guess. I have been taking on a lot the last few months, the meridian account, the onboarding docs rewrite, and then covering for pre a while she was out.",
+      "segment_ids": [
+        36,
+        37,
+        38
+      ]
+    },
+    {
+      "chunk_index": 16,
+      "speaker": "A",
+      "start": 143.76,
+      "end": 152.68,
+      "text": "Right, and that's three fairly demanding things stacked on top of your regular workload, not spread out, just stacked.",
+      "segment_ids": [
+        39,
+        40
+      ]
+    },
+    {
+      "chunk_index": 17,
+      "speaker": "B",
+      "start": 152.68,
+      "end": 160.48,
+      "text": "Exactly. And I didn't want to say no to any of it, because it felt like everyone else was busy too.",
+      "segment_ids": [
+        41,
+        42,
+        43
+      ]
+    },
+    {
+      "chunk_index": 18,
+      "speaker": "A",
+      "start": 160.48,
+      "end": 172.56,
+      "text": "I hear that a lot, and it's usually a sign that workload conversations aren't happening early enough. So let's talk about what can actually change, not just how you're feeling about it.",
+      "segment_ids": [
+        44,
+        45,
+        46
+      ]
+    },
+    {
+      "chunk_index": 19,
+      "speaker": "B",
+      "start": 172.56,
+      "end": 180.48,
+      "text": "Okay, that would help. I don't want this to just be a conversation where event and nothing shifts afterward.",
+      "segment_ids": [
+        47,
+        48
+      ]
+    },
+    {
+      "chunk_index": 20,
+      "speaker": "A",
+      "start": 180.48,
+      "end": 191.64,
+      "text": "Fair, and I don't want that either. First thing, the meridian account, is there a piece of that you could hand off to someone else on the team?",
+      "segment_ids": [
+        49,
+        50,
+        51
+      ]
+    },
+    {
+      "chunk_index": 21,
+      "speaker": "B",
+      "start": 191.64,
+      "end": 200.68,
+      "text": "Probably the reporting piece. Marcus has done similar reporting for other clients, he could probably pick that up without much ramp up time.",
+      "segment_ids": [
+        52,
+        53,
+        54
+      ]
+    },
+    {
+      "chunk_index": 22,
+      "speaker": "A",
+      "start": 200.68,
+      "end": 210.8,
+      "text": "Good, I'll talk to him this week. What about the onboarding docs rewrite, is there a real deadline on that or is it more of a nice to have right now?",
+      "segment_ids": [
+        55,
+        56,
+        57
+      ]
+    },
+    {
+      "chunk_index": 23,
+      "speaker": "B",
+      "start": 210.8,
+      "end": 221.52,
+      "text": "Honestly it's more of a nice to have. I put pressure on myself to finish it by end of quarter, but nobody actually asked for that timeline.",
+      "segment_ids": [
+        58,
+        59,
+        60
+      ]
+    },
+    {
+      "chunk_index": 24,
+      "speaker": "A",
+      "start": 221.52,
+      "end": 228.84,
+      "text": "Let's push that out by a month then, officially, so it's off your plate as an active source of pressure.",
+      "segment_ids": [
+        61,
+        62
+      ]
+    },
+    {
+      "chunk_index": 25,
+      "speaker": "B",
+      "start": 228.84,
+      "end": 235.4,
+      "text": "That alone would help a lot, just knowing it's not sitting there as an overdue thing in the back of my mind.",
+      "segment_ids": [
+        63,
+        64
+      ]
+    },
+    {
+      "chunk_index": 26,
+      "speaker": "A",
+      "start": 235.4,
+      "end": 241.56,
+      "text": "Good. And covering for Priya, she's back now, right?",
+      "segment_ids": [
+        65,
+        66
+      ]
+    },
+    {
+      "chunk_index": 27,
+      "speaker": "B",
+      "start": 241.56,
+      "end": 251.28,
+      "text": "She's back, yet, but I've kept doing a couple of her weekly reports out of habit, honestly, because I never formally handed them back.",
+      "segment_ids": [
+        67,
+        68
+      ]
+    },
+    {
+      "chunk_index": 28,
+      "speaker": "A",
+      "start": 251.28,
+      "end": 259.44,
+      "text": "Let's fix that today. I'll message her and make sure that hand back actually happens instead of just assuming it will.",
+      "segment_ids": [
+        69,
+        70,
+        71
+      ]
+    },
+    {
+      "chunk_index": 29,
+      "speaker": "B",
+      "start": 259.44,
+      "end": 267.88,
+      "text": "Thank you. It sounds small when I say it out loud, but that's probably four or five hours a week I could get back.",
+      "segment_ids": [
+        72,
+        73,
+        74
+      ]
+    },
+    {
+      "chunk_index": 30,
+      "speaker": "A",
+      "start": 267.88,
+      "end": 280.4,
+      "text": "That's not small at all, that's more than half a workday. Now, beyond redistributing tasks, how are you doing outside of work, are you getting any real time off?",
+      "segment_ids": [
+        75,
+        76,
+        77
+      ]
+    },
+    {
+      "chunk_index": 31,
+      "speaker": "B",
+      "start": 280.4,
+      "end": 290.28,
+      "text": "Not really. I have vacation days sitting unused, and every time I think about booking something, I convince myself it's a bad time.",
+      "segment_ids": [
+        78,
+        79,
+        80
+      ]
+    },
+    {
+      "chunk_index": 32,
+      "speaker": "A",
+      "start": 290.28,
+      "end": 299.88,
+      "text": "There's never going to be a perfect time, that's kind of the trap. I'd like you to actually put in for at least a few days in the next month.",
+      "segment_ids": [
+        81,
+        82
+      ]
+    },
+    {
+      "chunk_index": 33,
+      "speaker": "B",
+      "start": 299.88,
+      "end": 309.2,
+      "text": "I can do that. Honestly having someone tell me to just do it helps, because on my own I keep deprioritizing myself.",
+      "segment_ids": [
+        83,
+        84,
+        85
+      ]
+    },
+    {
+      "chunk_index": 34,
+      "speaker": "A",
+      "start": 309.2,
+      "end": 320.6,
+      "text": "That's really common, and it's part of why this conversation matters. I also want to check in on how you're sleeping, since that usually ties into all of this.",
+      "segment_ids": [
+        86,
+        87
+      ]
+    },
+    {
+      "chunk_index": 35,
+      "speaker": "B",
+      "start": 320.6,
+      "end": 328.48,
+      "text": "Not well. I wake up around four most mornings with my mind already running through a list of things I haven't done.",
+      "segment_ids": [
+        88,
+        89,
+        90
+      ]
+    },
+    {
+      "chunk_index": 36,
+      "speaker": "A",
+      "start": 328.48,
+      "end": 341.48,
+      "text": "That's a hard way to start a day before it's even begun. Would you be open to talking to someone through the employee assistance program, just to have extra support outside of what we can fix here at work?",
+      "segment_ids": [
+        91,
+        92,
+        93
+      ]
+    },
+    {
+      "chunk_index": 37,
+      "speaker": "B",
+      "start": 341.48,
+      "end": 352.68,
+      "text": "I think I would, actually. I looked at that page once and then closed the tab, but hearing you suggest it directly makes it feel less like an overreaction.",
+      "segment_ids": [
+        94,
+        95,
+        96
+      ]
+    },
+    {
+      "chunk_index": 38,
+      "speaker": "A",
+      "start": 352.68,
+      "end": 362.92,
+      "text": "It's not an overreaction at all, it's exactly what that program is for. I'll send you the direct link after this so you don't have to go dig for it.",
+      "segment_ids": [
+        97,
+        98
+      ]
+    },
+    {
+      "chunk_index": 39,
+      "speaker": "B",
+      "start": 362.92,
+      "end": 370.52,
+      "text": "That would help, thanks. I appreciate you not making this feel like a performance conversation.",
+      "segment_ids": [
+        99,
+        100
+      ]
+    },
+    {
+      "chunk_index": 40,
+      "speaker": "A",
+      "start": 370.52,
+      "end": 380.6,
+      "text": "It absolutely isn't. Your work has been strong, that's actually part of the problem, you've been quietly absorbing more than anyone noticed.",
+      "segment_ids": [
+        101,
+        102,
+        103
+      ]
+    },
+    {
+      "chunk_index": 41,
+      "speaker": "B",
+      "start": 380.6,
+      "end": 384.36,
+      "text": "I guess I'm good at hiding it until I'm not.",
+      "segment_ids": [
+        104
+      ]
+    },
+    {
+      "chunk_index": 42,
+      "speaker": "A",
+      "start": 384.36,
+      "end": 394.24,
+      "text": "Let's make sure it doesn't get to that point again. Can we plan a shorter follow-up in two weeks, just to see how the handoffs are going and how you're feeling?",
+      "segment_ids": [
+        105,
+        106,
+        107
+      ]
+    },
+    {
+      "chunk_index": 43,
+      "speaker": "B",
+      "start": 394.24,
+      "end": 402.64,
+      "text": "Yeah, I'd like that. It's nice to have a specific date instead of just hoping things get better on their own.",
+      "segment_ids": [
+        108,
+        109
+      ]
+    },
+    {
+      "chunk_index": 44,
+      "speaker": "A",
+      "start": 402.64,
+      "end": 411.92,
+      "text": "Agreed. And please, if it gets worse before then, don't wait for the schedule check-in, just message me directly.",
+      "segment_ids": [
+        110,
+        111,
+        112
+      ]
+    },
+    {
+      "chunk_index": 45,
+      "speaker": "B",
+      "start": 411.92,
+      "end": 420.92,
+      "text": "I will. Thank you for actually noticing before I said anything. I think I would have kept pushing through otherwise.",
+      "segment_ids": [
+        113,
+        114,
+        115
+      ]
+    },
+    {
+      "chunk_index": 46,
+      "speaker": "A",
+      "start": 420.92,
+      "end": 426.72,
+      "text": "That's what I'm here for. Let's get you some breathing room and go from there.",
+      "segment_ids": [
+        116,
+        117
+      ]
+    },
+    {
+      "chunk_index": 47,
+      "speaker": "B",
+      "start": 426.72,
+      "end": 433.8,
+      "text": "Can I ask, does this happen a lot on the team, people getting to this point without saying anything?",
+      "segment_ids": [
+        118,
+        119
+      ]
+    },
+    {
+      "chunk_index": 48,
+      "speaker": "A",
+      "start": 433.8,
+      "end": 445.4,
+      "text": "More than I'd like, honestly. I think our culture rewards saying yes to everything, and that's on leadership to fix, not on individuals to just cope with better.",
+      "segment_ids": [
+        120,
+        121,
+        122
+      ]
+    },
+    {
+      "chunk_index": 49,
+      "speaker": "B",
+      "start": 445.4,
+      "end": 453.12,
+      "text": "That's good to hear you say. Sometimes it feels like the expectation is to just push through no matter what.",
+      "segment_ids": [
+        123,
+        124
+      ]
+    },
+    {
+      "chunk_index": 50,
+      "speaker": "A",
+      "start": 453.12,
+      "end": 464.36,
+      "text": "It shouldn't be. If I notice this pattern with you, I want to look at the broader teamwork load too, because you're probably not the only one quietly stretched thin.",
+      "segment_ids": [
+        125,
+        126,
+        127
+      ]
+    },
+    {
+      "chunk_index": 51,
+      "speaker": "B",
+      "start": 464.36,
+      "end": 473.56,
+      "text": "Priya mentioned something similar a few weeks ago, actually, before she went out. I didn't put it together until just now.",
+      "segment_ids": [
+        128,
+        129
+      ]
+    },
+    {
+      "chunk_index": 52,
+      "speaker": "A",
+      "start": 473.56,
+      "end": 484.28,
+      "text": "That's useful context, thank you for mentioning it. I might bring up workload distribution at the next team-lead meeting without naming anyone specifically.",
+      "segment_ids": [
+        130,
+        131,
+        132
+      ]
+    },
+    {
+      "chunk_index": 53,
+      "speaker": "B",
+      "start": 484.28,
+      "end": 491.96,
+      "text": "That sounds like a good idea. I think a lot of people would feel relief just hearing it acknowledged out loud.",
+      "segment_ids": [
+        133,
+        134
+      ]
+    },
+    {
+      "chunk_index": 54,
+      "speaker": "A",
+      "start": 491.96,
+      "end": 503.56,
+      "text": "Let's start there then. In the meantime, take care of yourself this week, and actually block off time on your calendar for lunch, not just meetings back to back.",
+      "segment_ids": [
+        135,
+        136,
+        137
+      ]
+    },
+    {
+      "chunk_index": 55,
+      "speaker": "B",
+      "start": 503.56,
+      "end": 510.72,
+      "text": "I'll do that. Thanks again, seriously, this helped more than I expected it to.",
+      "segment_ids": [
+        138,
+        139
+      ]
+    },
+    {
+      "chunk_index": 56,
+      "speaker": "A",
+      "start": 510.72,
+      "end": 512.84,
+      "text": "Anytime. Talk soon.",
+      "segment_ids": [
+        140,
+        141
+      ]
+    }
+  ]
+}

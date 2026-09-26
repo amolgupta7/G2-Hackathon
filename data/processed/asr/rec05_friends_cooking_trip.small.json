@@ -1,0 +1,603 @@
+{
+  "recording": "rec05_friends_cooking_trip",
+  "model": "small",
+  "audio_duration_s": 512.5,
+  "asr_seconds": 525.1,
+  "real_time_factor": 1.025,
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 6.88,
+      "text": "Okay so I finally tried making that dish we had in Lisbon, the one with the clams and the sausage."
+    },
+    {
+      "id": 2,
+      "start": 6.88,
+      "end": 10.08,
+      "text": "Oh my gosh, the Cata Plana thing."
+    },
+    {
+      "id": 3,
+      "start": 10.08,
+      "end": 12.46,
+      "text": "How did it turn out?"
+    },
+    {
+      "id": 4,
+      "start": 12.46,
+      "end": 15.78,
+      "text": "Honestly, way better than I expected."
+    },
+    {
+      "id": 5,
+      "start": 15.78,
+      "end": 20.78,
+      "text": "Not as good as that little place near the river, but pretty close."
+    },
+    {
+      "id": 6,
+      "start": 20.78,
+      "end": 24.16,
+      "text": "See, I still think about that restaurant."
+    },
+    {
+      "id": 7,
+      "start": 24.16,
+      "end": 28.64,
+      "text": "What was it called again, something with an alley in the name?"
+    },
+    {
+      "id": 8,
+      "start": 28.64,
+      "end": 36.52,
+      "text": "Alphama, that's the neighborhood, the restaurant itself didn't even have a sign really, we just wandered in."
+    },
+    {
+      "id": 9,
+      "start": 36.52,
+      "end": 39.32,
+      "text": "Right, right, Alphama."
+    },
+    {
+      "id": 10,
+      "start": 39.32,
+      "end": 43.92,
+      "text": "We almost didn't go in because it looked closed from outside."
+    },
+    {
+      "id": 11,
+      "start": 43.92,
+      "end": 50.78,
+      "text": "I know, and then the guy just waved us in through the side door like he'd been waiting for us specifically."
+    },
+    {
+      "id": 12,
+      "start": 50.78,
+      "end": 54.82,
+      "text": "That whole trip was full of moments like that, honestly."
+    },
+    {
+      "id": 13,
+      "start": 54.9,
+      "end": 60.24,
+      "text": "Places that looked sketchy from outside and turned out to be the best meal of the day."
+    },
+    {
+      "id": 14,
+      "start": 60.24,
+      "end": 61.56,
+      "text": "Totally."
+    },
+    {
+      "id": 15,
+      "start": 61.56,
+      "end": 71.42,
+      "text": "Anyway, so for the Cata Plana, I couldn't find the actual pan, the copper clam shell one, so I just used a regular Dutch oven."
+    },
+    {
+      "id": 16,
+      "start": 71.42,
+      "end": 76.28,
+      "text": "Did that mess with the cooking at all, or was it basically fine?"
+    },
+    {
+      "id": 17,
+      "start": 76.28,
+      "end": 83.62,
+      "text": "It was mostly fine, I think the real pan trapped steam a little differently, but honestly the flavor was there."
+    },
+    {
+      "id": 18,
+      "start": 83.62,
+      "end": 88.98,
+      "text": "Garlic, white wine, the smoked sausage, tomatoes."
+    },
+    {
+      "id": 19,
+      "start": 88.98,
+      "end": 96.82,
+      "text": "What kind of sausage did you use, because I remember the original had this really specific smoky thing going on?"
+    },
+    {
+      "id": 20,
+      "start": 96.82,
+      "end": 101.6,
+      "text": "I used chorizo, since I couldn't find Linguica anywhere near me."
+    },
+    {
+      "id": 21,
+      "start": 101.6,
+      "end": 107.2,
+      "text": "Close enough, honestly, maybe a little spicier than the original."
+    },
+    {
+      "id": 22,
+      "start": 107.2,
+      "end": 114.38,
+      "text": "I actually like chorizo better in most things anyway, don't tell anyone from Portugal I said that."
+    },
+    {
+      "id": 23,
+      "start": 114.38,
+      "end": 117.04,
+      "text": "Ha, your secret's safe."
+    },
+    {
+      "id": 24,
+      "start": 117.04,
+      "end": 123.78,
+      "text": "So I threw the clams in at the very end, covered it, let it steam for like six minutes."
+    },
+    {
+      "id": 25,
+      "start": 123.78,
+      "end": 129.82,
+      "text": "That's the part I always get nervous about, timing the clams so they don't turn rubbery."
+    },
+    {
+      "id": 26,
+      "start": 129.82,
+      "end": 132.5,
+      "text": "Same, but it worked out."
+    },
+    {
+      "id": 27,
+      "start": 132.5,
+      "end": 139.52,
+      "text": "They all opened up, nothing stayed shut, which I hear is the actual test of whether you did it right."
+    },
+    {
+      "id": 28,
+      "start": 139.52,
+      "end": 145.62,
+      "text": "Yes, exactly, if a bunch of them stay closed you're supposed to toss those ones."
+    },
+    {
+      "id": 29,
+      "start": 145.62,
+      "end": 147.98,
+      "text": "Did that happen to you?"
+    },
+    {
+      "id": 30,
+      "start": 147.98,
+      "end": 150.38,
+      "text": "Maybe two out of like twenty."
+    },
+    {
+      "id": 31,
+      "start": 150.38,
+      "end": 153.1,
+      "text": "Not bad odds honestly."
+    },
+    {
+      "id": 32,
+      "start": 153.1,
+      "end": 155.1,
+      "text": "That's a great ratio."
+    },
+    {
+      "id": 33,
+      "start": 155.1,
+      "end": 158.9,
+      "text": "Okay, now I'm hungry just talking about this."
+    },
+    {
+      "id": 34,
+      "start": 158.9,
+      "end": 161.54,
+      "text": "What did you serve it with?"
+    },
+    {
+      "id": 35,
+      "start": 161.54,
+      "end": 171.66,
+      "text": "Crusty bread, just to soak up the broth, and then this little side salad with oranges and olives, kind of a nod to that market we walked through."
+    },
+    {
+      "id": 36,
+      "start": 171.66,
+      "end": 176.54,
+      "text": "The one near the water, right, with all the tiled stalls."
+    },
+    {
+      "id": 37,
+      "start": 176.54,
+      "end": 178.7,
+      "text": "Yeah, that one."
+    },
+    {
+      "id": 38,
+      "start": 178.7,
+      "end": 185.08,
+      "text": "I keep thinking about the smell of that place, like citrus and grilled fish all mixed together."
+    },
+    {
+      "id": 39,
+      "start": 185.08,
+      "end": 189.5,
+      "text": "Honestly that might be my favorite smell memory from the entire trip."
+    },
+    {
+      "id": 40,
+      "start": 189.54,
+      "end": 194.34,
+      "text": "Better than the bakery, even, and that bakery was unreal."
+    },
+    {
+      "id": 41,
+      "start": 194.34,
+      "end": 196.3,
+      "text": "The custard tarts."
+    },
+    {
+      "id": 42,
+      "start": 196.3,
+      "end": 199.82,
+      "text": "I still dream about those custard tarts."
+    },
+    {
+      "id": 43,
+      "start": 199.82,
+      "end": 204.82,
+      "text": "Don't even start, I tried to recreate them at home and it was a disaster."
+    },
+    {
+      "id": 44,
+      "start": 204.82,
+      "end": 208.94,
+      "text": "Burnt the sugar on top and the custard never set right."
+    },
+    {
+      "id": 45,
+      "start": 208.94,
+      "end": 211.62,
+      "text": "Those things are deceptively hard."
+    },
+    {
+      "id": 46,
+      "start": 211.62,
+      "end": 215.78,
+      "text": "The crust alone takes forever to get flaky like that."
+    },
+    {
+      "id": 47,
+      "start": 215.82,
+      "end": 222.62,
+      "text": "Yeah, I gave up after the second attempt and just accepted I'll only have good ones when we go back."
+    },
+    {
+      "id": 48,
+      "start": 222.62,
+      "end": 229.46,
+      "text": "Speaking of going back, have you actually looked at flights at all, or was that just talk?"
+    },
+    {
+      "id": 49,
+      "start": 229.46,
+      "end": 231.54,
+      "text": "I looked, ha."
+    },
+    {
+      "id": 50,
+      "start": 231.54,
+      "end": 238.46,
+      "text": "Prices are actually not terrible if we go in the shoulder season, like late September or October."
+    },
+    {
+      "id": 51,
+      "start": 238.46,
+      "end": 247.46,
+      "text": "That tracks with the weather too, it was so hot when we went in July, remember we basically hid indoors from like 1-4 every day."
+    },
+    {
+      "id": 52,
+      "start": 247.46,
+      "end": 254.54,
+      "text": "I remember hiding in that little bookstore with the air conditioning that was way too strong for how hot it was outside."
+    },
+    {
+      "id": 53,
+      "start": 254.54,
+      "end": 261.38,
+      "text": "That place was great though, I still have the book I bought there, never actually finished reading it."
+    },
+    {
+      "id": 54,
+      "start": 261.38,
+      "end": 262.94,
+      "text": "Classic."
+    },
+    {
+      "id": 55,
+      "start": 262.98,
+      "end": 272.42,
+      "text": "Okay, if we go again, I want to actually make it out to that town everyone kept telling us to visit, the one with the castle on the hill."
+    },
+    {
+      "id": 56,
+      "start": 272.42,
+      "end": 279.9,
+      "text": "Cintra, yeah, we ran out of time for that last time, which honestly still bugs me a little."
+    },
+    {
+      "id": 57,
+      "start": 279.9,
+      "end": 281.26,
+      "text": "Same."
+    },
+    {
+      "id": 58,
+      "start": 281.26,
+      "end": 287.34,
+      "text": "We spent that whole extra day just wandering the city again instead of taking the train out there."
+    },
+    {
+      "id": 59,
+      "start": 287.38,
+      "end": 294.5,
+      "text": "No regrets though, that was the day we found the little wine bar with the guy who kept giving us extra powers."
+    },
+    {
+      "id": 60,
+      "start": 294.5,
+      "end": 301.54,
+      "text": "Oh my gosh, yes, he just kept topping off our glasses and pretending it was an accident."
+    },
+    {
+      "id": 61,
+      "start": 301.54,
+      "end": 305.86,
+      "text": "I think he liked that we were so obviously enjoying ourselves."
+    },
+    {
+      "id": 62,
+      "start": 305.86,
+      "end": 309.78,
+      "text": "Either way, we left that place very happy."
+    },
+    {
+      "id": 63,
+      "start": 309.78,
+      "end": 317.46,
+      "text": "Very happy is an understatement, we got lost trying to find our hotel afterward and it took like 40 minutes."
+    },
+    {
+      "id": 64,
+      "start": 317.46,
+      "end": 323.66,
+      "text": "In our defence, those streets all look the same after a few glasses of Vinho Verde."
+    },
+    {
+      "id": 65,
+      "start": 323.66,
+      "end": 324.9,
+      "text": "True."
+    },
+    {
+      "id": 66,
+      "start": 324.9,
+      "end": 338.38,
+      "text": "Okay, so if we go back, plan is, more time in Cintra, one more Cataplana dinner, and I'm making a real attempt at the custard tarts again with an actual recipe this time instead of guessing."
+    },
+    {
+      "id": 67,
+      "start": 338.42,
+      "end": 340.78,
+      "text": "I fully support this plan."
+    },
+    {
+      "id": 68,
+      "start": 340.78,
+      "end": 346.66,
+      "text": "Should we also revisit that seafood rice place, the one with the line out front?"
+    },
+    {
+      "id": 69,
+      "start": 346.66,
+      "end": 348.9,
+      "text": "The line was so worth it though."
+    },
+    {
+      "id": 70,
+      "start": 348.9,
+      "end": 356.14,
+      "text": "That rice had this deep, almost smoky sweetness from the broth, I don't know how they got it that rich."
+    },
+    {
+      "id": 71,
+      "start": 356.14,
+      "end": 364.62,
+      "text": "I think it's just hours of simmering with the shells and heads still in, honestly, that's usually the secret with stuff like that."
+    },
+    {
+      "id": 72,
+      "start": 364.62,
+      "end": 366.22,
+      "text": "Makes sense."
+    },
+    {
+      "id": 73,
+      "start": 366.22,
+      "end": 372.98,
+      "text": "Okay, I'm sending you flight options tonight, I'm actually getting excited about this now."
+    },
+    {
+      "id": 74,
+      "start": 372.98,
+      "end": 379.86,
+      "text": "Same, let's actually book something this time instead of just talking about it for six months."
+    },
+    {
+      "id": 75,
+      "start": 379.86,
+      "end": 381.06,
+      "text": "Deal."
+    },
+    {
+      "id": 76,
+      "start": 381.06,
+      "end": 391.34,
+      "text": "And you have to bring the Cataplana recipe you used, I want to try it myself before we go, just so I have something to compare it to when we're actually there."
+    },
+    {
+      "id": 77,
+      "start": 391.34,
+      "end": 393.66,
+      "text": "I'll text it to you tonight."
+    },
+    {
+      "id": 78,
+      "start": 393.74,
+      "end": 399.38,
+      "text": "Fair warning, my version has way more garlic than is probably traditional."
+    },
+    {
+      "id": 79,
+      "start": 399.38,
+      "end": 403.94,
+      "text": "Good, more garlic is never a downside in my opinion."
+    },
+    {
+      "id": 80,
+      "start": 403.94,
+      "end": 405.86,
+      "text": "Agreed completely."
+    },
+    {
+      "id": 81,
+      "start": 405.86,
+      "end": 411.98,
+      "text": "Alright, let's actually look at those dates tonight and stop talking about it in theory."
+    },
+    {
+      "id": 82,
+      "start": 411.98,
+      "end": 417.14,
+      "text": "Deal, I'll call you later once I've got a couple options pulled up."
+    },
+    {
+      "id": 83,
+      "start": 417.14,
+      "end": 426.26,
+      "text": "Oh, one more thing, we need to figure out where we're staying this time, because that last hotel was kind of a let down honestly."
+    },
+    {
+      "id": 84,
+      "start": 426.26,
+      "end": 429.78,
+      "text": "The one with the tiny window that didn't actually open."
+    },
+    {
+      "id": 85,
+      "start": 429.78,
+      "end": 433.18,
+      "text": "I forgot about that until you just said it."
+    },
+    {
+      "id": 86,
+      "start": 433.18,
+      "end": 437.9,
+      "text": "Yeah, and the shower had like zero water pressure the entire week."
+    },
+    {
+      "id": 87,
+      "start": 437.9,
+      "end": 442.18,
+      "text": "Nice location, but rough on the actual room."
+    },
+    {
+      "id": 88,
+      "start": 442.22,
+      "end": 451.98,
+      "text": "I've been meaning to look for something in Alphama itself this time, even if it's a little pricier, just to be closer to everything we actually want to do."
+    },
+    {
+      "id": 89,
+      "start": 451.98,
+      "end": 460.26,
+      "text": "That would be nice, honestly, waking up and just walking down those little streets instead of taking a cab everywhere."
+    },
+    {
+      "id": 90,
+      "start": 460.26,
+      "end": 467.74,
+      "text": "Exactly, and it would put us closer to that wine bar too, which honestly might be the real motivation here."
+    },
+    {
+      "id": 91,
+      "start": 467.78,
+      "end": 472.5,
+      "text": "Ha, fair, I won't pretend that's not part of it for me too."
+    },
+    {
+      "id": 92,
+      "start": 472.5,
+      "end": 478.02,
+      "text": "Okay, send me a couple of hotel options along with the flights tonight."
+    },
+    {
+      "id": 93,
+      "start": 478.02,
+      "end": 479.34,
+      "text": "Will do."
+    },
+    {
+      "id": 94,
+      "start": 479.34,
+      "end": 487.98,
+      "text": "I'm also going to look into whether there's a food tour we can book in advance this time, since last time we just wandered and got lucky."
+    },
+    {
+      "id": 95,
+      "start": 487.98,
+      "end": 495.18,
+      "text": "We did get lucky a lot, but a guided one might actually get us into places we'd never find on our own."
+    },
+    {
+      "id": 96,
+      "start": 495.18,
+      "end": 497.1,
+      "text": "That's what I'm hoping."
+    },
+    {
+      "id": 97,
+      "start": 497.14,
+      "end": 504.62,
+      "text": "Alright, I really do need to run, but this got me way more excited than I expected for a random Tuesday."
+    },
+    {
+      "id": 98,
+      "start": 504.62,
+      "end": 509.22,
+      "text": "Same, talk tonight once you've got the options together."
+    },
+    {
+      "id": 99,
+      "start": 509.22,
+      "end": 512.22,
+      "text": "Sounds good, talk soon."
+    }
+  ]
+}

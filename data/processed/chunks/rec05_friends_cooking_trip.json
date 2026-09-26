@@ -1,0 +1,680 @@
+{
+  "recording": "rec05_friends_cooking_trip",
+  "chunks": [
+    {
+      "chunk_index": 0,
+      "speaker": "A",
+      "start": 0.0,
+      "end": 6.88,
+      "text": "Okay so I finally tried making that dish we had in Lisbon, the one with the clams and the sausage.",
+      "segment_ids": [
+        1
+      ]
+    },
+    {
+      "chunk_index": 1,
+      "speaker": "B",
+      "start": 6.88,
+      "end": 12.46,
+      "text": "Oh my gosh, the Cata Plana thing. How did it turn out?",
+      "segment_ids": [
+        2,
+        3
+      ]
+    },
+    {
+      "chunk_index": 2,
+      "speaker": "A",
+      "start": 12.46,
+      "end": 20.78,
+      "text": "Honestly, way better than I expected. Not as good as that little place near the river, but pretty close.",
+      "segment_ids": [
+        4,
+        5
+      ]
+    },
+    {
+      "chunk_index": 3,
+      "speaker": "B",
+      "start": 20.78,
+      "end": 28.64,
+      "text": "See, I still think about that restaurant. What was it called again, something with an alley in the name?",
+      "segment_ids": [
+        6,
+        7
+      ]
+    },
+    {
+      "chunk_index": 4,
+      "speaker": "A",
+      "start": 28.64,
+      "end": 36.52,
+      "text": "Alphama, that's the neighborhood, the restaurant itself didn't even have a sign really, we just wandered in.",
+      "segment_ids": [
+        8
+      ]
+    },
+    {
+      "chunk_index": 5,
+      "speaker": "B",
+      "start": 36.52,
+      "end": 43.92,
+      "text": "Right, right, Alphama. We almost didn't go in because it looked closed from outside.",
+      "segment_ids": [
+        9,
+        10
+      ]
+    },
+    {
+      "chunk_index": 6,
+      "speaker": "A",
+      "start": 43.92,
+      "end": 50.78,
+      "text": "I know, and then the guy just waved us in through the side door like he'd been waiting for us specifically.",
+      "segment_ids": [
+        11
+      ]
+    },
+    {
+      "chunk_index": 7,
+      "speaker": "B",
+      "start": 50.78,
+      "end": 60.24,
+      "text": "That whole trip was full of moments like that, honestly. Places that looked sketchy from outside and turned out to be the best meal of the day.",
+      "segment_ids": [
+        12,
+        13
+      ]
+    },
+    {
+      "chunk_index": 8,
+      "speaker": "A",
+      "start": 60.24,
+      "end": 71.42,
+      "text": "Totally. Anyway, so for the Cata Plana, I couldn't find the actual pan, the copper clam shell one, so I just used a regular Dutch oven.",
+      "segment_ids": [
+        14,
+        15
+      ]
+    },
+    {
+      "chunk_index": 9,
+      "speaker": "B",
+      "start": 71.42,
+      "end": 76.28,
+      "text": "Did that mess with the cooking at all, or was it basically fine?",
+      "segment_ids": [
+        16
+      ]
+    },
+    {
+      "chunk_index": 10,
+      "speaker": "A",
+      "start": 76.28,
+      "end": 88.98,
+      "text": "It was mostly fine, I think the real pan trapped steam a little differently, but honestly the flavor was there. Garlic, white wine, the smoked sausage, tomatoes.",
+      "segment_ids": [
+        17,
+        18
+      ]
+    },
+    {
+      "chunk_index": 11,
+      "speaker": "B",
+      "start": 88.98,
+      "end": 96.82,
+      "text": "What kind of sausage did you use, because I remember the original had this really specific smoky thing going on?",
+      "segment_ids": [
+        19
+      ]
+    },
+    {
+      "chunk_index": 12,
+      "speaker": "A",
+      "start": 96.82,
+      "end": 107.2,
+      "text": "I used chorizo, since I couldn't find Linguica anywhere near me. Close enough, honestly, maybe a little spicier than the original.",
+      "segment_ids": [
+        20,
+        21
+      ]
+    },
+    {
+      "chunk_index": 13,
+      "speaker": "B",
+      "start": 107.2,
+      "end": 114.38,
+      "text": "I actually like chorizo better in most things anyway, don't tell anyone from Portugal I said that.",
+      "segment_ids": [
+        22
+      ]
+    },
+    {
+      "chunk_index": 14,
+      "speaker": "A",
+      "start": 114.38,
+      "end": 123.78,
+      "text": "Ha, your secret's safe. So I threw the clams in at the very end, covered it, let it steam for like six minutes.",
+      "segment_ids": [
+        23,
+        24
+      ]
+    },
+    {
+      "chunk_index": 15,
+      "speaker": "B",
+      "start": 123.78,
+      "end": 129.82,
+      "text": "That's the part I always get nervous about, timing the clams so they don't turn rubbery.",
+      "segment_ids": [
+        25
+      ]
+    },
+    {
+      "chunk_index": 16,
+      "speaker": "A",
+      "start": 129.82,
+      "end": 139.52,
+      "text": "Same, but it worked out. They all opened up, nothing stayed shut, which I hear is the actual test of whether you did it right.",
+      "segment_ids": [
+        26,
+        27
+      ]
+    },
+    {
+      "chunk_index": 17,
+      "speaker": "B",
+      "start": 139.52,
+      "end": 147.98,
+      "text": "Yes, exactly, if a bunch of them stay closed you're supposed to toss those ones. Did that happen to you?",
+      "segment_ids": [
+        28,
+        29
+      ]
+    },
+    {
+      "chunk_index": 18,
+      "speaker": "A",
+      "start": 147.98,
+      "end": 153.1,
+      "text": "Maybe two out of like twenty. Not bad odds honestly.",
+      "segment_ids": [
+        30,
+        31
+      ]
+    },
+    {
+      "chunk_index": 19,
+      "speaker": "B",
+      "start": 153.1,
+      "end": 161.54,
+      "text": "That's a great ratio. Okay, now I'm hungry just talking about this. What did you serve it with?",
+      "segment_ids": [
+        32,
+        33,
+        34
+      ]
+    },
+    {
+      "chunk_index": 20,
+      "speaker": "A",
+      "start": 161.54,
+      "end": 171.66,
+      "text": "Crusty bread, just to soak up the broth, and then this little side salad with oranges and olives, kind of a nod to that market we walked through.",
+      "segment_ids": [
+        35
+      ]
+    },
+    {
+      "chunk_index": 21,
+      "speaker": "B",
+      "start": 171.66,
+      "end": 176.54,
+      "text": "The one near the water, right, with all the tiled stalls.",
+      "segment_ids": [
+        36
+      ]
+    },
+    {
+      "chunk_index": 22,
+      "speaker": "A",
+      "start": 176.54,
+      "end": 185.08,
+      "text": "Yeah, that one. I keep thinking about the smell of that place, like citrus and grilled fish all mixed together.",
+      "segment_ids": [
+        37,
+        38
+      ]
+    },
+    {
+      "chunk_index": 23,
+      "speaker": "B",
+      "start": 185.08,
+      "end": 194.34,
+      "text": "Honestly that might be my favorite smell memory from the entire trip. Better than the bakery, even, and that bakery was unreal.",
+      "segment_ids": [
+        39,
+        40
+      ]
+    },
+    {
+      "chunk_index": 24,
+      "speaker": "A",
+      "start": 194.34,
+      "end": 199.82,
+      "text": "The custard tarts. I still dream about those custard tarts.",
+      "segment_ids": [
+        41,
+        42
+      ]
+    },
+    {
+      "chunk_index": 25,
+      "speaker": "B",
+      "start": 199.82,
+      "end": 208.94,
+      "text": "Don't even start, I tried to recreate them at home and it was a disaster. Burnt the sugar on top and the custard never set right.",
+      "segment_ids": [
+        43,
+        44
+      ]
+    },
+    {
+      "chunk_index": 26,
+      "speaker": "A",
+      "start": 208.94,
+      "end": 215.78,
+      "text": "Those things are deceptively hard. The crust alone takes forever to get flaky like that.",
+      "segment_ids": [
+        45,
+        46
+      ]
+    },
+    {
+      "chunk_index": 27,
+      "speaker": "B",
+      "start": 215.82,
+      "end": 222.62,
+      "text": "Yeah, I gave up after the second attempt and just accepted I'll only have good ones when we go back.",
+      "segment_ids": [
+        47
+      ]
+    },
+    {
+      "chunk_index": 28,
+      "speaker": "A",
+      "start": 222.62,
+      "end": 229.46,
+      "text": "Speaking of going back, have you actually looked at flights at all, or was that just talk?",
+      "segment_ids": [
+        48
+      ]
+    },
+    {
+      "chunk_index": 29,
+      "speaker": "B",
+      "start": 229.46,
+      "end": 238.46,
+      "text": "I looked, ha. Prices are actually not terrible if we go in the shoulder season, like late September or October.",
+      "segment_ids": [
+        49,
+        50
+      ]
+    },
+    {
+      "chunk_index": 30,
+      "speaker": "A",
+      "start": 238.46,
+      "end": 247.46,
+      "text": "That tracks with the weather too, it was so hot when we went in July, remember we basically hid indoors from like 1-4 every day.",
+      "segment_ids": [
+        51
+      ]
+    },
+    {
+      "chunk_index": 31,
+      "speaker": "B",
+      "start": 247.46,
+      "end": 254.54,
+      "text": "I remember hiding in that little bookstore with the air conditioning that was way too strong for how hot it was outside.",
+      "segment_ids": [
+        52
+      ]
+    },
+    {
+      "chunk_index": 32,
+      "speaker": "A",
+      "start": 254.54,
+      "end": 261.38,
+      "text": "That place was great though, I still have the book I bought there, never actually finished reading it.",
+      "segment_ids": [
+        53
+      ]
+    },
+    {
+      "chunk_index": 33,
+      "speaker": "B",
+      "start": 261.38,
+      "end": 272.42,
+      "text": "Classic. Okay, if we go again, I want to actually make it out to that town everyone kept telling us to visit, the one with the castle on the hill.",
+      "segment_ids": [
+        54,
+        55
+      ]
+    },
+    {
+      "chunk_index": 34,
+      "speaker": "A",
+      "start": 272.42,
+      "end": 279.9,
+      "text": "Cintra, yeah, we ran out of time for that last time, which honestly still bugs me a little.",
+      "segment_ids": [
+        56
+      ]
+    },
+    {
+      "chunk_index": 35,
+      "speaker": "B",
+      "start": 279.9,
+      "end": 287.34,
+      "text": "Same. We spent that whole extra day just wandering the city again instead of taking the train out there.",
+      "segment_ids": [
+        57,
+        58
+      ]
+    },
+    {
+      "chunk_index": 36,
+      "speaker": "A",
+      "start": 287.38,
+      "end": 294.5,
+      "text": "No regrets though, that was the day we found the little wine bar with the guy who kept giving us extra powers.",
+      "segment_ids": [
+        59
+      ]
+    },
+    {
+      "chunk_index": 37,
+      "speaker": "B",
+      "start": 294.5,
+      "end": 301.54,
+      "text": "Oh my gosh, yes, he just kept topping off our glasses and pretending it was an accident.",
+      "segment_ids": [
+        60
+      ]
+    },
+    {
+      "chunk_index": 38,
+      "speaker": "A",
+      "start": 301.54,
+      "end": 309.78,
+      "text": "I think he liked that we were so obviously enjoying ourselves. Either way, we left that place very happy.",
+      "segment_ids": [
+        61,
+        62
+      ]
+    },
+    {
+      "chunk_index": 39,
+      "speaker": "B",
+      "start": 309.78,
+      "end": 317.46,
+      "text": "Very happy is an understatement, we got lost trying to find our hotel afterward and it took like 40 minutes.",
+      "segment_ids": [
+        63
+      ]
+    },
+    {
+      "chunk_index": 40,
+      "speaker": "A",
+      "start": 317.46,
+      "end": 323.66,
+      "text": "In our defence, those streets all look the same after a few glasses of Vinho Verde.",
+      "segment_ids": [
+        64
+      ]
+    },
+    {
+      "chunk_index": 41,
+      "speaker": "B",
+      "start": 323.66,
+      "end": 338.38,
+      "text": "True. Okay, so if we go back, plan is, more time in Cintra, one more Cataplana dinner, and I'm making a real attempt at the custard tarts again with an actual recipe this time instead of guessing.",
+      "segment_ids": [
+        65,
+        66
+      ]
+    },
+    {
+      "chunk_index": 42,
+      "speaker": "A",
+      "start": 338.42,
+      "end": 346.66,
+      "text": "I fully support this plan. Should we also revisit that seafood rice place, the one with the line out front?",
+      "segment_ids": [
+        67,
+        68
+      ]
+    },
+    {
+      "chunk_index": 43,
+      "speaker": "B",
+      "start": 346.66,
+      "end": 356.14,
+      "text": "The line was so worth it though. That rice had this deep, almost smoky sweetness from the broth, I don't know how they got it that rich.",
+      "segment_ids": [
+        69,
+        70
+      ]
+    },
+    {
+      "chunk_index": 44,
+      "speaker": "A",
+      "start": 356.14,
+      "end": 364.62,
+      "text": "I think it's just hours of simmering with the shells and heads still in, honestly, that's usually the secret with stuff like that.",
+      "segment_ids": [
+        71
+      ]
+    },
+    {
+      "chunk_index": 45,
+      "speaker": "B",
+      "start": 364.62,
+      "end": 372.98,
+      "text": "Makes sense. Okay, I'm sending you flight options tonight, I'm actually getting excited about this now.",
+      "segment_ids": [
+        72,
+        73
+      ]
+    },
+    {
+      "chunk_index": 46,
+      "speaker": "A",
+      "start": 372.98,
+      "end": 379.86,
+      "text": "Same, let's actually book something this time instead of just talking about it for six months.",
+      "segment_ids": [
+        74
+      ]
+    },
+    {
+      "chunk_index": 47,
+      "speaker": "B",
+      "start": 379.86,
+      "end": 391.34,
+      "text": "Deal. And you have to bring the Cataplana recipe you used, I want to try it myself before we go, just so I have something to compare it to when we're actually there.",
+      "segment_ids": [
+        75,
+        76
+      ]
+    },
+    {
+      "chunk_index": 48,
+      "speaker": "A",
+      "start": 391.34,
+      "end": 399.38,
+      "text": "I'll text it to you tonight. Fair warning, my version has way more garlic than is probably traditional.",
+      "segment_ids": [
+        77,
+        78
+      ]
+    },
+    {
+      "chunk_index": 49,
+      "speaker": "B",
+      "start": 399.38,
+      "end": 403.94,
+      "text": "Good, more garlic is never a downside in my opinion.",
+      "segment_ids": [
+        79
+      ]
+    },
+    {
+      "chunk_index": 50,
+      "speaker": "A",
+      "start": 403.94,
+      "end": 411.98,
+      "text": "Agreed completely. Alright, let's actually look at those dates tonight and stop talking about it in theory.",
+      "segment_ids": [
+        80,
+        81
+      ]
+    },
+    {
+      "chunk_index": 51,
+      "speaker": "B",
+      "start": 411.98,
+      "end": 417.14,
+      "text": "Deal, I'll call you later once I've got a couple options pulled up.",
+      "segment_ids": [
+        82
+      ]
+    },
+    {
+      "chunk_index": 52,
+      "speaker": "A",
+      "start": 417.14,
+      "end": 426.26,
+      "text": "Oh, one more thing, we need to figure out where we're staying this time, because that last hotel was kind of a let down honestly.",
+      "segment_ids": [
+        83
+      ]
+    },
+    {
+      "chunk_index": 53,
+      "speaker": "B",
+      "start": 426.26,
+      "end": 433.18,
+      "text": "The one with the tiny window that didn't actually open. I forgot about that until you just said it.",
+      "segment_ids": [
+        84,
+        85
+      ]
+    },
+    {
+      "chunk_index": 54,
+      "speaker": "A",
+      "start": 433.18,
+      "end": 442.18,
+      "text": "Yeah, and the shower had like zero water pressure the entire week. Nice location, but rough on the actual room.",
+      "segment_ids": [
+        86,
+        87
+      ]
+    },
+    {
+      "chunk_index": 55,
+      "speaker": "B",
+      "start": 442.22,
+      "end": 451.98,
+      "text": "I've been meaning to look for something in Alphama itself this time, even if it's a little pricier, just to be closer to everything we actually want to do.",
+      "segment_ids": [
+        88
+      ]
+    },
+    {
+      "chunk_index": 56,
+      "speaker": "A",
+      "start": 451.98,
+      "end": 460.26,
+      "text": "That would be nice, honestly, waking up and just walking down those little streets instead of taking a cab everywhere.",
+      "segment_ids": [
+        89
+      ]
+    },
+    {
+      "chunk_index": 57,
+      "speaker": "B",
+      "start": 460.26,
+      "end": 467.74,
+      "text": "Exactly, and it would put us closer to that wine bar too, which honestly might be the real motivation here.",
+      "segment_ids": [
+        90
+      ]
+    },
+    {
+      "chunk_index": 58,
+      "speaker": "A",
+      "start": 467.78,
+      "end": 478.02,
+      "text": "Ha, fair, I won't pretend that's not part of it for me too. Okay, send me a couple of hotel options along with the flights tonight.",
+      "segment_ids": [
+        91,
+        92
+      ]
+    },
+    {
+      "chunk_index": 59,
+      "speaker": "B",
+      "start": 478.02,
+      "end": 487.98,
+      "text": "Will do. I'm also going to look into whether there's a food tour we can book in advance this time, since last time we just wandered and got lucky.",
+      "segment_ids": [
+        93,
+        94
+      ]
+    },
+    {
+      "chunk_index": 60,
+      "speaker": "A",
+      "start": 487.98,
+      "end": 495.18,
+      "text": "We did get lucky a lot, but a guided one might actually get us into places we'd never find on our own.",
+      "segment_ids": [
+        95
+      ]
+    },
+    {
+      "chunk_index": 61,
+      "speaker": "B",
+      "start": 495.18,
+      "end": 504.62,
+      "text": "That's what I'm hoping. Alright, I really do need to run, but this got me way more excited than I expected for a random Tuesday.",
+      "segment_ids": [
+        96,
+        97
+      ]
+    },
+    {
+      "chunk_index": 62,
+      "speaker": "A",
+      "start": 504.62,
+      "end": 509.22,
+      "text": "Same, talk tonight once you've got the options together.",
+      "segment_ids": [
+        98
+      ]
+    },
+    {
+      "chunk_index": 63,
+      "speaker": "B",
+      "start": 509.22,
+      "end": 512.22,
+      "text": "Sounds good, talk soon.",
+      "segment_ids": [
+        99
+      ]
+    }
+  ]
+}

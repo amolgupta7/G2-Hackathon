@@ -1,0 +1,694 @@
+{
+  "recording": "rec01_standup_incident",
+  "chunks": [
+    {
+      "chunk_index": 0,
+      "speaker": "A",
+      "start": 0.0,
+      "end": 11.0,
+      "text": "Okay, so before we close this out, can we walk through what actually happened last night? I want to get the timeline straight before I write the postmortem.",
+      "segment_ids": [
+        1,
+        2
+      ]
+    },
+    {
+      "chunk_index": 1,
+      "speaker": "B",
+      "start": 11.0,
+      "end": 22.32,
+      "text": "Yeah, for sure. So it started around 2 in the morning. I was the one on call, and I got paged for elevated latency on the checkout service.",
+      "segment_ids": [
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "chunk_index": 2,
+      "speaker": "A",
+      "start": 22.32,
+      "end": 28.92,
+      "text": "Right, and at that point did you think it was checkout itself, or something downstream?",
+      "segment_ids": [
+        6
+      ]
+    },
+    {
+      "chunk_index": 3,
+      "speaker": "B",
+      "start": 28.92,
+      "end": 43.0,
+      "text": "Honestly my first guess was checkout, because that's usually where the noise is. But when I pulled up the dashboards, the checkout pods looked fine. CPU was normal, memory was normal.",
+      "segment_ids": [
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "chunk_index": 4,
+      "speaker": "A",
+      "start": 43.0,
+      "end": 45.84,
+      "text": "So where did you look next?",
+      "segment_ids": [
+        10
+      ]
+    },
+    {
+      "chunk_index": 5,
+      "speaker": "B",
+      "start": 45.84,
+      "end": 57.36,
+      "text": "I went one layer down and looked at the production database, and that's when things got interesting. Connection counts were way past what we'd normally see, like almost triple.",
+      "segment_ids": [
+        11,
+        12
+      ]
+    },
+    {
+      "chunk_index": 6,
+      "speaker": "A",
+      "start": 57.36,
+      "end": 65.8,
+      "text": "Triple. Okay, that's a lot was it just checkout hitting it that hard, or were other services piling on too?",
+      "segment_ids": [
+        13,
+        14
+      ]
+    },
+    {
+      "chunk_index": 7,
+      "speaker": "B",
+      "start": 65.8,
+      "end": 76.28,
+      "text": "That's the thing, it wasn't just checkout. The recommendations service and the inventory sync job were both hammering the same tables around the same time.",
+      "segment_ids": [
+        15,
+        16
+      ]
+    },
+    {
+      "chunk_index": 8,
+      "speaker": "A",
+      "start": 76.28,
+      "end": 80.68,
+      "text": "So basically everybody showed up to the party at once.",
+      "segment_ids": [
+        17
+      ]
+    },
+    {
+      "chunk_index": 9,
+      "speaker": "B",
+      "start": 80.68,
+      "end": 94.24,
+      "text": "Pretty much. And the database just could not keep up. It was completely overwhelmed. Every query was queuing behind ten others, and the connection pool was maxed out within minutes.",
+      "segment_ids": [
+        18,
+        19,
+        20,
+        21
+      ]
+    },
+    {
+      "chunk_index": 10,
+      "speaker": "A",
+      "start": 94.24,
+      "end": 97.56,
+      "text": "Buckling under load, basically.",
+      "segment_ids": [
+        22
+      ]
+    },
+    {
+      "chunk_index": 11,
+      "speaker": "B",
+      "start": 97.56,
+      "end": 104.72,
+      "text": "Exactly that. Buckling under load is the phrase I used in the incident channel, actually.",
+      "segment_ids": [
+        23,
+        24
+      ]
+    },
+    {
+      "chunk_index": 12,
+      "speaker": "A",
+      "start": 104.72,
+      "end": 110.08,
+      "text": "Okay, so once you saw the connection spike, what did you do?",
+      "segment_ids": [
+        25
+      ]
+    },
+    {
+      "chunk_index": 13,
+      "speaker": "B",
+      "start": 110.08,
+      "end": 120.88,
+      "text": "First thing, I killed the long running queries from the inventory sync job, because those looked like the biggest offenders. That bought us some breathing room.",
+      "segment_ids": [
+        26,
+        27
+      ]
+    },
+    {
+      "chunk_index": 14,
+      "speaker": "A",
+      "start": 120.88,
+      "end": 124.0,
+      "text": "Did latency come down right away?",
+      "segment_ids": [
+        28
+      ]
+    },
+    {
+      "chunk_index": 15,
+      "speaker": "B",
+      "start": 124.0,
+      "end": 139.88,
+      "text": "Some, but not enough. Checkout was still timing out for a chunk of users. So I bumped the connection pool limit temporarily and restarted the recommendations service, since it seemed to be leaking connections instead of releasing them properly.",
+      "segment_ids": [
+        29,
+        30,
+        31
+      ]
+    },
+    {
+      "chunk_index": 16,
+      "speaker": "A",
+      "start": 140.32,
+      "end": 143.16,
+      "text": "And that's when it stabilized.",
+      "segment_ids": [
+        32
+      ]
+    },
+    {
+      "chunk_index": 17,
+      "speaker": "B",
+      "start": 143.16,
+      "end": 150.36,
+      "text": "That's when it stabilized, yet. By around 240 it was back to normal error rates.",
+      "segment_ids": [
+        33,
+        34
+      ]
+    },
+    {
+      "chunk_index": 18,
+      "speaker": "A",
+      "start": 150.36,
+      "end": 160.52,
+      "text": "Okay, so let's talk about the actual root cause here, because killing queries and bumping a pool limit, that's a mitigation, not a fix.",
+      "segment_ids": [
+        35
+      ]
+    },
+    {
+      "chunk_index": 19,
+      "speaker": "B",
+      "start": 160.52,
+      "end": 173.56,
+      "text": "Agreed. So digging into it this morning, the root cause looks like a bad deploy from inventory sync yesterday afternoon. Someone removed a batching limit on one of the update queries.",
+      "segment_ids": [
+        36,
+        37,
+        38
+      ]
+    },
+    {
+      "chunk_index": 20,
+      "speaker": "A",
+      "start": 173.56,
+      "end": 181.4,
+      "text": "Oh, so instead of updating in batches of like 500 rows, it was just doing everything at once?",
+      "segment_ids": [
+        39
+      ]
+    },
+    {
+      "chunk_index": 21,
+      "speaker": "B",
+      "start": 181.4,
+      "end": 192.28,
+      "text": "Right, unbounded updates against a live table. Which is fine at low traffic, but once we hit peak hours it started competing for locks with everything else.",
+      "segment_ids": [
+        40,
+        41
+      ]
+    },
+    {
+      "chunk_index": 22,
+      "speaker": "A",
+      "start": 192.28,
+      "end": 198.52,
+      "text": "And recommendations leaking connections was sort of a secondary issue that just made it worse.",
+      "segment_ids": [
+        42
+      ]
+    },
+    {
+      "chunk_index": 23,
+      "speaker": "B",
+      "start": 198.6,
+      "end": 207.72,
+      "text": "Yeah, that one's been lurking for a while apparently. There's an old ticket about connection leaks in that service that never got picked up.",
+      "segment_ids": [
+        43,
+        44
+      ]
+    },
+    {
+      "chunk_index": 24,
+      "speaker": "A",
+      "start": 207.72,
+      "end": 212.28,
+      "text": "Great, so we've got two root causes tangled together.",
+      "segment_ids": [
+        45
+      ]
+    },
+    {
+      "chunk_index": 25,
+      "speaker": "B",
+      "start": 212.28,
+      "end": 221.08,
+      "text": "Kind of, yet. The batching removal is what triggered it, but the leak is what turned a bad night into a really bad night.",
+      "segment_ids": [
+        46,
+        47
+      ]
+    },
+    {
+      "chunk_index": 26,
+      "speaker": "A",
+      "start": 221.08,
+      "end": 230.48,
+      "text": "Got it? So for the write-up, I want to be clear that this wasn't a single dumb mistake, it's two separate issues that collided.",
+      "segment_ids": [
+        48,
+        49
+      ]
+    },
+    {
+      "chunk_index": 27,
+      "speaker": "B",
+      "start": 230.48,
+      "end": 241.56,
+      "text": "That's fair. I'd also add that we didn't have great visibility into connection counts per service, we were kind of inferring who the culprit was instead of just looking it up.",
+      "segment_ids": [
+        50,
+        51
+      ]
+    },
+    {
+      "chunk_index": 28,
+      "speaker": "A",
+      "start": 241.56,
+      "end": 250.12,
+      "text": "That's a good point actually. If we'd had per service connection metrics we would have found this in 10 minutes instead of 40.",
+      "segment_ids": [
+        52,
+        53
+      ]
+    },
+    {
+      "chunk_index": 29,
+      "speaker": "B",
+      "start": 250.12,
+      "end": 259.64,
+      "text": "Exactly. That should probably be an action item, honestly, better dashboards for database connections broken out by caller.",
+      "segment_ids": [
+        54,
+        55
+      ]
+    },
+    {
+      "chunk_index": 30,
+      "speaker": "A",
+      "start": 259.64,
+      "end": 266.56,
+      "text": "Agreed, I'll add that. What about the batching limit, do we just put it back?",
+      "segment_ids": [
+        56,
+        57
+      ]
+    },
+    {
+      "chunk_index": 31,
+      "speaker": "B",
+      "start": 266.56,
+      "end": 275.84,
+      "text": "Put it back, and I think we should also add a lint rule or a code review checklist item so nobody removes a batch size without someone flagging it.",
+      "segment_ids": [
+        58
+      ]
+    },
+    {
+      "chunk_index": 32,
+      "speaker": "A",
+      "start": 275.84,
+      "end": 280.96,
+      "text": "Makes sense. And the connection leak in recommendations.",
+      "segment_ids": [
+        59,
+        60
+      ]
+    },
+    {
+      "chunk_index": 33,
+      "speaker": "B",
+      "start": 281.04,
+      "end": 290.44,
+      "text": "That one needs an actual fix, not a workaround. I talked to their team lead this morning and they're going to prioritize it this sprint.",
+      "segment_ids": [
+        61,
+        62
+      ]
+    },
+    {
+      "chunk_index": 34,
+      "speaker": "A",
+      "start": 290.44,
+      "end": 298.84,
+      "text": "Good. Now, how did the on-call rotation handle this overall, were you able to get help when you needed it?",
+      "segment_ids": [
+        63,
+        64
+      ]
+    },
+    {
+      "chunk_index": 35,
+      "speaker": "B",
+      "start": 298.84,
+      "end": 310.92,
+      "text": "I paged in a second engineer around 2.20 when I realized it wasn't going to be a quick fix, and honestly that helped a lot, having a second set of eyes on the database side while I focused on the services.",
+      "segment_ids": [
+        65
+      ]
+    },
+    {
+      "chunk_index": 36,
+      "speaker": "A",
+      "start": 311.8,
+      "end": 317.52,
+      "text": "That's good practice. Sometimes people wait too long to escalate.",
+      "segment_ids": [
+        66,
+        67
+      ]
+    },
+    {
+      "chunk_index": 37,
+      "speaker": "B",
+      "start": 317.52,
+      "end": 325.6,
+      "text": "Yeah, I used to be guilty of that, trying to solve everything solo at 3 in the morning. Not worth it.",
+      "segment_ids": [
+        68,
+        69
+      ]
+    },
+    {
+      "chunk_index": 38,
+      "speaker": "A",
+      "start": 325.6,
+      "end": 329.44,
+      "text": "How long was the total customer impact window?",
+      "segment_ids": [
+        70
+      ]
+    },
+    {
+      "chunk_index": 39,
+      "speaker": "B",
+      "start": 329.44,
+      "end": 341.48,
+      "text": "From the first page to full recovery, about 50 minutes. But the worst of it, where checkout was really failing for a lot of users, that was maybe 20 minutes in the middle.",
+      "segment_ids": [
+        71,
+        72
+      ]
+    },
+    {
+      "chunk_index": 40,
+      "speaker": "A",
+      "start": 341.48,
+      "end": 346.16,
+      "text": "Do we know roughly how many failed checkouts that translates to?",
+      "segment_ids": [
+        73
+      ]
+    },
+    {
+      "chunk_index": 41,
+      "speaker": "B",
+      "start": 346.16,
+      "end": 357.64,
+      "text": "Support said they got a handful of complaints, but the error rate graph suggests it's more like a few hundred failed attempts, some of which probably just retried and succeeded.",
+      "segment_ids": [
+        74
+      ]
+    },
+    {
+      "chunk_index": 42,
+      "speaker": "A",
+      "start": 357.64,
+      "end": 366.12,
+      "text": "Okay, I'll get an exact number from the data team for the report. Anything else stand out to you from the timeline?",
+      "segment_ids": [
+        75,
+        76
+      ]
+    },
+    {
+      "chunk_index": 43,
+      "speaker": "B",
+      "start": 366.12,
+      "end": 379.08,
+      "text": "One thing, our alerting fired pretty fast, which was good, but the runbook for checkout latency didn't mention checking database connection counts at all. I was basically improvising.",
+      "segment_ids": [
+        77,
+        78
+      ]
+    },
+    {
+      "chunk_index": 44,
+      "speaker": "A",
+      "start": 379.08,
+      "end": 387.48,
+      "text": "That's worth fixing too. A runbook that only covers the obvious cause isn't that useful when the obvious cause is wrong.",
+      "segment_ids": [
+        79,
+        80
+      ]
+    },
+    {
+      "chunk_index": 45,
+      "speaker": "B",
+      "start": 387.52,
+      "end": 394.48,
+      "text": "Right, so I'll rewrite that section to include a database connection check as one of the first steps.",
+      "segment_ids": [
+        81
+      ]
+    },
+    {
+      "chunk_index": 46,
+      "speaker": "A",
+      "start": 394.48,
+      "end": 405.28,
+      "text": "Perfect. Let's also loop in the inventory sync team so they understand why unbounded updates are dangerous, not just tell them to fix it and move on.",
+      "segment_ids": [
+        82,
+        83
+      ]
+    },
+    {
+      "chunk_index": 47,
+      "speaker": "B",
+      "start": 405.28,
+      "end": 415.48,
+      "text": "Agreed, context matters there. If they don't understand why it broke things, they'll probably do something similar again in a different service.",
+      "segment_ids": [
+        84,
+        85
+      ]
+    },
+    {
+      "chunk_index": 48,
+      "speaker": "A",
+      "start": 415.48,
+      "end": 433.36,
+      "text": "Exactly. Okay, I think I have enough to draft the postmortem. Root cause, the unbounded update from the batching removal, contributing factor, the connection leak, mitigation steps you took, and then the four action items we just listed.",
+      "segment_ids": [
+        86,
+        87,
+        88
+      ]
+    },
+    {
+      "chunk_index": 49,
+      "speaker": "B",
+      "start": 433.36,
+      "end": 439.96,
+      "text": "Sounds right. Send it my way before you post it and I'll add any details I missed.",
+      "segment_ids": [
+        89,
+        90
+      ]
+    },
+    {
+      "chunk_index": 50,
+      "speaker": "A",
+      "start": 439.96,
+      "end": 448.28,
+      "text": "Will do. Honestly, given how it could have gone, 50 minutes and no data loss isn't a bad outcome.",
+      "segment_ids": [
+        91,
+        92
+      ]
+    },
+    {
+      "chunk_index": 51,
+      "speaker": "B",
+      "start": 448.28,
+      "end": 457.96,
+      "text": "No data loss is the important part. It could have been a lot messy if those updates had actually corrupted something instead of just locking things up.",
+      "segment_ids": [
+        93,
+        94
+      ]
+    },
+    {
+      "chunk_index": 52,
+      "speaker": "A",
+      "start": 457.96,
+      "end": 464.96,
+      "text": "True. Alright, go get some sleep, you've earned it after a 2am page.",
+      "segment_ids": [
+        95,
+        96
+      ]
+    },
+    {
+      "chunk_index": 53,
+      "speaker": "B",
+      "start": 464.96,
+      "end": 469.72,
+      "text": "Thanks, I might actually take a nap before lunch today.",
+      "segment_ids": [
+        97
+      ]
+    },
+    {
+      "chunk_index": 54,
+      "speaker": "A",
+      "start": 469.72,
+      "end": 479.2,
+      "text": "One more thing before we wrap, do we need to notify any customers directly, or is this small enough that a status page update covers it?",
+      "segment_ids": [
+        98
+      ]
+    },
+    {
+      "chunk_index": 55,
+      "speaker": "B",
+      "start": 479.2,
+      "end": 490.56,
+      "text": "I think a status page update is enough. We already posted one during the incident saying checkout was degraded, so I'll just add a short resolved note with a rough summary.",
+      "segment_ids": [
+        99,
+        100
+      ]
+    },
+    {
+      "chunk_index": 56,
+      "speaker": "A",
+      "start": 490.56,
+      "end": 497.32,
+      "text": "Keep it high level for that, no need to mention connection pools and batch sizes to customers.",
+      "segment_ids": [
+        101
+      ]
+    },
+    {
+      "chunk_index": 57,
+      "speaker": "B",
+      "start": 497.32,
+      "end": 507.92,
+      "text": "Right, something like, we experienced elevated checkout errors for about 50 minutes due to increased database load, and the issue has been fully resolved.",
+      "segment_ids": [
+        102
+      ]
+    },
+    {
+      "chunk_index": 58,
+      "speaker": "A",
+      "start": 507.92,
+      "end": 519.32,
+      "text": "That works. And internally, should we do a broader review of other jobs that touch the production database directly, in case there are other unbounded queries lurking?",
+      "segment_ids": [
+        103,
+        104
+      ]
+    },
+    {
+      "chunk_index": 59,
+      "speaker": "B",
+      "start": 519.32,
+      "end": 530.48,
+      "text": "That's probably worth a ticket on its own. I know at least two other batch jobs that were written around the same time as inventory sync, so they might have the same pattern.",
+      "segment_ids": [
+        105,
+        106
+      ]
+    },
+    {
+      "chunk_index": 60,
+      "speaker": "A",
+      "start": 530.48,
+      "end": 538.72,
+      "text": "Let's flag that as a follow-up audit rather than folding it into this postmortem, otherwise this document is going to balloon.",
+      "segment_ids": [
+        107
+      ]
+    },
+    {
+      "chunk_index": 61,
+      "speaker": "B",
+      "start": 538.72,
+      "end": 547.84,
+      "text": "Agreed, keep this one focused on last night. I'll open a separate ticket for the audit and link it from the Action Items section.",
+      "segment_ids": [
+        108,
+        109
+      ]
+    },
+    {
+      "chunk_index": 62,
+      "speaker": "A",
+      "start": 547.84,
+      "end": 560.32,
+      "text": "Perfect, that's exactly what I needed. Thanks for walking through all of this, it makes writing the report a lot easier when the on-call engineer actually remembers the details clearly.",
+      "segment_ids": [
+        110,
+        111
+      ]
+    },
+    {
+      "chunk_index": 63,
+      "speaker": "B",
+      "start": 560.32,
+      "end": 567.32,
+      "text": "No problem, it's still pretty fresh in my mind, unfortunately. Talk later.",
+      "segment_ids": [
+        112,
+        113
+      ]
+    }
+  ]
+}

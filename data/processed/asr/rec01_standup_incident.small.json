@@ -1,0 +1,687 @@
+{
+  "recording": "rec01_standup_incident",
+  "model": "small",
+  "audio_duration_s": 567.5,
+  "asr_seconds": 431.0,
+  "real_time_factor": 0.76,
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 6.4,
+      "text": "Okay, so before we close this out, can we walk through what actually happened last night?"
+    },
+    {
+      "id": 2,
+      "start": 6.4,
+      "end": 11.0,
+      "text": "I want to get the timeline straight before I write the postmortem."
+    },
+    {
+      "id": 3,
+      "start": 11.0,
+      "end": 13.2,
+      "text": "Yeah, for sure."
+    },
+    {
+      "id": 4,
+      "start": 13.2,
+      "end": 16.04,
+      "text": "So it started around 2 in the morning."
+    },
+    {
+      "id": 5,
+      "start": 16.04,
+      "end": 22.32,
+      "text": "I was the one on call, and I got paged for elevated latency on the checkout service."
+    },
+    {
+      "id": 6,
+      "start": 22.32,
+      "end": 28.92,
+      "text": "Right, and at that point did you think it was checkout itself, or something downstream?"
+    },
+    {
+      "id": 7,
+      "start": 28.92,
+      "end": 34.4,
+      "text": "Honestly my first guess was checkout, because that's usually where the noise is."
+    },
+    {
+      "id": 8,
+      "start": 34.4,
+      "end": 39.08,
+      "text": "But when I pulled up the dashboards, the checkout pods looked fine."
+    },
+    {
+      "id": 9,
+      "start": 39.08,
+      "end": 43.0,
+      "text": "CPU was normal, memory was normal."
+    },
+    {
+      "id": 10,
+      "start": 43.0,
+      "end": 45.84,
+      "text": "So where did you look next?"
+    },
+    {
+      "id": 11,
+      "start": 45.84,
+      "end": 51.84,
+      "text": "I went one layer down and looked at the production database, and that's when things got interesting."
+    },
+    {
+      "id": 12,
+      "start": 51.84,
+      "end": 57.36,
+      "text": "Connection counts were way past what we'd normally see, like almost triple."
+    },
+    {
+      "id": 13,
+      "start": 57.36,
+      "end": 58.68,
+      "text": "Triple."
+    },
+    {
+      "id": 14,
+      "start": 58.68,
+      "end": 65.8,
+      "text": "Okay, that's a lot was it just checkout hitting it that hard, or were other services piling on too?"
+    },
+    {
+      "id": 15,
+      "start": 65.8,
+      "end": 69.16,
+      "text": "That's the thing, it wasn't just checkout."
+    },
+    {
+      "id": 16,
+      "start": 69.16,
+      "end": 76.28,
+      "text": "The recommendations service and the inventory sync job were both hammering the same tables around the same time."
+    },
+    {
+      "id": 17,
+      "start": 76.28,
+      "end": 80.68,
+      "text": "So basically everybody showed up to the party at once."
+    },
+    {
+      "id": 18,
+      "start": 80.68,
+      "end": 82.24,
+      "text": "Pretty much."
+    },
+    {
+      "id": 19,
+      "start": 82.24,
+      "end": 85.12,
+      "text": "And the database just could not keep up."
+    },
+    {
+      "id": 20,
+      "start": 85.12,
+      "end": 87.6,
+      "text": "It was completely overwhelmed."
+    },
+    {
+      "id": 21,
+      "start": 87.64,
+      "end": 94.24,
+      "text": "Every query was queuing behind ten others, and the connection pool was maxed out within minutes."
+    },
+    {
+      "id": 22,
+      "start": 94.24,
+      "end": 97.56,
+      "text": "Buckling under load, basically."
+    },
+    {
+      "id": 23,
+      "start": 97.56,
+      "end": 99.36,
+      "text": "Exactly that."
+    },
+    {
+      "id": 24,
+      "start": 99.36,
+      "end": 104.72,
+      "text": "Buckling under load is the phrase I used in the incident channel, actually."
+    },
+    {
+      "id": 25,
+      "start": 104.72,
+      "end": 110.08,
+      "text": "Okay, so once you saw the connection spike, what did you do?"
+    },
+    {
+      "id": 26,
+      "start": 110.08,
+      "end": 118.0,
+      "text": "First thing, I killed the long running queries from the inventory sync job, because those looked like the biggest offenders."
+    },
+    {
+      "id": 27,
+      "start": 118.0,
+      "end": 120.88,
+      "text": "That bought us some breathing room."
+    },
+    {
+      "id": 28,
+      "start": 120.88,
+      "end": 124.0,
+      "text": "Did latency come down right away?"
+    },
+    {
+      "id": 29,
+      "start": 124.0,
+      "end": 126.56,
+      "text": "Some, but not enough."
+    },
+    {
+      "id": 30,
+      "start": 126.56,
+      "end": 130.16,
+      "text": "Checkout was still timing out for a chunk of users."
+    },
+    {
+      "id": 31,
+      "start": 130.16,
+      "end": 139.88,
+      "text": "So I bumped the connection pool limit temporarily and restarted the recommendations service, since it seemed to be leaking connections instead of releasing them properly."
+    },
+    {
+      "id": 32,
+      "start": 140.32,
+      "end": 143.16,
+      "text": "And that's when it stabilized."
+    },
+    {
+      "id": 33,
+      "start": 143.16,
+      "end": 146.04,
+      "text": "That's when it stabilized, yet."
+    },
+    {
+      "id": 34,
+      "start": 146.04,
+      "end": 150.36,
+      "text": "By around 240 it was back to normal error rates."
+    },
+    {
+      "id": 35,
+      "start": 150.36,
+      "end": 160.52,
+      "text": "Okay, so let's talk about the actual root cause here, because killing queries and bumping a pool limit, that's a mitigation, not a fix."
+    },
+    {
+      "id": 36,
+      "start": 160.52,
+      "end": 161.88,
+      "text": "Agreed."
+    },
+    {
+      "id": 37,
+      "start": 161.88,
+      "end": 169.0,
+      "text": "So digging into it this morning, the root cause looks like a bad deploy from inventory sync yesterday afternoon."
+    },
+    {
+      "id": 38,
+      "start": 169.08,
+      "end": 173.56,
+      "text": "Someone removed a batching limit on one of the update queries."
+    },
+    {
+      "id": 39,
+      "start": 173.56,
+      "end": 181.4,
+      "text": "Oh, so instead of updating in batches of like 500 rows, it was just doing everything at once?"
+    },
+    {
+      "id": 40,
+      "start": 181.4,
+      "end": 185.16,
+      "text": "Right, unbounded updates against a live table."
+    },
+    {
+      "id": 41,
+      "start": 185.16,
+      "end": 192.28,
+      "text": "Which is fine at low traffic, but once we hit peak hours it started competing for locks with everything else."
+    },
+    {
+      "id": 42,
+      "start": 192.28,
+      "end": 198.52,
+      "text": "And recommendations leaking connections was sort of a secondary issue that just made it worse."
+    },
+    {
+      "id": 43,
+      "start": 198.6,
+      "end": 202.36,
+      "text": "Yeah, that one's been lurking for a while apparently."
+    },
+    {
+      "id": 44,
+      "start": 202.36,
+      "end": 207.72,
+      "text": "There's an old ticket about connection leaks in that service that never got picked up."
+    },
+    {
+      "id": 45,
+      "start": 207.72,
+      "end": 212.28,
+      "text": "Great, so we've got two root causes tangled together."
+    },
+    {
+      "id": 46,
+      "start": 212.28,
+      "end": 214.4,
+      "text": "Kind of, yet."
+    },
+    {
+      "id": 47,
+      "start": 214.4,
+      "end": 221.08,
+      "text": "The batching removal is what triggered it, but the leak is what turned a bad night into a really bad night."
+    },
+    {
+      "id": 48,
+      "start": 221.08,
+      "end": 222.4,
+      "text": "Got it?"
+    },
+    {
+      "id": 49,
+      "start": 222.48,
+      "end": 230.48,
+      "text": "So for the write-up, I want to be clear that this wasn't a single dumb mistake, it's two separate issues that collided."
+    },
+    {
+      "id": 50,
+      "start": 230.48,
+      "end": 231.92,
+      "text": "That's fair."
+    },
+    {
+      "id": 51,
+      "start": 231.92,
+      "end": 241.56,
+      "text": "I'd also add that we didn't have great visibility into connection counts per service, we were kind of inferring who the culprit was instead of just looking it up."
+    },
+    {
+      "id": 52,
+      "start": 241.56,
+      "end": 243.88,
+      "text": "That's a good point actually."
+    },
+    {
+      "id": 53,
+      "start": 243.88,
+      "end": 250.12,
+      "text": "If we'd had per service connection metrics we would have found this in 10 minutes instead of 40."
+    },
+    {
+      "id": 54,
+      "start": 250.12,
+      "end": 251.6,
+      "text": "Exactly."
+    },
+    {
+      "id": 55,
+      "start": 251.64,
+      "end": 259.64,
+      "text": "That should probably be an action item, honestly, better dashboards for database connections broken out by caller."
+    },
+    {
+      "id": 56,
+      "start": 259.64,
+      "end": 262.12,
+      "text": "Agreed, I'll add that."
+    },
+    {
+      "id": 57,
+      "start": 262.12,
+      "end": 266.56,
+      "text": "What about the batching limit, do we just put it back?"
+    },
+    {
+      "id": 58,
+      "start": 266.56,
+      "end": 275.84,
+      "text": "Put it back, and I think we should also add a lint rule or a code review checklist item so nobody removes a batch size without someone flagging it."
+    },
+    {
+      "id": 59,
+      "start": 275.84,
+      "end": 277.52,
+      "text": "Makes sense."
+    },
+    {
+      "id": 60,
+      "start": 277.52,
+      "end": 280.96,
+      "text": "And the connection leak in recommendations."
+    },
+    {
+      "id": 61,
+      "start": 281.04,
+      "end": 285.04,
+      "text": "That one needs an actual fix, not a workaround."
+    },
+    {
+      "id": 62,
+      "start": 285.04,
+      "end": 290.44,
+      "text": "I talked to their team lead this morning and they're going to prioritize it this sprint."
+    },
+    {
+      "id": 63,
+      "start": 290.44,
+      "end": 291.64,
+      "text": "Good."
+    },
+    {
+      "id": 64,
+      "start": 291.64,
+      "end": 298.84,
+      "text": "Now, how did the on-call rotation handle this overall, were you able to get help when you needed it?"
+    },
+    {
+      "id": 65,
+      "start": 298.84,
+      "end": 310.92,
+      "text": "I paged in a second engineer around 2.20 when I realized it wasn't going to be a quick fix, and honestly that helped a lot, having a second set of eyes on the database side while I focused on the services."
+    },
+    {
+      "id": 66,
+      "start": 311.8,
+      "end": 313.76,
+      "text": "That's good practice."
+    },
+    {
+      "id": 67,
+      "start": 313.76,
+      "end": 317.52,
+      "text": "Sometimes people wait too long to escalate."
+    },
+    {
+      "id": 68,
+      "start": 317.52,
+      "end": 323.56,
+      "text": "Yeah, I used to be guilty of that, trying to solve everything solo at 3 in the morning."
+    },
+    {
+      "id": 69,
+      "start": 323.56,
+      "end": 325.6,
+      "text": "Not worth it."
+    },
+    {
+      "id": 70,
+      "start": 325.6,
+      "end": 329.44,
+      "text": "How long was the total customer impact window?"
+    },
+    {
+      "id": 71,
+      "start": 329.44,
+      "end": 333.88,
+      "text": "From the first page to full recovery, about 50 minutes."
+    },
+    {
+      "id": 72,
+      "start": 333.92,
+      "end": 341.48,
+      "text": "But the worst of it, where checkout was really failing for a lot of users, that was maybe 20 minutes in the middle."
+    },
+    {
+      "id": 73,
+      "start": 341.48,
+      "end": 346.16,
+      "text": "Do we know roughly how many failed checkouts that translates to?"
+    },
+    {
+      "id": 74,
+      "start": 346.16,
+      "end": 357.64,
+      "text": "Support said they got a handful of complaints, but the error rate graph suggests it's more like a few hundred failed attempts, some of which probably just retried and succeeded."
+    },
+    {
+      "id": 75,
+      "start": 357.64,
+      "end": 362.28,
+      "text": "Okay, I'll get an exact number from the data team for the report."
+    },
+    {
+      "id": 76,
+      "start": 362.28,
+      "end": 366.12,
+      "text": "Anything else stand out to you from the timeline?"
+    },
+    {
+      "id": 77,
+      "start": 366.12,
+      "end": 376.12,
+      "text": "One thing, our alerting fired pretty fast, which was good, but the runbook for checkout latency didn't mention checking database connection counts at all."
+    },
+    {
+      "id": 78,
+      "start": 376.12,
+      "end": 379.08,
+      "text": "I was basically improvising."
+    },
+    {
+      "id": 79,
+      "start": 379.08,
+      "end": 381.16,
+      "text": "That's worth fixing too."
+    },
+    {
+      "id": 80,
+      "start": 381.16,
+      "end": 387.48,
+      "text": "A runbook that only covers the obvious cause isn't that useful when the obvious cause is wrong."
+    },
+    {
+      "id": 81,
+      "start": 387.52,
+      "end": 394.48,
+      "text": "Right, so I'll rewrite that section to include a database connection check as one of the first steps."
+    },
+    {
+      "id": 82,
+      "start": 394.48,
+      "end": 395.88,
+      "text": "Perfect."
+    },
+    {
+      "id": 83,
+      "start": 395.88,
+      "end": 405.28,
+      "text": "Let's also loop in the inventory sync team so they understand why unbounded updates are dangerous, not just tell them to fix it and move on."
+    },
+    {
+      "id": 84,
+      "start": 405.28,
+      "end": 408.36,
+      "text": "Agreed, context matters there."
+    },
+    {
+      "id": 85,
+      "start": 408.36,
+      "end": 415.48,
+      "text": "If they don't understand why it broke things, they'll probably do something similar again in a different service."
+    },
+    {
+      "id": 86,
+      "start": 415.48,
+      "end": 417.08,
+      "text": "Exactly."
+    },
+    {
+      "id": 87,
+      "start": 417.08,
+      "end": 421.08,
+      "text": "Okay, I think I have enough to draft the postmortem."
+    },
+    {
+      "id": 88,
+      "start": 421.08,
+      "end": 433.36,
+      "text": "Root cause, the unbounded update from the batching removal, contributing factor, the connection leak, mitigation steps you took, and then the four action items we just listed."
+    },
+    {
+      "id": 89,
+      "start": 433.36,
+      "end": 435.12,
+      "text": "Sounds right."
+    },
+    {
+      "id": 90,
+      "start": 435.12,
+      "end": 439.96,
+      "text": "Send it my way before you post it and I'll add any details I missed."
+    },
+    {
+      "id": 91,
+      "start": 439.96,
+      "end": 441.28,
+      "text": "Will do."
+    },
+    {
+      "id": 92,
+      "start": 441.32,
+      "end": 448.28,
+      "text": "Honestly, given how it could have gone, 50 minutes and no data loss isn't a bad outcome."
+    },
+    {
+      "id": 93,
+      "start": 448.28,
+      "end": 451.12,
+      "text": "No data loss is the important part."
+    },
+    {
+      "id": 94,
+      "start": 451.12,
+      "end": 457.96,
+      "text": "It could have been a lot messy if those updates had actually corrupted something instead of just locking things up."
+    },
+    {
+      "id": 95,
+      "start": 457.96,
+      "end": 459.16,
+      "text": "True."
+    },
+    {
+      "id": 96,
+      "start": 459.16,
+      "end": 464.96,
+      "text": "Alright, go get some sleep, you've earned it after a 2am page."
+    },
+    {
+      "id": 97,
+      "start": 464.96,
+      "end": 469.72,
+      "text": "Thanks, I might actually take a nap before lunch today."
+    },
+    {
+      "id": 98,
+      "start": 469.72,
+      "end": 479.2,
+      "text": "One more thing before we wrap, do we need to notify any customers directly, or is this small enough that a status page update covers it?"
+    },
+    {
+      "id": 99,
+      "start": 479.2,
+      "end": 482.16,
+      "text": "I think a status page update is enough."
+    },
+    {
+      "id": 100,
+      "start": 482.16,
+      "end": 490.56,
+      "text": "We already posted one during the incident saying checkout was degraded, so I'll just add a short resolved note with a rough summary."
+    },
+    {
+      "id": 101,
+      "start": 490.56,
+      "end": 497.32,
+      "text": "Keep it high level for that, no need to mention connection pools and batch sizes to customers."
+    },
+    {
+      "id": 102,
+      "start": 497.32,
+      "end": 507.92,
+      "text": "Right, something like, we experienced elevated checkout errors for about 50 minutes due to increased database load, and the issue has been fully resolved."
+    },
+    {
+      "id": 103,
+      "start": 507.92,
+      "end": 509.48,
+      "text": "That works."
+    },
+    {
+      "id": 104,
+      "start": 509.48,
+      "end": 519.32,
+      "text": "And internally, should we do a broader review of other jobs that touch the production database directly, in case there are other unbounded queries lurking?"
+    },
+    {
+      "id": 105,
+      "start": 519.32,
+      "end": 522.28,
+      "text": "That's probably worth a ticket on its own."
+    },
+    {
+      "id": 106,
+      "start": 522.28,
+      "end": 530.48,
+      "text": "I know at least two other batch jobs that were written around the same time as inventory sync, so they might have the same pattern."
+    },
+    {
+      "id": 107,
+      "start": 530.48,
+      "end": 538.72,
+      "text": "Let's flag that as a follow-up audit rather than folding it into this postmortem, otherwise this document is going to balloon."
+    },
+    {
+      "id": 108,
+      "start": 538.72,
+      "end": 542.56,
+      "text": "Agreed, keep this one focused on last night."
+    },
+    {
+      "id": 109,
+      "start": 542.56,
+      "end": 547.84,
+      "text": "I'll open a separate ticket for the audit and link it from the Action Items section."
+    },
+    {
+      "id": 110,
+      "start": 547.84,
+      "end": 551.2,
+      "text": "Perfect, that's exactly what I needed."
+    },
+    {
+      "id": 111,
+      "start": 551.24,
+      "end": 560.32,
+      "text": "Thanks for walking through all of this, it makes writing the report a lot easier when the on-call engineer actually remembers the details clearly."
+    },
+    {
+      "id": 112,
+      "start": 560.32,
+      "end": 565.4,
+      "text": "No problem, it's still pretty fresh in my mind, unfortunately."
+    },
+    {
+      "id": 113,
+      "start": 565.4,
+      "end": 567.32,
+      "text": "Talk later."
+    }
+  ]
+}

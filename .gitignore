@@ -5,3 +5,5 @@ __pycache__/
 logs/
 data/audio/*
 !data/audio/.gitkeep
+# Raw embeddings are regenerated in seconds by app.pipeline.embed
+*.npz

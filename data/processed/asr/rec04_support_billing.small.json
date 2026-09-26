@@ -1,0 +1,567 @@
+{
+  "recording": "rec04_support_billing",
+  "model": "small",
+  "audio_duration_s": 516.0,
+  "asr_seconds": 489.6,
+  "real_time_factor": 0.949,
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 6.28,
+      "text": "Hi, thanks for calling in, you're through to billing support, my name's Devin."
+    },
+    {
+      "id": 2,
+      "start": 6.28,
+      "end": 9.4,
+      "text": "Can I grab your account number to pull things up?"
+    },
+    {
+      "id": 3,
+      "start": 9.4,
+      "end": 13.36,
+      "text": "Yeah, it's 447129."
+    },
+    {
+      "id": 4,
+      "start": 13.36,
+      "end": 18.64,
+      "text": "I'm calling because I was charged twice for the same thing and nobody's explained why."
+    },
+    {
+      "id": 5,
+      "start": 18.64,
+      "end": 21.96,
+      "text": "Okay, let me take a look."
+    },
+    {
+      "id": 6,
+      "start": 21.96,
+      "end": 24.52,
+      "text": "Give me just a second while this loads up."
+    },
+    {
+      "id": 7,
+      "start": 24.76,
+      "end": 31.64,
+      "text": "Alright, I can see your account, and you're on the standard monthly plan, is that right?"
+    },
+    {
+      "id": 8,
+      "start": 31.64,
+      "end": 33.16,
+      "text": "That's right."
+    },
+    {
+      "id": 9,
+      "start": 33.16,
+      "end": 40.48,
+      "text": "So I got my statement this week and there are two charges of $89 each, both dated the 14th."
+    },
+    {
+      "id": 10,
+      "start": 40.48,
+      "end": 43.04,
+      "text": "I see that too, yes."
+    },
+    {
+      "id": 11,
+      "start": 43.04,
+      "end": 51.12,
+      "text": "Two charges, same amount, same day, on invoice numbers ending in 031 and 032."
+    },
+    {
+      "id": 12,
+      "start": 51.12,
+      "end": 59.52,
+      "text": "Right, and I only have the one subscription, I didn't sign up for anything else, so this is really confusing to me."
+    },
+    {
+      "id": 13,
+      "start": 59.52,
+      "end": 67.72,
+      "text": "I completely understand the confusion, and I'm sorry you had to deal with seeing that on your statement without any explanation first."
+    },
+    {
+      "id": 14,
+      "start": 67.72,
+      "end": 72.52,
+      "text": "Let me dig into why this happened before we talk about fixing it."
+    },
+    {
+      "id": 15,
+      "start": 72.52,
+      "end": 79.76,
+      "text": "I appreciate that, I just want to understand what went wrong, honestly, more than anything."
+    },
+    {
+      "id": 16,
+      "start": 79.76,
+      "end": 81.44,
+      "text": "Totally fair."
+    },
+    {
+      "id": 17,
+      "start": 81.44,
+      "end": 93.52,
+      "text": "Okay, so looking at the log here, it looks like there was a billing system update that ran on the 13th, and for a small number of accounts it seems to have triggered the renewal charge twice."
+    },
+    {
+      "id": 18,
+      "start": 93.52,
+      "end": 96.2,
+      "text": "So this wasn't just me."
+    },
+    {
+      "id": 19,
+      "start": 96.2,
+      "end": 100.12,
+      "text": "No, it wasn't just you, unfortunately."
+    },
+    {
+      "id": 20,
+      "start": 100.12,
+      "end": 105.08,
+      "text": "It looks like a batch of accounts got hit by this, and yours is one of them."
+    },
+    {
+      "id": 21,
+      "start": 105.08,
+      "end": 112.2,
+      "text": "I want to be upfront that this is a duplicate charge caused by an error on our end, not anything you did."
+    },
+    {
+      "id": 22,
+      "start": 112.2,
+      "end": 120.72,
+      "text": "Okay, that actually helps, I was starting to wonder if I'd accidentally clicked something twice during checkout last month."
+    },
+    {
+      "id": 23,
+      "start": 120.72,
+      "end": 124.92,
+      "text": "No, nothing like that, this is squarely on us."
+    },
+    {
+      "id": 24,
+      "start": 124.92,
+      "end": 127.24,
+      "text": "So let's get this corrected."
+    },
+    {
+      "id": 25,
+      "start": 127.24,
+      "end": 133.68,
+      "text": "I can process a refund for the second charge right now, the one on invoice 032."
+    },
+    {
+      "id": 26,
+      "start": 133.68,
+      "end": 139.56,
+      "text": "Okay, and how long does a refund like that usually take to actually show up?"
+    },
+    {
+      "id": 27,
+      "start": 139.56,
+      "end": 149.96,
+      "text": "Typically three to five business days depending on your bank, sometimes it posts faster, but I don't want to promise less than five and have you disappointed."
+    },
+    {
+      "id": 28,
+      "start": 149.96,
+      "end": 155.4,
+      "text": "That's fine, I just wanted a realistic number instead of a vague answer."
+    },
+    {
+      "id": 29,
+      "start": 155.4,
+      "end": 157.28,
+      "text": "Absolutely fair."
+    },
+    {
+      "id": 30,
+      "start": 157.28,
+      "end": 160.04,
+      "text": "Let me go ahead and submit that now."
+    },
+    {
+      "id": 31,
+      "start": 160.08,
+      "end": 170.36,
+      "text": "Okay, the refund for $89 against invoice 032 has been submitted, and you should get a confirmation email within the next few minutes."
+    },
+    {
+      "id": 32,
+      "start": 170.36,
+      "end": 172.56,
+      "text": "Great, thank you."
+    },
+    {
+      "id": 33,
+      "start": 172.56,
+      "end": 181.2,
+      "text": "Can I ask, is there anything else on my account I should check, given that this billing update apparently affected a batch of people?"
+    },
+    {
+      "id": 34,
+      "start": 181.2,
+      "end": 186.16,
+      "text": "Good question, let me check your last three statements just to be thorough."
+    },
+    {
+      "id": 35,
+      "start": 186.16,
+      "end": 187.88,
+      "text": "Give me a moment."
+    },
+    {
+      "id": 36,
+      "start": 187.88,
+      "end": 197.16,
+      "text": "Okay, looking back at the last three months, everything before this looks normal, one charge per cycle, no duplicates."
+    },
+    {
+      "id": 37,
+      "start": 197.16,
+      "end": 200.48,
+      "text": "Okay, good, that's reassuring."
+    },
+    {
+      "id": 38,
+      "start": 200.48,
+      "end": 205.56,
+      "text": "What about going forward, is this going to happen again next month?"
+    },
+    {
+      "id": 39,
+      "start": 205.56,
+      "end": 207.0,
+      "text": "It shouldn't."
+    },
+    {
+      "id": 40,
+      "start": 207.0,
+      "end": 214.16,
+      "text": "The team pushed a fix for the underlying issue on the 15th, and I can see your account is flagged as one that was affected,"
+    },
+    {
+      "id": 41,
+      "start": 214.16,
+      "end": 219.56,
+      "text": "which means it'll get an extra manual check before next month's renewal runs."
+    },
+    {
+      "id": 42,
+      "start": 219.56,
+      "end": 226.88,
+      "text": "Okay, that's good to hear, I don't want to be back on the phone next month having the same conversation."
+    },
+    {
+      "id": 43,
+      "start": 226.88,
+      "end": 235.4,
+      "text": "Completely understandable, and honestly if it does happen again, mention this call, the reference number is r-8812,"
+    },
+    {
+      "id": 44,
+      "start": 235.4,
+      "end": 240.08,
+      "text": "and whoever you speak to will be able to see the history immediately."
+    },
+    {
+      "id": 45,
+      "start": 240.08,
+      "end": 242.72,
+      "text": "Got it, I'll write that down."
+    },
+    {
+      "id": 46,
+      "start": 242.72,
+      "end": 245.52,
+      "text": "r-8812"
+    },
+    {
+      "id": 47,
+      "start": 245.52,
+      "end": 246.96,
+      "text": "That's right."
+    },
+    {
+      "id": 48,
+      "start": 246.96,
+      "end": 256.56,
+      "text": "Now, I also want to check, did the duplicate charge cause any actual problems for you, like an overdraft or anything with your bank?"
+    },
+    {
+      "id": 49,
+      "start": 256.56,
+      "end": 267.04,
+      "text": "It didn't cause an overdraft, thankfully, but it did throw off my budgeting for the week, since I wasn't expecting to see an extra $89 gone."
+    },
+    {
+      "id": 50,
+      "start": 267.04,
+      "end": 270.68,
+      "text": "That's frustrating, and I'm sorry about that."
+    },
+    {
+      "id": 51,
+      "start": 270.72,
+      "end": 278.64,
+      "text": "I can also add a small credit to your account for the inconvenience, on top of the refund, if that would help."
+    },
+    {
+      "id": 52,
+      "start": 278.64,
+      "end": 283.48,
+      "text": "Oh, that's not necessary, but I won't say no either."
+    },
+    {
+      "id": 53,
+      "start": 283.48,
+      "end": 290.64,
+      "text": "I'll go ahead and add a $15 account credit, that'll show up as a reduction on your next invoice."
+    },
+    {
+      "id": 54,
+      "start": 290.64,
+      "end": 297.08,
+      "text": "Okay, thank you, that's a nice gesture, I wasn't expecting that honestly."
+    },
+    {
+      "id": 55,
+      "start": 297.08,
+      "end": 298.56,
+      "text": "Of course."
+    },
+    {
+      "id": 56,
+      "start": 298.6,
+      "end": 304.4,
+      "text": "Is there anything else on the account you wanted to go over while I have everything pulled up?"
+    },
+    {
+      "id": 57,
+      "start": 304.4,
+      "end": 312.32,
+      "text": "Actually yet, while I'm here, my invoice email address is still my old one, can we update that too?"
+    },
+    {
+      "id": 58,
+      "start": 312.32,
+      "end": 316.04,
+      "text": "Sure, what would you like it changed to?"
+    },
+    {
+      "id": 59,
+      "start": 316.04,
+      "end": 325.72,
+      "text": "It's dana.rayaset, let's just say a personal email domain, I'll type it in on the portal actually since it's easier than saying it out loud."
+    },
+    {
+      "id": 60,
+      "start": 325.72,
+      "end": 338.08,
+      "text": "That works too, if you go to account settings, then billing preferences, there's an update email field right at the top, and it takes effect immediately, no confirmation delay."
+    },
+    {
+      "id": 61,
+      "start": 338.08,
+      "end": 341.44,
+      "text": "Perfect, I'll do that after we hang up."
+    },
+    {
+      "id": 62,
+      "start": 341.44,
+      "end": 346.84,
+      "text": "Just to confirm one more time, the refund is definitely processing."
+    },
+    {
+      "id": 63,
+      "start": 346.88,
+      "end": 360.44,
+      "text": "Yes, confirmed, refund submitted for the $89 duplicate charge, plus the $15 credit for the inconvenience, and a flag on your account for extra review before next month's renewal."
+    },
+    {
+      "id": 64,
+      "start": 360.44,
+      "end": 363.36,
+      "text": "That covers everything I was worried about."
+    },
+    {
+      "id": 65,
+      "start": 363.36,
+      "end": 368.92,
+      "text": "Thank you for actually explaining what happened instead of just saying you'll look into it."
+    },
+    {
+      "id": 66,
+      "start": 368.92,
+      "end": 372.68,
+      "text": "Of course, that's exactly what we should be doing."
+    },
+    {
+      "id": 67,
+      "start": 372.72,
+      "end": 379.76,
+      "text": "I know getting a surprise charge like that is stressful, especially when the explanation isn't obvious."
+    },
+    {
+      "id": 68,
+      "start": 379.76,
+      "end": 385.76,
+      "text": "It really was stressful for about ten minutes this morning until I calmed down enough to call in."
+    },
+    {
+      "id": 69,
+      "start": 385.76,
+      "end": 394.24,
+      "text": "Completely understandable reaction. Is there anything else I can help with today, or are we good to close this out?"
+    },
+    {
+      "id": 70,
+      "start": 394.24,
+      "end": 396.04,
+      "text": "I think we're good."
+    },
+    {
+      "id": 71,
+      "start": 396.04,
+      "end": 401.88,
+      "text": "Thanks again, Devin, this actually went a lot smoother than I expected."
+    },
+    {
+      "id": 72,
+      "start": 401.92,
+      "end": 403.72,
+      "text": "Happy to help."
+    },
+    {
+      "id": 73,
+      "start": 403.72,
+      "end": 412.44,
+      "text": "You'll get that confirmation email shortly, and don't hesitate to call back with that reference number if anything looks off next cycle."
+    },
+    {
+      "id": 74,
+      "start": 412.44,
+      "end": 413.76,
+      "text": "Will do."
+    },
+    {
+      "id": 75,
+      "start": 413.76,
+      "end": 415.88,
+      "text": "Have a good one."
+    },
+    {
+      "id": 76,
+      "start": 415.88,
+      "end": 418.64,
+      "text": "You too, take care."
+    },
+    {
+      "id": 77,
+      "start": 418.64,
+      "end": 423.2,
+      "text": "Actually, hold on, one more thing just occurred to me."
+    },
+    {
+      "id": 78,
+      "start": 423.2,
+      "end": 432.0,
+      "text": "Will this duplicate charge situation affect my loyalty tier or anything like that, since it might show two renewal events instead of one?"
+    },
+    {
+      "id": 79,
+      "start": 432.0,
+      "end": 434.88,
+      "text": "Good catch, let me check that."
+    },
+    {
+      "id": 80,
+      "start": 434.88,
+      "end": 447.6,
+      "text": "Looking at your loyalty tier calculation, it's based on total month subscribed, not number of transactions, so a duplicate charge on the same day wouldn't push you into a different tier either way."
+    },
+    {
+      "id": 81,
+      "start": 447.6,
+      "end": 449.64,
+      "text": "Okay, that's a relief."
+    },
+    {
+      "id": 82,
+      "start": 449.64,
+      "end": 455.48,
+      "text": "I didn't want this mistake to somehow bump me into a different pricing tier by accident."
+    },
+    {
+      "id": 83,
+      "start": 455.48,
+      "end": 464.8,
+      "text": "No, that wouldn't happen, but I appreciate you asking, it's a reasonable thing to worry about given everything else that went wrong here."
+    },
+    {
+      "id": 84,
+      "start": 464.8,
+      "end": 472.24,
+      "text": "Yeah, once one thing goes sideways you start double checking everything else on the account, at least I do."
+    },
+    {
+      "id": 85,
+      "start": 472.24,
+      "end": 475.68,
+      "text": "That's a very normal reaction, honestly."
+    },
+    {
+      "id": 86,
+      "start": 475.72,
+      "end": 489.84,
+      "text": "While I have you, I'll also leave a note on the account summarizing today's call, the refund, the credit, and the email update request, so if anyone else looks at this account later they have full context."
+    },
+    {
+      "id": 87,
+      "start": 489.84,
+      "end": 496.6,
+      "text": "That's helpful, I like that it won't just disappear into a call log somewhere with no explanation."
+    },
+    {
+      "id": 88,
+      "start": 496.6,
+      "end": 499.28,
+      "text": "Exactly, that's the goal."
+    },
+    {
+      "id": 89,
+      "start": 499.28,
+      "end": 503.28,
+      "text": "Alright, I think that really does cover everything now."
+    },
+    {
+      "id": 90,
+      "start": 503.28,
+      "end": 508.96,
+      "text": "Take care, and again, sorry for the hassle with the duplicate charge."
+    },
+    {
+      "id": 91,
+      "start": 508.96,
+      "end": 512.6,
+      "text": "No worries, thanks for sorting it out quickly."
+    },
+    {
+      "id": 92,
+      "start": 512.6,
+      "end": 514.4,
+      "text": "Bye now."
+    },
+    {
+      "id": 93,
+      "start": 514.4,
+      "end": 515.8,
+      "text": "Bye."
+    }
+  ]
+}

@@ -1,0 +1,1007 @@
+{
+  "recording": "rec02_hr_burnout",
+  "asr_model": "small",
+  "diagnostics": {
+    "segments": 141,
+    "segments_per_speaker": {
+      "A": 71,
+      "B": 70
+    },
+    "speaker_switches": 56,
+    "silhouette": 0.624,
+    "mean_cos_within": [
+      0.85,
+      0.845
+    ],
+    "mean_cos_between": 0.581
+  },
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 2.44,
+      "text": "Thanks for making time today.",
+      "speaker": "A"
+    },
+    {
+      "id": 2,
+      "start": 2.44,
+      "end": 8.08,
+      "text": "I wanted this to just be an informal check-in, nothing formal, nothing going in a file unless",
+      "speaker": "A"
+    },
+    {
+      "id": 3,
+      "start": 8.08,
+      "end": 10.2,
+      "text": "you wanted to.",
+      "speaker": "A"
+    },
+    {
+      "id": 4,
+      "start": 10.2,
+      "end": 12.92,
+      "text": "Yeah, I appreciate that.",
+      "speaker": "B"
+    },
+    {
+      "id": 5,
+      "start": 12.92,
+      "end": 18.12,
+      "text": "Honestly I've been putting off asking for a meeting like this for a couple weeks now.",
+      "speaker": "B"
+    },
+    {
+      "id": 6,
+      "start": 18.12,
+      "end": 21.64,
+      "text": "Well, I'm glad you didn't wait any longer.",
+      "speaker": "A"
+    },
+    {
+      "id": 7,
+      "start": 21.64,
+      "end": 26.16,
+      "text": "How have things been for you lately, generally speaking?",
+      "speaker": "A"
+    },
+    {
+      "id": 8,
+      "start": 26.16,
+      "end": 28.64,
+      "text": "Honestly, not great.",
+      "speaker": "B"
+    },
+    {
+      "id": 9,
+      "start": 28.76,
+      "end": 33.24,
+      "text": "I've been feeling completely drained by the time I get home, like there's nothing left",
+      "speaker": "B"
+    },
+    {
+      "id": 10,
+      "start": 33.24,
+      "end": 36.4,
+      "text": "in the tank for anything else.",
+      "speaker": "B"
+    },
+    {
+      "id": 11,
+      "start": 36.4,
+      "end": 38.2,
+      "text": "That's tough to hear.",
+      "speaker": "A"
+    },
+    {
+      "id": 12,
+      "start": 38.2,
+      "end": 42.12,
+      "text": "Can you tell me more about what that looks like day to day?",
+      "speaker": "A"
+    },
+    {
+      "id": 13,
+      "start": 42.12,
+      "end": 47.56,
+      "text": "I dread coming into work now, which is strange for me to say, because a year ago I actually",
+      "speaker": "B"
+    },
+    {
+      "id": 14,
+      "start": 47.56,
+      "end": 50.96,
+      "text": "looked forward to it most mornings.",
+      "speaker": "B"
+    },
+    {
+      "id": 15,
+      "start": 50.96,
+      "end": 53.08,
+      "text": "That is a pretty big shift.",
+      "speaker": "A"
+    },
+    {
+      "id": 16,
+      "start": 53.08,
+      "end": 56.68,
+      "text": "Do you have a sense of when that started changing?",
+      "speaker": "A"
+    },
+    {
+      "id": 17,
+      "start": 56.68,
+      "end": 61.92,
+      "text": "I think it crept up slowly, honestly, over the last two quarters.",
+      "speaker": "B"
+    },
+    {
+      "id": 18,
+      "start": 61.92,
+      "end": 68.08,
+      "text": "It wasn't one bad week, it was more like each month got a little heavier than the last.",
+      "speaker": "B"
+    },
+    {
+      "id": 19,
+      "start": 68.08,
+      "end": 71.96,
+      "text": "Has it affected how you're able to focus during the day?",
+      "speaker": "A"
+    },
+    {
+      "id": 20,
+      "start": 71.96,
+      "end": 73.36,
+      "text": "Definitely.",
+      "speaker": "B"
+    },
+    {
+      "id": 21,
+      "start": 73.36,
+      "end": 77.96,
+      "text": "I can't focus on anything anymore, not even simple stuff.",
+      "speaker": "B"
+    },
+    {
+      "id": 22,
+      "start": 77.96,
+      "end": 82.92,
+      "text": "I'll sit down to write an email and just stare at it for ten minutes.",
+      "speaker": "B"
+    },
+    {
+      "id": 23,
+      "start": 82.92,
+      "end": 87.36,
+      "text": "It sounds exhausting in a different way than just being tired.",
+      "speaker": "A"
+    },
+    {
+      "id": 24,
+      "start": 87.36,
+      "end": 88.6,
+      "text": "It is.",
+      "speaker": "B"
+    },
+    {
+      "id": 25,
+      "start": 88.6,
+      "end": 93.4,
+      "text": "I'm running on empty most afternoons, and I end up redoing work the next morning that",
+      "speaker": "B"
+    },
+    {
+      "id": 26,
+      "start": 93.4,
+      "end": 98.68,
+      "text": "I know I did wrong the day before, just because my head wasn't in it.",
+      "speaker": "B"
+    },
+    {
+      "id": 27,
+      "start": 98.68,
+      "end": 104.4,
+      "text": "I want to name this directly, because I think it matters that we call it what it is.",
+      "speaker": "A"
+    },
+    {
+      "id": 28,
+      "start": 104.4,
+      "end": 110.12,
+      "text": "What you're describing sounds a lot like employee burnout, and I don't say that lightly.",
+      "speaker": "A"
+    },
+    {
+      "id": 29,
+      "start": 110.12,
+      "end": 111.64,
+      "text": "Yet.",
+      "speaker": "B"
+    },
+    {
+      "id": 30,
+      "start": 111.64,
+      "end": 115.8,
+      "text": "Honestly hearing you say the word out loud is a little bit of a relief.",
+      "speaker": "B"
+    },
+    {
+      "id": 31,
+      "start": 115.8,
+      "end": 120.36,
+      "text": "I've been avoiding saying it myself, like it would sound like I'm not capable of doing",
+      "speaker": "B"
+    },
+    {
+      "id": 32,
+      "start": 120.36,
+      "end": 122.44,
+      "text": "my job.",
+      "speaker": "B"
+    },
+    {
+      "id": 33,
+      "start": 122.44,
+      "end": 124.72,
+      "text": "It doesn't mean that at all.",
+      "speaker": "A"
+    },
+    {
+      "id": 34,
+      "start": 124.72,
+      "end": 129.32,
+      "text": "It usually means the opposite, that someone cared enough to keep pushing past the point",
+      "speaker": "A"
+    },
+    {
+      "id": 35,
+      "start": 129.32,
+      "end": 131.84,
+      "text": "they should have stopped.",
+      "speaker": "A"
+    },
+    {
+      "id": 36,
+      "start": 131.84,
+      "end": 134.4,
+      "text": "That makes sense, I guess.",
+      "speaker": "B"
+    },
+    {
+      "id": 37,
+      "start": 134.4,
+      "end": 139.28,
+      "text": "I have been taking on a lot the last few months, the meridian account, the onboarding",
+      "speaker": "B"
+    },
+    {
+      "id": 38,
+      "start": 139.28,
+      "end": 143.76,
+      "text": "docs rewrite, and then covering for pre a while she was out.",
+      "speaker": "B"
+    },
+    {
+      "id": 39,
+      "start": 143.76,
+      "end": 149.52,
+      "text": "Right, and that's three fairly demanding things stacked on top of your regular workload,",
+      "speaker": "A"
+    },
+    {
+      "id": 40,
+      "start": 149.52,
+      "end": 152.68,
+      "text": "not spread out, just stacked.",
+      "speaker": "A"
+    },
+    {
+      "id": 41,
+      "start": 152.68,
+      "end": 154.32,
+      "text": "Exactly.",
+      "speaker": "B"
+    },
+    {
+      "id": 42,
+      "start": 154.32,
+      "end": 158.8,
+      "text": "And I didn't want to say no to any of it, because it felt like everyone else was busy",
+      "speaker": "B"
+    },
+    {
+      "id": 43,
+      "start": 158.8,
+      "end": 160.48,
+      "text": "too.",
+      "speaker": "B"
+    },
+    {
+      "id": 44,
+      "start": 160.48,
+      "end": 165.28,
+      "text": "I hear that a lot, and it's usually a sign that workload conversations aren't happening",
+      "speaker": "A"
+    },
+    {
+      "id": 45,
+      "start": 165.28,
+      "end": 167.08,
+      "text": "early enough.",
+      "speaker": "A"
+    },
+    {
+      "id": 46,
+      "start": 167.08,
+      "end": 172.56,
+      "text": "So let's talk about what can actually change, not just how you're feeling about it.",
+      "speaker": "A"
+    },
+    {
+      "id": 47,
+      "start": 172.56,
+      "end": 175.32,
+      "text": "Okay, that would help.",
+      "speaker": "B"
+    },
+    {
+      "id": 48,
+      "start": 175.32,
+      "end": 180.48,
+      "text": "I don't want this to just be a conversation where event and nothing shifts afterward.",
+      "speaker": "B"
+    },
+    {
+      "id": 49,
+      "start": 180.48,
+      "end": 184.36,
+      "text": "Fair, and I don't want that either.",
+      "speaker": "A"
+    },
+    {
+      "id": 50,
+      "start": 184.36,
+      "end": 188.96,
+      "text": "First thing, the meridian account, is there a piece of that you could hand off to someone",
+      "speaker": "A"
+    },
+    {
+      "id": 51,
+      "start": 188.96,
+      "end": 191.64,
+      "text": "else on the team?",
+      "speaker": "A"
+    },
+    {
+      "id": 52,
+      "start": 191.64,
+      "end": 193.72,
+      "text": "Probably the reporting piece.",
+      "speaker": "B"
+    },
+    {
+      "id": 53,
+      "start": 193.72,
+      "end": 198.6,
+      "text": "Marcus has done similar reporting for other clients, he could probably pick that up without",
+      "speaker": "B"
+    },
+    {
+      "id": 54,
+      "start": 198.6,
+      "end": 200.68,
+      "text": "much ramp up time.",
+      "speaker": "B"
+    },
+    {
+      "id": 55,
+      "start": 200.68,
+      "end": 204.28,
+      "text": "Good, I'll talk to him this week.",
+      "speaker": "A"
+    },
+    {
+      "id": 56,
+      "start": 204.28,
+      "end": 208.64,
+      "text": "What about the onboarding docs rewrite, is there a real deadline on that or is it more",
+      "speaker": "A"
+    },
+    {
+      "id": 57,
+      "start": 208.64,
+      "end": 210.8,
+      "text": "of a nice to have right now?",
+      "speaker": "A"
+    },
+    {
+      "id": 58,
+      "start": 210.8,
+      "end": 214.0,
+      "text": "Honestly it's more of a nice to have.",
+      "speaker": "B"
+    },
+    {
+      "id": 59,
+      "start": 214.0,
+      "end": 218.92,
+      "text": "I put pressure on myself to finish it by end of quarter, but nobody actually asked",
+      "speaker": "B"
+    },
+    {
+      "id": 60,
+      "start": 218.92,
+      "end": 221.52,
+      "text": "for that timeline.",
+      "speaker": "B"
+    },
+    {
+      "id": 61,
+      "start": 221.52,
+      "end": 226.72,
+      "text": "Let's push that out by a month then, officially, so it's off your plate as an active source",
+      "speaker": "A"
+    },
+    {
+      "id": 62,
+      "start": 226.72,
+      "end": 228.84,
+      "text": "of pressure.",
+      "speaker": "A"
+    },
+    {
+      "id": 63,
+      "start": 228.84,
+      "end": 232.88,
+      "text": "That alone would help a lot, just knowing it's not sitting there as an overdue thing",
+      "speaker": "B"
+    },
+    {
+      "id": 64,
+      "start": 232.88,
+      "end": 235.4,
+      "text": "in the back of my mind.",
+      "speaker": "B"
+    },
+    {
+      "id": 65,
+      "start": 235.4,
+      "end": 236.88,
+      "text": "Good.",
+      "speaker": "A"
+    },
+    {
+      "id": 66,
+      "start": 236.88,
+      "end": 241.56,
+      "text": "And covering for Priya, she's back now, right?",
+      "speaker": "A"
+    },
+    {
+      "id": 67,
+      "start": 241.56,
+      "end": 246.88,
+      "text": "She's back, yet, but I've kept doing a couple of her weekly reports out of habit,",
+      "speaker": "B"
+    },
+    {
+      "id": 68,
+      "start": 246.88,
+      "end": 251.28,
+      "text": "honestly, because I never formally handed them back.",
+      "speaker": "B"
+    },
+    {
+      "id": 69,
+      "start": 251.28,
+      "end": 253.0,
+      "text": "Let's fix that today.",
+      "speaker": "A"
+    },
+    {
+      "id": 70,
+      "start": 253.0,
+      "end": 257.32,
+      "text": "I'll message her and make sure that hand back actually happens instead of just assuming",
+      "speaker": "A"
+    },
+    {
+      "id": 71,
+      "start": 257.32,
+      "end": 259.44,
+      "text": "it will.",
+      "speaker": "A"
+    },
+    {
+      "id": 72,
+      "start": 259.44,
+      "end": 260.68,
+      "text": "Thank you.",
+      "speaker": "B"
+    },
+    {
+      "id": 73,
+      "start": 260.68,
+      "end": 265.4,
+      "text": "It sounds small when I say it out loud, but that's probably four or five hours a week",
+      "speaker": "B"
+    },
+    {
+      "id": 74,
+      "start": 265.4,
+      "end": 267.88,
+      "text": "I could get back.",
+      "speaker": "B"
+    },
+    {
+      "id": 75,
+      "start": 267.88,
+      "end": 271.64,
+      "text": "That's not small at all, that's more than half a workday.",
+      "speaker": "A"
+    },
+    {
+      "id": 76,
+      "start": 271.64,
+      "end": 277.32,
+      "text": "Now, beyond redistributing tasks, how are you doing outside of work, are you",
+      "speaker": "A"
+    },
+    {
+      "id": 77,
+      "start": 277.32,
+      "end": 280.4,
+      "text": "getting any real time off?",
+      "speaker": "A"
+    },
+    {
+      "id": 78,
+      "start": 280.4,
+      "end": 281.64,
+      "text": "Not really.",
+      "speaker": "B"
+    },
+    {
+      "id": 79,
+      "start": 281.64,
+      "end": 287.28,
+      "text": "I have vacation days sitting unused, and every time I think about booking something, I convince",
+      "speaker": "B"
+    },
+    {
+      "id": 80,
+      "start": 287.28,
+      "end": 290.28,
+      "text": "myself it's a bad time.",
+      "speaker": "B"
+    },
+    {
+      "id": 81,
+      "start": 290.28,
+      "end": 294.64,
+      "text": "There's never going to be a perfect time, that's kind of the trap.",
+      "speaker": "A"
+    },
+    {
+      "id": 82,
+      "start": 294.64,
+      "end": 299.88,
+      "text": "I'd like you to actually put in for at least a few days in the next month.",
+      "speaker": "A"
+    },
+    {
+      "id": 83,
+      "start": 299.88,
+      "end": 301.88,
+      "text": "I can do that.",
+      "speaker": "B"
+    },
+    {
+      "id": 84,
+      "start": 301.88,
+      "end": 306.04,
+      "text": "Honestly having someone tell me to just do it helps, because on my own I keep",
+      "speaker": "B"
+    },
+    {
+      "id": 85,
+      "start": 306.04,
+      "end": 309.2,
+      "text": "deprioritizing myself.",
+      "speaker": "B"
+    },
+    {
+      "id": 86,
+      "start": 309.2,
+      "end": 313.84,
+      "text": "That's really common, and it's part of why this conversation matters.",
+      "speaker": "A"
+    },
+    {
+      "id": 87,
+      "start": 313.84,
+      "end": 320.6,
+      "text": "I also want to check in on how you're sleeping, since that usually ties into all of this.",
+      "speaker": "A"
+    },
+    {
+      "id": 88,
+      "start": 320.6,
+      "end": 321.84,
+      "text": "Not well.",
+      "speaker": "B"
+    },
+    {
+      "id": 89,
+      "start": 321.84,
+      "end": 326.12,
+      "text": "I wake up around four most mornings with my mind already running through a list of things",
+      "speaker": "B"
+    },
+    {
+      "id": 90,
+      "start": 326.12,
+      "end": 328.48,
+      "text": "I haven't done.",
+      "speaker": "B"
+    },
+    {
+      "id": 91,
+      "start": 328.48,
+      "end": 332.2,
+      "text": "That's a hard way to start a day before it's even begun.",
+      "speaker": "A"
+    },
+    {
+      "id": 92,
+      "start": 332.2,
+      "end": 337.08,
+      "text": "Would you be open to talking to someone through the employee assistance program, just to have",
+      "speaker": "A"
+    },
+    {
+      "id": 93,
+      "start": 337.08,
+      "end": 341.48,
+      "text": "extra support outside of what we can fix here at work?",
+      "speaker": "A"
+    },
+    {
+      "id": 94,
+      "start": 341.48,
+      "end": 344.16,
+      "text": "I think I would, actually.",
+      "speaker": "B"
+    },
+    {
+      "id": 95,
+      "start": 344.16,
+      "end": 348.96,
+      "text": "I looked at that page once and then closed the tab, but hearing you suggest it directly",
+      "speaker": "B"
+    },
+    {
+      "id": 96,
+      "start": 348.96,
+      "end": 352.68,
+      "text": "makes it feel less like an overreaction.",
+      "speaker": "B"
+    },
+    {
+      "id": 97,
+      "start": 352.68,
+      "end": 357.32,
+      "text": "It's not an overreaction at all, it's exactly what that program is for.",
+      "speaker": "A"
+    },
+    {
+      "id": 98,
+      "start": 357.76,
+      "end": 362.92,
+      "text": "I'll send you the direct link after this so you don't have to go dig for it.",
+      "speaker": "A"
+    },
+    {
+      "id": 99,
+      "start": 362.92,
+      "end": 365.28,
+      "text": "That would help, thanks.",
+      "speaker": "B"
+    },
+    {
+      "id": 100,
+      "start": 365.28,
+      "end": 370.52,
+      "text": "I appreciate you not making this feel like a performance conversation.",
+      "speaker": "B"
+    },
+    {
+      "id": 101,
+      "start": 370.52,
+      "end": 372.6,
+      "text": "It absolutely isn't.",
+      "speaker": "A"
+    },
+    {
+      "id": 102,
+      "start": 372.6,
+      "end": 377.32,
+      "text": "Your work has been strong, that's actually part of the problem, you've been quietly",
+      "speaker": "A"
+    },
+    {
+      "id": 103,
+      "start": 377.32,
+      "end": 380.6,
+      "text": "absorbing more than anyone noticed.",
+      "speaker": "A"
+    },
+    {
+      "id": 104,
+      "start": 380.6,
+      "end": 384.36,
+      "text": "I guess I'm good at hiding it until I'm not.",
+      "speaker": "B"
+    },
+    {
+      "id": 105,
+      "start": 384.36,
+      "end": 387.64,
+      "text": "Let's make sure it doesn't get to that point again.",
+      "speaker": "A"
+    },
+    {
+      "id": 106,
+      "start": 387.64,
+      "end": 392.52,
+      "text": "Can we plan a shorter follow-up in two weeks, just to see how the handoffs are going and",
+      "speaker": "A"
+    },
+    {
+      "id": 107,
+      "start": 392.52,
+      "end": 394.24,
+      "text": "how you're feeling?",
+      "speaker": "A"
+    },
+    {
+      "id": 108,
+      "start": 394.24,
+      "end": 397.2,
+      "text": "Yeah, I'd like that.",
+      "speaker": "B"
+    },
+    {
+      "id": 109,
+      "start": 397.2,
+      "end": 402.64,
+      "text": "It's nice to have a specific date instead of just hoping things get better on their own.",
+      "speaker": "B"
+    },
+    {
+      "id": 110,
+      "start": 402.64,
+      "end": 404.08,
+      "text": "Agreed.",
+      "speaker": "A"
+    },
+    {
+      "id": 111,
+      "start": 404.08,
+      "end": 409.8,
+      "text": "And please, if it gets worse before then, don't wait for the schedule check-in, just message",
+      "speaker": "A"
+    },
+    {
+      "id": 112,
+      "start": 409.8,
+      "end": 411.92,
+      "text": "me directly.",
+      "speaker": "A"
+    },
+    {
+      "id": 113,
+      "start": 411.92,
+      "end": 413.56,
+      "text": "I will.",
+      "speaker": "B"
+    },
+    {
+      "id": 114,
+      "start": 413.56,
+      "end": 417.0,
+      "text": "Thank you for actually noticing before I said anything.",
+      "speaker": "B"
+    },
+    {
+      "id": 115,
+      "start": 417.0,
+      "end": 420.92,
+      "text": "I think I would have kept pushing through otherwise.",
+      "speaker": "B"
+    },
+    {
+      "id": 116,
+      "start": 420.92,
+      "end": 423.04,
+      "text": "That's what I'm here for.",
+      "speaker": "A"
+    },
+    {
+      "id": 117,
+      "start": 423.04,
+      "end": 426.72,
+      "text": "Let's get you some breathing room and go from there.",
+      "speaker": "A"
+    },
+    {
+      "id": 118,
+      "start": 426.72,
+      "end": 431.84,
+      "text": "Can I ask, does this happen a lot on the team, people getting to this point without saying",
+      "speaker": "B"
+    },
+    {
+      "id": 119,
+      "start": 431.84,
+      "end": 433.8,
+      "text": "anything?",
+      "speaker": "B"
+    },
+    {
+      "id": 120,
+      "start": 433.8,
+      "end": 436.4,
+      "text": "More than I'd like, honestly.",
+      "speaker": "A"
+    },
+    {
+      "id": 121,
+      "start": 436.4,
+      "end": 440.56,
+      "text": "I think our culture rewards saying yes to everything, and that's on leadership",
+      "speaker": "A"
+    },
+    {
+      "id": 122,
+      "start": 440.56,
+      "end": 445.4,
+      "text": "to fix, not on individuals to just cope with better.",
+      "speaker": "A"
+    },
+    {
+      "id": 123,
+      "start": 445.4,
+      "end": 447.92,
+      "text": "That's good to hear you say.",
+      "speaker": "B"
+    },
+    {
+      "id": 124,
+      "start": 447.92,
+      "end": 453.12,
+      "text": "Sometimes it feels like the expectation is to just push through no matter what.",
+      "speaker": "B"
+    },
+    {
+      "id": 125,
+      "start": 453.12,
+      "end": 454.72,
+      "text": "It shouldn't be.",
+      "speaker": "A"
+    },
+    {
+      "id": 126,
+      "start": 454.72,
+      "end": 459.84,
+      "text": "If I notice this pattern with you, I want to look at the broader teamwork load too, because",
+      "speaker": "A"
+    },
+    {
+      "id": 127,
+      "start": 459.84,
+      "end": 464.36,
+      "text": "you're probably not the only one quietly stretched thin.",
+      "speaker": "A"
+    },
+    {
+      "id": 128,
+      "start": 464.36,
+      "end": 470.0,
+      "text": "Priya mentioned something similar a few weeks ago, actually, before she went out.",
+      "speaker": "B"
+    },
+    {
+      "id": 129,
+      "start": 470.0,
+      "end": 473.56,
+      "text": "I didn't put it together until just now.",
+      "speaker": "B"
+    },
+    {
+      "id": 130,
+      "start": 473.56,
+      "end": 477.44,
+      "text": "That's useful context, thank you for mentioning it.",
+      "speaker": "A"
+    },
+    {
+      "id": 131,
+      "start": 477.44,
+      "end": 482.0,
+      "text": "I might bring up workload distribution at the next team-lead meeting without naming anyone",
+      "speaker": "A"
+    },
+    {
+      "id": 132,
+      "start": 482.0,
+      "end": 484.28,
+      "text": "specifically.",
+      "speaker": "A"
+    },
+    {
+      "id": 133,
+      "start": 484.28,
+      "end": 486.56,
+      "text": "That sounds like a good idea.",
+      "speaker": "B"
+    },
+    {
+      "id": 134,
+      "start": 486.56,
+      "end": 491.96,
+      "text": "I think a lot of people would feel relief just hearing it acknowledged out loud.",
+      "speaker": "B"
+    },
+    {
+      "id": 135,
+      "start": 491.96,
+      "end": 493.84,
+      "text": "Let's start there then.",
+      "speaker": "A"
+    },
+    {
+      "id": 136,
+      "start": 493.84,
+      "end": 499.0,
+      "text": "In the meantime, take care of yourself this week, and actually block off time on your",
+      "speaker": "A"
+    },
+    {
+      "id": 137,
+      "start": 499.0,
+      "end": 503.56,
+      "text": "calendar for lunch, not just meetings back to back.",
+      "speaker": "A"
+    },
+    {
+      "id": 138,
+      "start": 503.56,
+      "end": 505.16,
+      "text": "I'll do that.",
+      "speaker": "B"
+    },
+    {
+      "id": 139,
+      "start": 505.16,
+      "end": 510.72,
+      "text": "Thanks again, seriously, this helped more than I expected it to.",
+      "speaker": "B"
+    },
+    {
+      "id": 140,
+      "start": 510.72,
+      "end": 512.16,
+      "text": "Anytime.",
+      "speaker": "A"
+    },
+    {
+      "id": 141,
+      "start": 512.16,
+      "end": 512.84,
+      "text": "Talk soon.",
+      "speaker": "A"
+    }
+  ]
+}

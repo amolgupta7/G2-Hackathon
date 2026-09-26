@@ -1,0 +1,594 @@
+{
+  "recording": "rec03_sales_pricing",
+  "chunks": [
+    {
+      "chunk_index": 0,
+      "speaker": "A",
+      "start": 0.0,
+      "end": 8.48,
+      "text": "Thanks for hopping on again, I know we've been going back and forth over email, so I figured a call would move things faster.",
+      "segment_ids": [
+        1
+      ]
+    },
+    {
+      "chunk_index": 1,
+      "speaker": "B",
+      "start": 8.48,
+      "end": 17.84,
+      "text": "Yeah, agreed. My finance team has been asking me for a final number, so I'd like to land on something today if we can.",
+      "segment_ids": [
+        2,
+        3
+      ]
+    },
+    {
+      "chunk_index": 2,
+      "speaker": "A",
+      "start": 17.84,
+      "end": 29.16,
+      "text": "Perfect, let's do that. So last time we talked, you were looking at the growth plan for around 40 seats. Is that still the right ballpark?",
+      "segment_ids": [
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "chunk_index": 3,
+      "speaker": "B",
+      "start": 29.16,
+      "end": 37.96,
+      "text": "It's actually closer to 35 now, we had a couple of rolls get consolidated. But yeah, similar range.",
+      "segment_ids": [
+        7,
+        8
+      ]
+    },
+    {
+      "chunk_index": 4,
+      "speaker": "A",
+      "start": 37.96,
+      "end": 47.48,
+      "text": "Okay, that's helpful to know. At 35 seats on the growth plan, list price comes out to $12,000 a year.",
+      "segment_ids": [
+        9,
+        10
+      ]
+    },
+    {
+      "chunk_index": 5,
+      "speaker": "B",
+      "start": 47.48,
+      "end": 55.84,
+      "text": "Right, and I'll be honest with you, that's a tough number for us to justify right now, given where our budget is this quarter.",
+      "segment_ids": [
+        11
+      ]
+    },
+    {
+      "chunk_index": 6,
+      "speaker": "A",
+      "start": 55.92,
+      "end": 67.36,
+      "text": "I appreciate you being direct about that. Can you tell me more about what's driving the constraint, is it a hard budget cap, or more about proving value first?",
+      "segment_ids": [
+        12,
+        13
+      ]
+    },
+    {
+      "chunk_index": 7,
+      "speaker": "B",
+      "start": 67.36,
+      "end": 77.12,
+      "text": "A bit of both, honestly. We got burned last year by a tool we rolled out company-wide that maybe 40% of people actually used.",
+      "segment_ids": [
+        14,
+        15
+      ]
+    },
+    {
+      "chunk_index": 8,
+      "speaker": "A",
+      "start": 77.12,
+      "end": 85.76,
+      "text": "That makes sense, and I don't want to be that story for you. What would it take for you to feel confident this is different?",
+      "segment_ids": [
+        16,
+        17
+      ]
+    },
+    {
+      "chunk_index": 9,
+      "speaker": "B",
+      "start": 85.76,
+      "end": 94.8,
+      "text": "I think if we could start smaller, prove it out with one department, then talk about scaling up, that would be an easier sell internally.",
+      "segment_ids": [
+        18
+      ]
+    },
+    {
+      "chunk_index": 10,
+      "speaker": "A",
+      "start": 94.8,
+      "end": 106.36,
+      "text": "We can absolutely structure it that way. What if we started with 15 seats for the first two quarters, and built in an option to expand once you've seen adoption numbers?",
+      "segment_ids": [
+        19,
+        20
+      ]
+    },
+    {
+      "chunk_index": 11,
+      "speaker": "B",
+      "start": 106.36,
+      "end": 111.32,
+      "text": "That's more workable. What would 15 seats run us?",
+      "segment_ids": [
+        21,
+        22
+      ]
+    },
+    {
+      "chunk_index": 12,
+      "speaker": "A",
+      "start": 111.32,
+      "end": 120.04,
+      "text": "At 15 seats, you're looking at around $5,200 for that period, prorated from the annual rate.",
+      "segment_ids": [
+        23
+      ]
+    },
+    {
+      "chunk_index": 13,
+      "speaker": "B",
+      "start": 120.04,
+      "end": 128.0,
+      "text": "Okay, that's more digestible. Is there any flexibility on that number, or is that pretty firm?",
+      "segment_ids": [
+        24,
+        25
+      ]
+    },
+    {
+      "chunk_index": 14,
+      "speaker": "A",
+      "start": 128.0,
+      "end": 140.4,
+      "text": "There's some room. Since you're committing to expand later rather than just doing a short trial, I can get you a discount on the initial 15 seats, something like 15% off.",
+      "segment_ids": [
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "chunk_index": 15,
+      "speaker": "B",
+      "start": 140.4,
+      "end": 147.0,
+      "text": "15% gets us to, what, around $4,400 for the initial period?",
+      "segment_ids": [
+        29
+      ]
+    },
+    {
+      "chunk_index": 16,
+      "speaker": "A",
+      "start": 147.0,
+      "end": 158.04,
+      "text": "Close, $4,420, if we're being precise. And that discount would carry forward proportionally if you expand to the full 35 seats later.",
+      "segment_ids": [
+        30,
+        31
+      ]
+    },
+    {
+      "chunk_index": 17,
+      "speaker": "B",
+      "start": 158.04,
+      "end": 170.04,
+      "text": "That's a meaningful difference actually. Let me ask about something else, what does the contract structure look like after this initial period, are we locked into a full year right away?",
+      "segment_ids": [
+        32,
+        33
+      ]
+    },
+    {
+      "chunk_index": 18,
+      "speaker": "A",
+      "start": 170.04,
+      "end": 183.44,
+      "text": "Good question. Standard structure is an annual agreement with a quarterly renewal checkpoint, so even though it's a 12 month contract, we review usage and adjust seat count with you every quarter.",
+      "segment_ids": [
+        34,
+        35
+      ]
+    },
+    {
+      "chunk_index": 19,
+      "speaker": "B",
+      "start": 183.44,
+      "end": 189.92,
+      "text": "So the quarterly renewal is more like a checkpoint, not a full renegotiation each time?",
+      "segment_ids": [
+        36
+      ]
+    },
+    {
+      "chunk_index": 20,
+      "speaker": "A",
+      "start": 189.92,
+      "end": 203.48,
+      "text": "Exactly, think of it as we sit down every quarter, look at actual usage, and true up the seat count. If people aren't using it, we're not going to pretend that's fine and let you overpay.",
+      "segment_ids": [
+        37,
+        38
+      ]
+    },
+    {
+      "chunk_index": 21,
+      "speaker": "B",
+      "start": 203.48,
+      "end": 212.12,
+      "text": "I like that a lot better than a full annual commitment with no flexibility. That was honestly one of my bigger concerns going in.",
+      "segment_ids": [
+        39,
+        40
+      ]
+    },
+    {
+      "chunk_index": 22,
+      "speaker": "A",
+      "start": 212.12,
+      "end": 222.2,
+      "text": "Totally fair concern to have, especially given what happened with that other tool. Nobody wants to sign something rigid for a whole year on a bet.",
+      "segment_ids": [
+        41,
+        42
+      ]
+    },
+    {
+      "chunk_index": 23,
+      "speaker": "B",
+      "start": 222.2,
+      "end": 236.44,
+      "text": "Right. Okay, so walking through this, 15 seats, discounted rate, quarterly renewal checkpoints? What happens if after two quarters we decide it's just not working for us?",
+      "segment_ids": [
+        43,
+        44,
+        45
+      ]
+    },
+    {
+      "chunk_index": 24,
+      "speaker": "A",
+      "start": 236.44,
+      "end": 249.68,
+      "text": "If usage is genuinely low and it's not a fit, you can scale down or exit at the next quarterly checkpoint without penalty. We'd rather have an honest conversation than trap you in something you don't want.",
+      "segment_ids": [
+        46,
+        47
+      ]
+    },
+    {
+      "chunk_index": 25,
+      "speaker": "B",
+      "start": 249.68,
+      "end": 258.16,
+      "text": "That's reassuring to hear directly, because sometimes the fine print says something different than what the sales conversation implies.",
+      "segment_ids": [
+        48
+      ]
+    },
+    {
+      "chunk_index": 26,
+      "speaker": "A",
+      "start": 258.16,
+      "end": 272.4,
+      "text": "I get why you'd be cautious about that. I'll make sure the actual contract language matches exactly what I just told you, and I'm happy to have our legal team send you the relevant clause highlighted before you sign anything.",
+      "segment_ids": [
+        49,
+        50
+      ]
+    },
+    {
+      "chunk_index": 27,
+      "speaker": "B",
+      "start": 272.44,
+      "end": 282.76,
+      "text": "I'd appreciate that. Okay, let's say we move forward with the 15 seat pilot. What's the onboarding timeline usually look like?",
+      "segment_ids": [
+        51,
+        52,
+        53
+      ]
+    },
+    {
+      "chunk_index": 28,
+      "speaker": "A",
+      "start": 282.76,
+      "end": 293.84,
+      "text": "Typically about two weeks from signature to full rollout. We assign a dedicated onboarding specialist, and there's a kickoff call within the first three business days.",
+      "segment_ids": [
+        54,
+        55
+      ]
+    },
+    {
+      "chunk_index": 29,
+      "speaker": "B",
+      "start": 293.84,
+      "end": 299.48,
+      "text": "And training for the team, is that included, or is that a separate cost?",
+      "segment_ids": [
+        56
+      ]
+    },
+    {
+      "chunk_index": 30,
+      "speaker": "A",
+      "start": 299.48,
+      "end": 307.2,
+      "text": "Included at the stair, up to two live training sessions plus recorded materials your team can revisit later.",
+      "segment_ids": [
+        57
+      ]
+    },
+    {
+      "chunk_index": 31,
+      "speaker": "B",
+      "start": 307.2,
+      "end": 316.36,
+      "text": "That's good, that addresses another concern, since low adoption last time was partly because nobody really trained people properly.",
+      "segment_ids": [
+        58
+      ]
+    },
+    {
+      "chunk_index": 32,
+      "speaker": "A",
+      "start": 316.36,
+      "end": 327.2,
+      "text": "Yeah, that's a common failure mode honestly, the tool itself is rarely the actual problem, it's usually that nobody showed people how it fits into their day.",
+      "segment_ids": [
+        59
+      ]
+    },
+    {
+      "chunk_index": 33,
+      "speaker": "B",
+      "start": 327.24,
+      "end": 338.6,
+      "text": "That tracks with what I saw last year. Okay, one more thing, payment terms, can we do quarterly billing instead of paying the whole initial amount up front?",
+      "segment_ids": [
+        60,
+        61
+      ]
+    },
+    {
+      "chunk_index": 34,
+      "speaker": "A",
+      "start": 338.6,
+      "end": 350.56,
+      "text": "We can do that. Quarterly billing on the pilot amount is fine, it just means the discount is applied evenly across each billing cycle rather than as one lump reduction up front.",
+      "segment_ids": [
+        62,
+        63
+      ]
+    },
+    {
+      "chunk_index": 35,
+      "speaker": "B",
+      "start": 350.56,
+      "end": 362.52,
+      "text": "That works better for our cash flow honestly. Alright, I think I have what I need to bring back to finance. Can you send over a written summary of everything we just covered?",
+      "segment_ids": [
+        64,
+        65,
+        66
+      ]
+    },
+    {
+      "chunk_index": 36,
+      "speaker": "A",
+      "start": 362.52,
+      "end": 375.8,
+      "text": "Absolutely, I'll get that to you by end of day, 15 seats, the discounted rate, quarterly billing, quarterly renewal checkpoints, and the expansion path to 35 seats.",
+      "segment_ids": [
+        67
+      ]
+    },
+    {
+      "chunk_index": 37,
+      "speaker": "B",
+      "start": 375.8,
+      "end": 385.68,
+      "text": "Perfect. If finance signs off, which I think they will give in the smaller starting number, how fast could we actually get this signed?",
+      "segment_ids": [
+        68,
+        69
+      ]
+    },
+    {
+      "chunk_index": 38,
+      "speaker": "A",
+      "start": 385.68,
+      "end": 395.68,
+      "text": "Once you have the summary, I can turn around a contract draft within a day, and if everything looks right, we could have signatures by the end of the week.",
+      "segment_ids": [
+        70
+      ]
+    },
+    {
+      "chunk_index": 39,
+      "speaker": "B",
+      "start": 395.68,
+      "end": 403.32,
+      "text": "That would be great, honestly faster than I expected given how cautious we've had to be about vendor commitments recently.",
+      "segment_ids": [
+        71
+      ]
+    },
+    {
+      "chunk_index": 40,
+      "speaker": "A",
+      "start": 403.4,
+      "end": 417.32,
+      "text": "I completely understand the caution, especially after a bad experience with the previous tool. I'd rather earn the full 35 seats over a couple quarters than oversell you today and lose the relationship later.",
+      "segment_ids": [
+        72,
+        73
+      ]
+    },
+    {
+      "chunk_index": 41,
+      "speaker": "B",
+      "start": 417.32,
+      "end": 425.92,
+      "text": "I appreciate that approach, it's part of why I wanted to keep talking instead of just walking away when the first number felt too high.",
+      "segment_ids": [
+        74
+      ]
+    },
+    {
+      "chunk_index": 42,
+      "speaker": "A",
+      "start": 425.92,
+      "end": 435.6,
+      "text": "Glad we found something that works for both sides. I'll get that summary over shortly, and we can regroup once finance has had a look.",
+      "segment_ids": [
+        75,
+        76
+      ]
+    },
+    {
+      "chunk_index": 43,
+      "speaker": "B",
+      "start": 435.6,
+      "end": 438.8,
+      "text": "Sounds good, talk soon.",
+      "segment_ids": [
+        77
+      ]
+    },
+    {
+      "chunk_index": 44,
+      "speaker": "A",
+      "start": 438.8,
+      "end": 452.36,
+      "text": "Actually, before you go, one thing I forgot to mention, if you do decide to expand to the full 35 seats before the two quarters are up, there's an additional loyalty discount for early expansion.",
+      "segment_ids": [
+        78
+      ]
+    },
+    {
+      "chunk_index": 45,
+      "speaker": "B",
+      "start": 452.36,
+      "end": 455.76,
+      "text": "Oh, how much are we talking there?",
+      "segment_ids": [
+        79
+      ]
+    },
+    {
+      "chunk_index": 46,
+      "speaker": "A",
+      "start": 455.76,
+      "end": 467.24,
+      "text": "An extra 5% on top of the 15 you're already getting, so 20% total off the annual rate if you expand within the pilot window instead of waiting for the checkpoint.",
+      "segment_ids": [
+        80
+      ]
+    },
+    {
+      "chunk_index": 47,
+      "speaker": "B",
+      "start": 467.24,
+      "end": 478.56,
+      "text": "That's a nice incentive. I could see us getting there sooner than two quarters if the first department responds well, some of our other team leads have already been asking about it.",
+      "segment_ids": [
+        81,
+        82
+      ]
+    },
+    {
+      "chunk_index": 48,
+      "speaker": "A",
+      "start": 478.56,
+      "end": 491.2,
+      "text": "That's great to hear, word of mouth internally is usually a strong signal. Just flag it to me whenever that conversation starts so we can lock in the early expansion rate before it lapses.",
+      "segment_ids": [
+        83,
+        84
+      ]
+    },
+    {
+      "chunk_index": 49,
+      "speaker": "B",
+      "start": 491.2,
+      "end": 499.48,
+      "text": "Will do. Also, quick question, is there a limit on support tickets or is that unlimited at this tier?",
+      "segment_ids": [
+        85,
+        86
+      ]
+    },
+    {
+      "chunk_index": 50,
+      "speaker": "A",
+      "start": 499.48,
+      "end": 509.24,
+      "text": "Unlimited support tickets at this tier, with a same day response target on anything marked urgent, and next business day on standard requests.",
+      "segment_ids": [
+        87
+      ]
+    },
+    {
+      "chunk_index": 51,
+      "speaker": "B",
+      "start": 509.32,
+      "end": 517.68,
+      "text": "Good, that matters to us, the last tool we used had a support tier that basically didn't respond for a week half the time.",
+      "segment_ids": [
+        88
+      ]
+    },
+    {
+      "chunk_index": 52,
+      "speaker": "A",
+      "start": 517.68,
+      "end": 528.32,
+      "text": "Yeah, that's frustrating, and honestly it kills adoption fast if people hit a wall early and can't get help. We take that pretty seriously here.",
+      "segment_ids": [
+        89,
+        90
+      ]
+    },
+    {
+      "chunk_index": 53,
+      "speaker": "B",
+      "start": 528.32,
+      "end": 540.4,
+      "text": "Good to know. Alright, I really do need to jump to another call, but this was helpful, thank you for working through the numbers with me instead of just holding firm on the list price.",
+      "segment_ids": [
+        91,
+        92
+      ]
+    },
+    {
+      "chunk_index": 54,
+      "speaker": "A",
+      "start": 540.4,
+      "end": 547.8,
+      "text": "Of course, that's the job. I'll get that summary to you within the hour, and we'll go from there.",
+      "segment_ids": [
+        93,
+        94
+      ]
+    }
+  ]
+}

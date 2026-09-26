@@ -1,0 +1,573 @@
+{
+  "recording": "rec03_sales_pricing",
+  "model": "small",
+  "audio_duration_s": 548.0,
+  "asr_seconds": 473.0,
+  "real_time_factor": 0.863,
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 8.48,
+      "text": "Thanks for hopping on again, I know we've been going back and forth over email, so I figured a call would move things faster."
+    },
+    {
+      "id": 2,
+      "start": 8.48,
+      "end": 10.48,
+      "text": "Yeah, agreed."
+    },
+    {
+      "id": 3,
+      "start": 10.48,
+      "end": 17.84,
+      "text": "My finance team has been asking me for a final number, so I'd like to land on something today if we can."
+    },
+    {
+      "id": 4,
+      "start": 17.84,
+      "end": 20.4,
+      "text": "Perfect, let's do that."
+    },
+    {
+      "id": 5,
+      "start": 20.4,
+      "end": 26.16,
+      "text": "So last time we talked, you were looking at the growth plan for around 40 seats."
+    },
+    {
+      "id": 6,
+      "start": 26.16,
+      "end": 29.16,
+      "text": "Is that still the right ballpark?"
+    },
+    {
+      "id": 7,
+      "start": 29.16,
+      "end": 34.84,
+      "text": "It's actually closer to 35 now, we had a couple of rolls get consolidated."
+    },
+    {
+      "id": 8,
+      "start": 34.84,
+      "end": 37.96,
+      "text": "But yeah, similar range."
+    },
+    {
+      "id": 9,
+      "start": 37.96,
+      "end": 40.68,
+      "text": "Okay, that's helpful to know."
+    },
+    {
+      "id": 10,
+      "start": 40.68,
+      "end": 47.48,
+      "text": "At 35 seats on the growth plan, list price comes out to $12,000 a year."
+    },
+    {
+      "id": 11,
+      "start": 47.48,
+      "end": 55.84,
+      "text": "Right, and I'll be honest with you, that's a tough number for us to justify right now, given where our budget is this quarter."
+    },
+    {
+      "id": 12,
+      "start": 55.92,
+      "end": 59.04,
+      "text": "I appreciate you being direct about that."
+    },
+    {
+      "id": 13,
+      "start": 59.04,
+      "end": 67.36,
+      "text": "Can you tell me more about what's driving the constraint, is it a hard budget cap, or more about proving value first?"
+    },
+    {
+      "id": 14,
+      "start": 67.36,
+      "end": 69.92,
+      "text": "A bit of both, honestly."
+    },
+    {
+      "id": 15,
+      "start": 69.92,
+      "end": 77.12,
+      "text": "We got burned last year by a tool we rolled out company-wide that maybe 40% of people actually used."
+    },
+    {
+      "id": 16,
+      "start": 77.12,
+      "end": 81.44,
+      "text": "That makes sense, and I don't want to be that story for you."
+    },
+    {
+      "id": 17,
+      "start": 81.44,
+      "end": 85.76,
+      "text": "What would it take for you to feel confident this is different?"
+    },
+    {
+      "id": 18,
+      "start": 85.76,
+      "end": 94.8,
+      "text": "I think if we could start smaller, prove it out with one department, then talk about scaling up, that would be an easier sell internally."
+    },
+    {
+      "id": 19,
+      "start": 94.8,
+      "end": 97.8,
+      "text": "We can absolutely structure it that way."
+    },
+    {
+      "id": 20,
+      "start": 97.8,
+      "end": 106.36,
+      "text": "What if we started with 15 seats for the first two quarters, and built in an option to expand once you've seen adoption numbers?"
+    },
+    {
+      "id": 21,
+      "start": 106.36,
+      "end": 108.28,
+      "text": "That's more workable."
+    },
+    {
+      "id": 22,
+      "start": 108.28,
+      "end": 111.32,
+      "text": "What would 15 seats run us?"
+    },
+    {
+      "id": 23,
+      "start": 111.32,
+      "end": 120.04,
+      "text": "At 15 seats, you're looking at around $5,200 for that period, prorated from the annual rate."
+    },
+    {
+      "id": 24,
+      "start": 120.04,
+      "end": 122.92,
+      "text": "Okay, that's more digestible."
+    },
+    {
+      "id": 25,
+      "start": 122.92,
+      "end": 128.0,
+      "text": "Is there any flexibility on that number, or is that pretty firm?"
+    },
+    {
+      "id": 26,
+      "start": 128.0,
+      "end": 129.68,
+      "text": "There's some room."
+    },
+    {
+      "id": 27,
+      "start": 129.68,
+      "end": 137.2,
+      "text": "Since you're committing to expand later rather than just doing a short trial, I can get you a discount on the initial 15 seats,"
+    },
+    {
+      "id": 28,
+      "start": 137.24,
+      "end": 140.4,
+      "text": "something like 15% off."
+    },
+    {
+      "id": 29,
+      "start": 140.4,
+      "end": 147.0,
+      "text": "15% gets us to, what, around $4,400 for the initial period?"
+    },
+    {
+      "id": 30,
+      "start": 147.0,
+      "end": 151.56,
+      "text": "Close, $4,420, if we're being precise."
+    },
+    {
+      "id": 31,
+      "start": 151.56,
+      "end": 158.04,
+      "text": "And that discount would carry forward proportionally if you expand to the full 35 seats later."
+    },
+    {
+      "id": 32,
+      "start": 158.04,
+      "end": 160.72,
+      "text": "That's a meaningful difference actually."
+    },
+    {
+      "id": 33,
+      "start": 160.72,
+      "end": 170.04,
+      "text": "Let me ask about something else, what does the contract structure look like after this initial period, are we locked into a full year right away?"
+    },
+    {
+      "id": 34,
+      "start": 170.04,
+      "end": 171.68,
+      "text": "Good question."
+    },
+    {
+      "id": 35,
+      "start": 171.68,
+      "end": 183.44,
+      "text": "Standard structure is an annual agreement with a quarterly renewal checkpoint, so even though it's a 12 month contract, we review usage and adjust seat count with you every quarter."
+    },
+    {
+      "id": 36,
+      "start": 183.44,
+      "end": 189.92,
+      "text": "So the quarterly renewal is more like a checkpoint, not a full renegotiation each time?"
+    },
+    {
+      "id": 37,
+      "start": 189.92,
+      "end": 197.56,
+      "text": "Exactly, think of it as we sit down every quarter, look at actual usage, and true up the seat count."
+    },
+    {
+      "id": 38,
+      "start": 197.56,
+      "end": 203.48,
+      "text": "If people aren't using it, we're not going to pretend that's fine and let you overpay."
+    },
+    {
+      "id": 39,
+      "start": 203.48,
+      "end": 208.08,
+      "text": "I like that a lot better than a full annual commitment with no flexibility."
+    },
+    {
+      "id": 40,
+      "start": 208.08,
+      "end": 212.12,
+      "text": "That was honestly one of my bigger concerns going in."
+    },
+    {
+      "id": 41,
+      "start": 212.12,
+      "end": 217.6,
+      "text": "Totally fair concern to have, especially given what happened with that other tool."
+    },
+    {
+      "id": 42,
+      "start": 217.64,
+      "end": 222.2,
+      "text": "Nobody wants to sign something rigid for a whole year on a bet."
+    },
+    {
+      "id": 43,
+      "start": 222.2,
+      "end": 223.48,
+      "text": "Right."
+    },
+    {
+      "id": 44,
+      "start": 223.48,
+      "end": 231.2,
+      "text": "Okay, so walking through this, 15 seats, discounted rate, quarterly renewal checkpoints?"
+    },
+    {
+      "id": 45,
+      "start": 231.2,
+      "end": 236.44,
+      "text": "What happens if after two quarters we decide it's just not working for us?"
+    },
+    {
+      "id": 46,
+      "start": 236.44,
+      "end": 244.32,
+      "text": "If usage is genuinely low and it's not a fit, you can scale down or exit at the next quarterly checkpoint without penalty."
+    },
+    {
+      "id": 47,
+      "start": 244.36,
+      "end": 249.68,
+      "text": "We'd rather have an honest conversation than trap you in something you don't want."
+    },
+    {
+      "id": 48,
+      "start": 249.68,
+      "end": 258.16,
+      "text": "That's reassuring to hear directly, because sometimes the fine print says something different than what the sales conversation implies."
+    },
+    {
+      "id": 49,
+      "start": 258.16,
+      "end": 261.08,
+      "text": "I get why you'd be cautious about that."
+    },
+    {
+      "id": 50,
+      "start": 261.08,
+      "end": 272.4,
+      "text": "I'll make sure the actual contract language matches exactly what I just told you, and I'm happy to have our legal team send you the relevant clause highlighted before you sign anything."
+    },
+    {
+      "id": 51,
+      "start": 272.44,
+      "end": 274.4,
+      "text": "I'd appreciate that."
+    },
+    {
+      "id": 52,
+      "start": 274.4,
+      "end": 278.88,
+      "text": "Okay, let's say we move forward with the 15 seat pilot."
+    },
+    {
+      "id": 53,
+      "start": 278.88,
+      "end": 282.76,
+      "text": "What's the onboarding timeline usually look like?"
+    },
+    {
+      "id": 54,
+      "start": 282.76,
+      "end": 286.56,
+      "text": "Typically about two weeks from signature to full rollout."
+    },
+    {
+      "id": 55,
+      "start": 286.56,
+      "end": 293.84,
+      "text": "We assign a dedicated onboarding specialist, and there's a kickoff call within the first three business days."
+    },
+    {
+      "id": 56,
+      "start": 293.84,
+      "end": 299.48,
+      "text": "And training for the team, is that included, or is that a separate cost?"
+    },
+    {
+      "id": 57,
+      "start": 299.48,
+      "end": 307.2,
+      "text": "Included at the stair, up to two live training sessions plus recorded materials your team can revisit later."
+    },
+    {
+      "id": 58,
+      "start": 307.2,
+      "end": 316.36,
+      "text": "That's good, that addresses another concern, since low adoption last time was partly because nobody really trained people properly."
+    },
+    {
+      "id": 59,
+      "start": 316.36,
+      "end": 327.2,
+      "text": "Yeah, that's a common failure mode honestly, the tool itself is rarely the actual problem, it's usually that nobody showed people how it fits into their day."
+    },
+    {
+      "id": 60,
+      "start": 327.24,
+      "end": 330.04,
+      "text": "That tracks with what I saw last year."
+    },
+    {
+      "id": 61,
+      "start": 330.04,
+      "end": 338.6,
+      "text": "Okay, one more thing, payment terms, can we do quarterly billing instead of paying the whole initial amount up front?"
+    },
+    {
+      "id": 62,
+      "start": 338.6,
+      "end": 340.32,
+      "text": "We can do that."
+    },
+    {
+      "id": 63,
+      "start": 340.32,
+      "end": 350.56,
+      "text": "Quarterly billing on the pilot amount is fine, it just means the discount is applied evenly across each billing cycle rather than as one lump reduction up front."
+    },
+    {
+      "id": 64,
+      "start": 350.56,
+      "end": 353.72,
+      "text": "That works better for our cash flow honestly."
+    },
+    {
+      "id": 65,
+      "start": 353.76,
+      "end": 358.12,
+      "text": "Alright, I think I have what I need to bring back to finance."
+    },
+    {
+      "id": 66,
+      "start": 358.12,
+      "end": 362.52,
+      "text": "Can you send over a written summary of everything we just covered?"
+    },
+    {
+      "id": 67,
+      "start": 362.52,
+      "end": 375.8,
+      "text": "Absolutely, I'll get that to you by end of day, 15 seats, the discounted rate, quarterly billing, quarterly renewal checkpoints, and the expansion path to 35 seats."
+    },
+    {
+      "id": 68,
+      "start": 375.8,
+      "end": 377.36,
+      "text": "Perfect."
+    },
+    {
+      "id": 69,
+      "start": 377.36,
+      "end": 385.68,
+      "text": "If finance signs off, which I think they will give in the smaller starting number, how fast could we actually get this signed?"
+    },
+    {
+      "id": 70,
+      "start": 385.68,
+      "end": 395.68,
+      "text": "Once you have the summary, I can turn around a contract draft within a day, and if everything looks right, we could have signatures by the end of the week."
+    },
+    {
+      "id": 71,
+      "start": 395.68,
+      "end": 403.32,
+      "text": "That would be great, honestly faster than I expected given how cautious we've had to be about vendor commitments recently."
+    },
+    {
+      "id": 72,
+      "start": 403.4,
+      "end": 409.88,
+      "text": "I completely understand the caution, especially after a bad experience with the previous tool."
+    },
+    {
+      "id": 73,
+      "start": 409.88,
+      "end": 417.32,
+      "text": "I'd rather earn the full 35 seats over a couple quarters than oversell you today and lose the relationship later."
+    },
+    {
+      "id": 74,
+      "start": 417.32,
+      "end": 425.92,
+      "text": "I appreciate that approach, it's part of why I wanted to keep talking instead of just walking away when the first number felt too high."
+    },
+    {
+      "id": 75,
+      "start": 425.92,
+      "end": 429.48,
+      "text": "Glad we found something that works for both sides."
+    },
+    {
+      "id": 76,
+      "start": 429.56,
+      "end": 435.6,
+      "text": "I'll get that summary over shortly, and we can regroup once finance has had a look."
+    },
+    {
+      "id": 77,
+      "start": 435.6,
+      "end": 438.8,
+      "text": "Sounds good, talk soon."
+    },
+    {
+      "id": 78,
+      "start": 438.8,
+      "end": 452.36,
+      "text": "Actually, before you go, one thing I forgot to mention, if you do decide to expand to the full 35 seats before the two quarters are up, there's an additional loyalty discount for early expansion."
+    },
+    {
+      "id": 79,
+      "start": 452.36,
+      "end": 455.76,
+      "text": "Oh, how much are we talking there?"
+    },
+    {
+      "id": 80,
+      "start": 455.76,
+      "end": 467.24,
+      "text": "An extra 5% on top of the 15 you're already getting, so 20% total off the annual rate if you expand within the pilot window instead of waiting for the checkpoint."
+    },
+    {
+      "id": 81,
+      "start": 467.24,
+      "end": 469.28,
+      "text": "That's a nice incentive."
+    },
+    {
+      "id": 82,
+      "start": 469.28,
+      "end": 478.56,
+      "text": "I could see us getting there sooner than two quarters if the first department responds well, some of our other team leads have already been asking about it."
+    },
+    {
+      "id": 83,
+      "start": 478.56,
+      "end": 483.72,
+      "text": "That's great to hear, word of mouth internally is usually a strong signal."
+    },
+    {
+      "id": 84,
+      "start": 483.72,
+      "end": 491.2,
+      "text": "Just flag it to me whenever that conversation starts so we can lock in the early expansion rate before it lapses."
+    },
+    {
+      "id": 85,
+      "start": 491.2,
+      "end": 492.52,
+      "text": "Will do."
+    },
+    {
+      "id": 86,
+      "start": 492.52,
+      "end": 499.48,
+      "text": "Also, quick question, is there a limit on support tickets or is that unlimited at this tier?"
+    },
+    {
+      "id": 87,
+      "start": 499.48,
+      "end": 509.24,
+      "text": "Unlimited support tickets at this tier, with a same day response target on anything marked urgent, and next business day on standard requests."
+    },
+    {
+      "id": 88,
+      "start": 509.32,
+      "end": 517.68,
+      "text": "Good, that matters to us, the last tool we used had a support tier that basically didn't respond for a week half the time."
+    },
+    {
+      "id": 89,
+      "start": 517.68,
+      "end": 525.16,
+      "text": "Yeah, that's frustrating, and honestly it kills adoption fast if people hit a wall early and can't get help."
+    },
+    {
+      "id": 90,
+      "start": 525.16,
+      "end": 528.32,
+      "text": "We take that pretty seriously here."
+    },
+    {
+      "id": 91,
+      "start": 528.32,
+      "end": 529.72,
+      "text": "Good to know."
+    },
+    {
+      "id": 92,
+      "start": 529.72,
+      "end": 540.4,
+      "text": "Alright, I really do need to jump to another call, but this was helpful, thank you for working through the numbers with me instead of just holding firm on the list price."
+    },
+    {
+      "id": 93,
+      "start": 540.4,
+      "end": 543.04,
+      "text": "Of course, that's the job."
+    },
+    {
+      "id": 94,
+      "start": 543.04,
+      "end": 547.8,
+      "text": "I'll get that summary to you within the hour, and we'll go from there."
+    }
+  ]
+}
